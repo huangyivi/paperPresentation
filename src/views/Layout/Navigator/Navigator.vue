@@ -3,24 +3,24 @@
     <div id="mav-logo">我是logo</div>
     <div id="nav-content">
       <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
-        <Menu-item key="0" name="0">
-          <router-link to="HomePage">首页</router-link>
-        </Menu-item>
-        <Menu-item key="1" name="1">
-          <router-link to="JournalCollection">期刊大全</router-link>
-        </Menu-item>
-        <Menu-item key="2" name="2">
-          <router-link to="JournalRecommend">期刊推荐</router-link>
-        </Menu-item>
-        <Menu-item key="3" name="3">
-          <router-link to="DocumentBase">文献库</router-link>
-        </Menu-item>
-        <Menu-item key="4" name="4">
-          <router-link to="PaperCheck">论文查重</router-link>
-        </Menu-item>
-        <Menu-item key="5" name="5">
-          <router-link to="OnlineSubmit">在线投稿</router-link>
-        </Menu-item>
+        <router-link to="HomePage">
+          <Menu-item key="0" name="0">首页</Menu-item>
+        </router-link>
+        <router-link to="JournalCollection">
+          <Menu-item key="1" name="1">期刊大全</Menu-item>
+        </router-link>
+        <router-link to="JournalRecommend">
+          <Menu-item key="2" name="2">期刊推荐</Menu-item>
+        </router-link>
+        <router-link to="DocumentBase">
+          <Menu-item key="3" name="3">文献库</Menu-item>
+        </router-link>
+        <router-link to="PaperCheck">
+          <Menu-item key="4" name="4">论文查重</Menu-item>
+        </router-link>
+        <router-link to="OnlineSubmit">
+          <Menu-item key="5" name="5">在线投稿</Menu-item>
+        </router-link>
       </Menu>
     </div>
     <div id="nav-search">
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       theme1: "light",
-      select: 'magazine'
+      select: "magazine"
     };
   }
 };
@@ -66,6 +66,9 @@ export default {
     margin-left: 150px;
   }
   #nav-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   #nav-search {
     margin-right: 150px;
