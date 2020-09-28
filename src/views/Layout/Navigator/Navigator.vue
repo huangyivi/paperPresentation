@@ -35,6 +35,7 @@
           <i-option value="unit">单位</i-option>
           <i-option value="abstract">摘要</i-option>
         </i-select>
+        <i-button slot="append" icon="ios-search"></i-button>
       </i-input>
     </div>
   </div>
@@ -52,6 +53,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #nav-container {
+  z-index: 999;
   width: 100%;
   min-width: 1460px;
   height: 60px;

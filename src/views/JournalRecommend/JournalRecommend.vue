@@ -1,5 +1,15 @@
 <template>
     <div>
-       期刊推荐
+       <Search/>
     </div>
 </template>
+<script>
+    import Search from "../../components/JournalRecommend/Search"
+
+    export default{
+        name : "JournalRecommend",
+        components : {
+            Search
+        }
+    }
+</script>
