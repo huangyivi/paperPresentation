@@ -2,7 +2,7 @@
   <div id="layout">
     <Header/>
     <Nav/>
-    <router-view></router-view>
+    <router-view id="router"></router-view>
     <Footer/>
   </div>
 </template>
@@ -26,5 +26,9 @@ export default {
 #layout{
     width: 100%;
     padding-top: 80px;
+    background-color: rgb(238,238,238);
+    #router{
+        padding: 0 200px;
+    }
 }
 </style>

@@ -7,9 +7,12 @@ import JournalRecommend from "@/views/JournalRecommend/JournalRecommend.vue";
 import DocumentBase from "@/views/DocumentBase/DocumentBase.vue";
 import PaperCheck from "@/views/PaperCheck/PaperCheck.vue";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit.vue";
+import DocDetails from "@/views/DocDetails/DocDetails.vue"
+
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       name: 'layout',
@@ -46,6 +49,11 @@ export default new Router({
           path: 'OnlineSubmit',
           name: 'OnlineSubmit',
           component: OnlineSubmit
+        },
+        {
+          path: 'DocDetails/:docid',
+          name : "DocDetails",
+          component : DocDetails
         },
 
       ]

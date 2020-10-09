@@ -3,22 +3,22 @@
     <div id="mav-logo">我是logo</div>
     <div id="nav-content">
       <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
-        <router-link to="HomePage">
+        <router-link to="/">
           <Menu-item key="0" name="0">首页</Menu-item>
         </router-link>
-        <router-link to="JournalCollection">
+        <router-link to="/JournalCollection">
           <Menu-item key="1" name="1">期刊大全</Menu-item>
         </router-link>
-        <router-link to="JournalRecommend">
+        <router-link to="/JournalRecommend">
           <Menu-item key="2" name="2">期刊推荐</Menu-item>
         </router-link>
-        <router-link to="DocumentBase">
+        <router-link to="/DocumentBase">
           <Menu-item key="3" name="3">文献库</Menu-item>
         </router-link>
-        <router-link to="PaperCheck">
+        <router-link to="/PaperCheck">
           <Menu-item key="4" name="4">论文查重</Menu-item>
         </router-link>
-        <router-link to="OnlineSubmit">
+        <router-link to="/OnlineSubmit">
           <Menu-item key="5" name="5">在线投稿</Menu-item>
         </router-link>
       </Menu>
@@ -65,7 +65,7 @@ export default {
   background-color: #fff;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.16);
   #mav-logo {
-    margin-left: 150px;
+    margin-left: 200px;
   }
   #nav-content{
     display: flex;
@@ -73,7 +73,7 @@ export default {
     justify-content: center;
   }
   #nav-search {
-    margin-right: 150px;
+    margin-right: 200px;
   }
 }
 </style>

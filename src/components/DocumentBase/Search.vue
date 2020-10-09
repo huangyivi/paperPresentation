@@ -29,11 +29,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 #search {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  min-width: 1400px;
+  width: 100%;
+  min-width: 1120px;
   min-height: 200px;
   padding: 0 300px;
   #search-up {
