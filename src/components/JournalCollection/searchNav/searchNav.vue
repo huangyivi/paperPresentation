@@ -1,35 +1,42 @@
 <template>
   <div class="search-nav">
     <div class="search-nav-title">期刊大全</div>
+    <ul>
+      <li v-for="(item, index) in allList" :key="index">
+        <a v-for="i in 3" :key="i">{{ item[i - 1] }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: "searchNav",
-  props: [""],
+
   data() {
-    return {};
+    return {
+      allList: [
+        ["OA期刊", "基础", "社科"],
+        ["自然", "医药", "生物"],
+        ["环境", "核能", "化学"],
+        ["理学", "文化", "艺术"],
+        ["文学", "经济", "哲学"],
+        ["政法", "农业", "工业"],
+        ["机械", "建筑", "交通"],
+        ["油气", "天文", "军事"],
+        ["航空", "金属", "冶金"],
+        ["矿业", "电气", "水利"],
+        ["动力", "计算机", "电子"],
+      ],
+    };
+  },
+
+  methods: {
+    
   },
 };
 </script>
 
 <style scoped lang="scss">
-.search-nav {
-  background: #fff;
-  width: 222px;
-  min-height: 340px;
-  float: left;
-  border-right: 1px solid black;
-
-  .search-nav-title {
-      width: 100px;
-    height: 40px;
-    margin: 0 auto;
-    color: rgba(0, 0, 0, 0.85);
-    font-weight: 600;
-    line-height: 40px;
-    font-size: 20px;
-  }
-}
+@import "searchNav.scss";
 </style>
