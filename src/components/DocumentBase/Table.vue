@@ -1,9 +1,22 @@
 <template>
   <div id="doc-table">
-    <Tabs active-key="key1" size="small" type="card" @on-click="getDocs" >
-      <Tab-pane v-for="(item,key) in tabs" :name="item" :label="item" :key="key" class="table-panel" >
-        <!-- <i-table stripe :columns="columns1" :data="data1"></i-table> -->
-        <!-- <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page> -->
+    <Tabs :animated=false active-key="key1" size="small" type="card" @on-click="getDocs">
+      <Tab-pane
+        v-for="(item,key) in tabs"
+        :name="item"
+        :label="item"
+        :key="key"
+        class="table-panel"
+      >
+        <i-table no-data-text="加载中......" stripe :columns="columns1" :data="docs" v-if="isSize"></i-table>
+        <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
+        <Page
+          class="doc-pages"
+          :total="dataCount"
+          :page-size="pageSize"
+          show-total
+          @on-change="changePage"
+        ></Page>
       </Tab-pane>
     </Tabs>
   </div>
@@ -13,6 +26,11 @@ export default {
   name: "Table",
   data() {
     return {
+      // 输入框
+      input: this.Global.docInput,
+      // 附加条件
+      attach: this.Global.docAttach,
+      //标签
       tabs: [
         "全部",
         "OA期刊",
@@ -47,8 +65,9 @@ export default {
         "动力",
         "计算机",
         "电子",
-        "语言",
+        "语言"
       ],
+      // 表格行头
       columns1: [
         {
           title: "标题",
@@ -82,120 +101,131 @@ export default {
         },
         {
           title: "发表时间",
-          key: "time",
+          key: "publishTime",
           align: "center"
         },
         {
           title: "期刊",
-          key: "magazine",
+          key: "fromJournal",
           align: "center",
           render: (h, params) => {
             return h(
               "a",
               {
                 attrs: {
-                  href: "JournalDetails/" + params.row.url,
+                  href: "JournalDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }
               },
-              params.row.magazine
+              params.row.fromJournal
             );
           }
         },
         {
-          title: "下载量",
-          key: "download",
-          align: "center"
-        },
-        {
-          title: "热度",
-          key: "hot",
-          align: "center",
-          width: 120,
-          render:(h,params)=>{
-            // 用switch语句进行判断
-            return <div>
-              <svg t="1602398619473" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2428" width="15" height="15"><path d="M272.4 813.1c-1.4 0-2.7-0.1-4.1-0.3-13.1-2.3-21.9-14.7-19.6-27.7l4.5-26.2c2.2-13.1 14.7-21.8 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-4.5 26.2c-2 11.7-12.1 19.9-23.6 19.9z" fill="#d81e06" p-id="2429"></path><path d="M885 434.7l-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1l-74.8-151.6-69.6 141-74.7 10.8c-3.5 7-10.2 11.8-18 12.9l-191.2 27.8 202.8 197.7L361.3 831l140.1-73.7c7-3.7 15.4-3.7 22.4 0l62.7 33 22.2-11.7 129.7 68.2L701 628.7c-1.3-7.8 1.3-15.8 6.9-21.3L885 434.7z" fill="#d81e06" p-id="2430"></path><path d="M774.1 940.4c-3.8 0-7.7-0.9-11.2-2.8L512 805.8 261.1 937.7c-8.1 4.3-17.9 3.5-25.3-1.8-7.4-5.4-11.1-14.5-9.6-23.5l11.5-67.2c2.2-13.1 14.8-21.9 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-3.3 19.2 219-115.1c7-3.7 15.4-3.7 22.4 0l219 115.1-41.8-243.8c-1.3-7.8 1.3-15.8 6.9-21.3l177.2-172.7-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1L512 164.1 402.6 386c-3.5 7.1-10.3 12-18.1 13.1l-244.8 35.6 177.2 172.7c5.7 5.5 8.3 13.5 6.9 21.3L311.7 699c-2.3 13.1-14.6 21.9-27.7 19.6-13.1-2.2-21.9-14.7-19.6-27.7l9.9-57.8-203-197.8c-6.6-6.4-8.9-15.9-6.1-24.6 2.8-8.7 10.3-15 19.4-16.3l280.5-40.8L490.5 99.2c4.1-8.2 12.4-13.4 21.5-13.4s17.5 5.2 21.5 13.4L659 353.4l280.5 40.8c9 1.3 16.6 7.6 19.4 16.3 2.8 8.7 0.5 18.3-6.1 24.6L749.9 633l47.9 279.4c1.5 9-2.2 18.1-9.6 23.5-4.1 3-9.1 4.5-14.1 4.5z" fill="#d81e06" p-id="2431"></path></svg>
-              <svg t="1602398619473" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2428" width="15" height="15"><path d="M272.4 813.1c-1.4 0-2.7-0.1-4.1-0.3-13.1-2.3-21.9-14.7-19.6-27.7l4.5-26.2c2.2-13.1 14.7-21.8 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-4.5 26.2c-2 11.7-12.1 19.9-23.6 19.9z" fill="#d81e06" p-id="2429"></path><path d="M885 434.7l-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1l-74.8-151.6-69.6 141-74.7 10.8c-3.5 7-10.2 11.8-18 12.9l-191.2 27.8 202.8 197.7L361.3 831l140.1-73.7c7-3.7 15.4-3.7 22.4 0l62.7 33 22.2-11.7 129.7 68.2L701 628.7c-1.3-7.8 1.3-15.8 6.9-21.3L885 434.7z" fill="#d81e06" p-id="2430"></path><path d="M774.1 940.4c-3.8 0-7.7-0.9-11.2-2.8L512 805.8 261.1 937.7c-8.1 4.3-17.9 3.5-25.3-1.8-7.4-5.4-11.1-14.5-9.6-23.5l11.5-67.2c2.2-13.1 14.8-21.9 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-3.3 19.2 219-115.1c7-3.7 15.4-3.7 22.4 0l219 115.1-41.8-243.8c-1.3-7.8 1.3-15.8 6.9-21.3l177.2-172.7-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1L512 164.1 402.6 386c-3.5 7.1-10.3 12-18.1 13.1l-244.8 35.6 177.2 172.7c5.7 5.5 8.3 13.5 6.9 21.3L311.7 699c-2.3 13.1-14.6 21.9-27.7 19.6-13.1-2.2-21.9-14.7-19.6-27.7l9.9-57.8-203-197.8c-6.6-6.4-8.9-15.9-6.1-24.6 2.8-8.7 10.3-15 19.4-16.3l280.5-40.8L490.5 99.2c4.1-8.2 12.4-13.4 21.5-13.4s17.5 5.2 21.5 13.4L659 353.4l280.5 40.8c9 1.3 16.6 7.6 19.4 16.3 2.8 8.7 0.5 18.3-6.1 24.6L749.9 633l47.9 279.4c1.5 9-2.2 18.1-9.6 23.5-4.1 3-9.1 4.5-14.1 4.5z" fill="#d81e06" p-id="2431"></path></svg>
-              <svg t="1602398619473" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2428" width="15" height="15"><path d="M272.4 813.1c-1.4 0-2.7-0.1-4.1-0.3-13.1-2.3-21.9-14.7-19.6-27.7l4.5-26.2c2.2-13.1 14.7-21.8 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-4.5 26.2c-2 11.7-12.1 19.9-23.6 19.9z" fill="#d81e06" p-id="2429"></path><path d="M885 434.7l-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1l-74.8-151.6-69.6 141-74.7 10.8c-3.5 7-10.2 11.8-18 12.9l-191.2 27.8 202.8 197.7L361.3 831l140.1-73.7c7-3.7 15.4-3.7 22.4 0l62.7 33 22.2-11.7 129.7 68.2L701 628.7c-1.3-7.8 1.3-15.8 6.9-21.3L885 434.7z" fill="#d81e06" p-id="2430"></path><path d="M774.1 940.4c-3.8 0-7.7-0.9-11.2-2.8L512 805.8 261.1 937.7c-8.1 4.3-17.9 3.5-25.3-1.8-7.4-5.4-11.1-14.5-9.6-23.5l11.5-67.2c2.2-13.1 14.8-21.9 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-3.3 19.2 219-115.1c7-3.7 15.4-3.7 22.4 0l219 115.1-41.8-243.8c-1.3-7.8 1.3-15.8 6.9-21.3l177.2-172.7-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1L512 164.1 402.6 386c-3.5 7.1-10.3 12-18.1 13.1l-244.8 35.6 177.2 172.7c5.7 5.5 8.3 13.5 6.9 21.3L311.7 699c-2.3 13.1-14.6 21.9-27.7 19.6-13.1-2.2-21.9-14.7-19.6-27.7l9.9-57.8-203-197.8c-6.6-6.4-8.9-15.9-6.1-24.6 2.8-8.7 10.3-15 19.4-16.3l280.5-40.8L490.5 99.2c4.1-8.2 12.4-13.4 21.5-13.4s17.5 5.2 21.5 13.4L659 353.4l280.5 40.8c9 1.3 16.6 7.6 19.4 16.3 2.8 8.7 0.5 18.3-6.1 24.6L749.9 633l47.9 279.4c1.5 9-2.2 18.1-9.6 23.5-4.1 3-9.1 4.5-14.1 4.5z" fill="#d81e06" p-id="2431"></path></svg>
-              <svg t="1602398619473" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2428" width="15" height="15"><path d="M272.4 813.1c-1.4 0-2.7-0.1-4.1-0.3-13.1-2.3-21.9-14.7-19.6-27.7l4.5-26.2c2.2-13.1 14.7-21.8 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-4.5 26.2c-2 11.7-12.1 19.9-23.6 19.9z" fill="#bfbfbf" p-id="2429"></path><path d="M885 434.7l-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1l-74.8-151.6-69.6 141-74.7 10.8c-3.5 7-10.2 11.8-18 12.9l-191.2 27.8 202.8 197.7L361.3 831l140.1-73.7c7-3.7 15.4-3.7 22.4 0l62.7 33 22.2-11.7 129.7 68.2L701 628.7c-1.3-7.8 1.3-15.8 6.9-21.3L885 434.7z" fill="#bfbfbf" p-id="2430"></path><path d="M774.1 940.4c-3.8 0-7.7-0.9-11.2-2.8L512 805.8 261.1 937.7c-8.1 4.3-17.9 3.5-25.3-1.8-7.4-5.4-11.1-14.5-9.6-23.5l11.5-67.2c2.2-13.1 14.8-21.9 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-3.3 19.2 219-115.1c7-3.7 15.4-3.7 22.4 0l219 115.1-41.8-243.8c-1.3-7.8 1.3-15.8 6.9-21.3l177.2-172.7-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1L512 164.1 402.6 386c-3.5 7.1-10.3 12-18.1 13.1l-244.8 35.6 177.2 172.7c5.7 5.5 8.3 13.5 6.9 21.3L311.7 699c-2.3 13.1-14.6 21.9-27.7 19.6-13.1-2.2-21.9-14.7-19.6-27.7l9.9-57.8-203-197.8c-6.6-6.4-8.9-15.9-6.1-24.6 2.8-8.7 10.3-15 19.4-16.3l280.5-40.8L490.5 99.2c4.1-8.2 12.4-13.4 21.5-13.4s17.5 5.2 21.5 13.4L659 353.4l280.5 40.8c9 1.3 16.6 7.6 19.4 16.3 2.8 8.7 0.5 18.3-6.1 24.6L749.9 633l47.9 279.4c1.5 9-2.2 18.1-9.6 23.5-4.1 3-9.1 4.5-14.1 4.5z" fill="#bfbfbf" p-id="2431"></path></svg>
-              <svg t="1602398619473" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2428" width="15" height="15"><path d="M272.4 813.1c-1.4 0-2.7-0.1-4.1-0.3-13.1-2.3-21.9-14.7-19.6-27.7l4.5-26.2c2.2-13.1 14.7-21.8 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-4.5 26.2c-2 11.7-12.1 19.9-23.6 19.9z" fill="#bfbfbf" p-id="2429"></path><path d="M885 434.7l-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1l-74.8-151.6-69.6 141-74.7 10.8c-3.5 7-10.2 11.8-18 12.9l-191.2 27.8 202.8 197.7L361.3 831l140.1-73.7c7-3.7 15.4-3.7 22.4 0l62.7 33 22.2-11.7 129.7 68.2L701 628.7c-1.3-7.8 1.3-15.8 6.9-21.3L885 434.7z" fill="#bfbfbf" p-id="2430"></path><path d="M774.1 940.4c-3.8 0-7.7-0.9-11.2-2.8L512 805.8 261.1 937.7c-8.1 4.3-17.9 3.5-25.3-1.8-7.4-5.4-11.1-14.5-9.6-23.5l11.5-67.2c2.2-13.1 14.8-21.9 27.7-19.6 13.1 2.3 21.9 14.7 19.6 27.7l-3.3 19.2 219-115.1c7-3.7 15.4-3.7 22.4 0l219 115.1-41.8-243.8c-1.3-7.8 1.3-15.8 6.9-21.3l177.2-172.7-244.8-35.6c-7.8-1.1-14.6-6.1-18.1-13.1L512 164.1 402.6 386c-3.5 7.1-10.3 12-18.1 13.1l-244.8 35.6 177.2 172.7c5.7 5.5 8.3 13.5 6.9 21.3L311.7 699c-2.3 13.1-14.6 21.9-27.7 19.6-13.1-2.2-21.9-14.7-19.6-27.7l9.9-57.8-203-197.8c-6.6-6.4-8.9-15.9-6.1-24.6 2.8-8.7 10.3-15 19.4-16.3l280.5-40.8L490.5 99.2c4.1-8.2 12.4-13.4 21.5-13.4s17.5 5.2 21.5 13.4L659 353.4l280.5 40.8c9 1.3 16.6 7.6 19.4 16.3 2.8 8.7 0.5 18.3-6.1 24.6L749.9 633l47.9 279.4c1.5 9-2.2 18.1-9.6 23.5-4.1 3-9.1 4.5-14.1 4.5z" fill="#bfbfbf" p-id="2431"></path></svg>
-            </div>
-          }
-        },
-        {
-          title: "篇幅（页）",
-          key: "page",
+          title: "文献类型",
+          key: "paperType",
           align: "center"
         }
       ],
-      data1: [],
+      docs: [
+        // {
+        //   title: "微博平台建设对于高职学生 心理危机的识别及其干预分析",
+        //   keyword: "微博平台 高职学生 心理危机",
+        //   author: "陈红",
+        //   publishTime: "2020-10-01",
+        //   fromJournal: "长江期刊",
+        //   paperType: "OA"
+        // }
+      ],
       // 信息总量
       dataCount: 0,
       // 每页显示
       pageSize: 10,
       //当前页码
       currentPage: 1,
-      historyData: []
-        
+      //当前分类
+      currentHead : '',
+      // 是否有数据
+      isSize: 1
     };
   },
   methods: {
-    // 处理首页
-    handleFirst() {
-      // this.$http.get("http://39.98.41.126:30007/doc",{
-      //   params:{
-      //     pageNum : 1,
-      //     pageSize : this.pageSize
-      //   }
-      // }).then(res=>{
-      //   console.log(res);
-      // })
-
-    },
     changePage(index) {
       var _start = (index - 1) * this.pageSize;
       var _end = index * this.pageSize;
-      this.data1 = this.historyData.slice(_start, _end);
+      this.docs = this.docs.slice(_start, _end);
+      this.currentPage = index;
+      this.getDocs(this.currentHead);
     },
-    getDocs(item){
-      if(item == "全部"){
-        item = ''
-      };
-      // this.$http.get("http://39.98.41.126:30007/doc",{
-      //   params:{
-      //     head : item,
-      //     pageNum : 1,
-      //     pageSize : this.pageSize
-      //   }
-      // }).then(res=>{
-      //   console.log(res);
-      // })
+    getDocs(item) {
+    if(this.currentHead != item){
+        this.currentHead = item;
+        this.currentPage = 1;
+    }
+      if (item == "全部") {
+        item = "";
+      }
+      this.$http
+        .get("http://39.98.41.126:30007/doc", {
+          params: {
+            head: item,
+            input: this.input,
+            attach: this.attach,
+            pageNum: this.currentPage,
+            pageSize: this.pageSize
+          }
+        })
+        .then(res => {
+          if (res.data.code == 1) {
+            this.dataCount = res.data.data.total;
+            this.docs = res.data.data.list;
+            this.isSize = res.data.data.size;
+          } else {
+            this.isSize = false;
+          }
+        });
     }
   },
   created() {
-    this.handleFirst();
+    this.getDocs("");
   }
+  //   computed: {
+  //     isChangeInput() {
+  //       return this.Global.docInput;
+  //     },
+  //     isChangeAttach() {
+  //       return this.Global.docAttach;
+  //     }
+  //   },
+  //   watch: {
+  //     isChangeInput: (newval, oldval) => {
+  //       alert(newval);
+  //     },
+  //     isChangeAttach: (newval, oldval) => {
+  //       alert(newval);
+  //     }
+  //   }
 };
 </script>
 <style lang="scss" scoped>
 #doc-table {
-padding: 0 20px;
-background-color: #fff;
+  padding: 0 20px;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
-    width: 100%;
+  width: 100%;
   min-width: 1120px;
   min-height: 600px;
   .table-panel {
     min-height: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     .ivu-page {
+      margin-top: 20px;
       align-self: center;
     }
   }

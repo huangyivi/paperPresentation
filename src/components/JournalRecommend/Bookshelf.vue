@@ -1,6 +1,6 @@
 <template>
   <div id="bookshelf">
-    <Tabs active-key="key1" size="small" type="card">
+    <Tabs :animated=false active-key="key1" size="small" type="card">
       <Tab-pane v-for="(item,key) in tabs" :label="item" :key="key" class="books-pane">
         <div id="books">
           <Book v-for="(item,key) in 24" :key="key" :imgSrc="imgsrc" />

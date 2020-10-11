@@ -6,13 +6,16 @@ import router from './router'
 import iView from 'iview';
 import axios from 'axios';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
-
+import global from './global/Global.vue'
 Vue.use(iView);
 
 //全局配置axios
 //在其他组件中使用方法：this.$http.get()/post()
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
+
+// 全局变量
+Vue.prototype.Global = global;
 
 /* eslint-disable no-new */
 new Vue({
