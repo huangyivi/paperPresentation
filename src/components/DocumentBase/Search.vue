@@ -4,15 +4,15 @@
       <h1>文献搜索</h1>
     </div>
     <div id="search-up">
-      <input type="text" />
+      <input type="text" v-model="input"/>
       <i-button type="primary" icon="ios-search">搜索</i-button>
     </div>
     <div id="search-type">
-      <input type="radio" name="group1" value="title" id="title" checked />
+      <input class="doc-attach"  type="radio" name="group1" value="1" id="title" @click="changeAttach" checked />
       <label for="title">文章标题</label>
-      <input type="radio" name="group1" value="author" id="author" />
+      <input class="doc-attach" type="radio" name="group1" value="2" id="author" @click="changeAttach" />
       <label for="author">作者</label>
-      <input type="radio" name="group1" value="keyword" id="keyword" />
+      <input class="doc-attach" type="radio" name="group1" value="3" id="keyword" @click="changeAttach" />
       <label for="keyword">关键词</label>
     </div>
   </div>
@@ -22,8 +22,19 @@ export default {
   name: "Search",
   data() {
     return {
-      keywords: "title"
+      input : this.Global.docInput
     };
+  },
+  methods: {
+    changeAttach(){
+      let attachs = document.getElementsByClassName('doc-attach');
+      for(let i=0;i<attachs.length;i++){
+        if(attachs[i].checked == true){
+          this.docAttach = attachs[i].value;
+          // console.log(this.docAttach);
+        }
+      }
+    }
   }
 };
 </script>
