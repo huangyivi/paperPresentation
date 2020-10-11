@@ -1,0 +1,232 @@
+#HomePage {
+
+    background: rgb(249,249,249);
+
+    .book-show {
+        margin: 0 auto;
+        padding: 10px 0;
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .list {
+        margin: 0 auto;
+        padding: 0 15px;
+        width: 80%;
+        height: 44px;
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 14px;
+        background: #fff;
+        color: #5f5f5f;
+        border: 1px solid #d8d8d8;
+        overflow: hidden;
+
+        li {
+            
+            padding: 2px 10px;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            
+            &:hover {
+                color: #fff;
+                background: #2880da;
+            }
+        }
+
+        a {
+            margin-left: 40px;
+            font-size: 12px;
+        }
+        
+    }
+
+
+    .guoji-show {
+
+        .book-intro {
+            height: 352px;
+        }
+
+        .book {
+            height: 352px;
+        }
+    }
+
+    .guonei-show {
+
+        .book-intro {
+            height: 332px;
+        }
+
+        .book {
+            height: 332px;
+        }
+    }
+
+    .consult-man {
+        margin-top: 20px;
+        padding: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        background: url('http://zhimaikeji.net/imgs/wf/prose_answer.png') no-repeat;
+        background-size: 100% 100%;
+
+        >div {
+            width: 80%;
+            font-size: 18px;
+
+            >span {
+                margin: 0 15px;
+            }
+
+            >p {
+                font-size: 16px;
+            }
+
+            .man-intro {
+                margin: 20px 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    .hangye {
+        padding: 30px 0;
+        background: #fff;
+
+        .article-show {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 30px auto 10px;
+        }
+    }
+
+    .article-check {
+        margin: 30px auto;
+        flex-wrap: nowrap;
+        
+        .book-intro {
+            height: 224px;
+        }
+
+        ul {
+            
+            margin: 10px 0;
+            padding: 30px;
+            height: 224px;
+            width: calc(100% - 320px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            background: #fff;
+            overflow-y: auto;
+            scrollbar-width: none;
+
+            li {
+                margin: 3px;
+                width: 194px;
+                height: 74px;
+                border: 3px solid #d8d8d8;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &:hover {
+                    border-color: #ffa231;
+                }
+            }
+        }
+    }
+
+    .new-article {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 80%;
+        margin: 10px auto;
+
+        .book-intro {
+            height: 434px;
+        }
+
+        .article-table {
+            width: calc(100% - 320px);
+            height: 434px;
+            margin: 10px 0;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #dcdee2;
+            border-top: none;
+            overflow-y: auto;
+            scrollbar-width: none;
+
+            button {
+                margin-top: 30px;
+                width: 298px;
+                height: 35px;
+                line-height: 35px;
+                color: #2880da;
+                border: 1px solid #2880da;
+                font-size: 12px;
+                border-radius: 5px;
+                outline: none;
+                background: #fff;
+                cursor: pointer;
+
+                &:hover {
+                    background: #2880da;
+                    color: #fff;
+                }
+            }
+        }
+        
+    }
+
+    .web-container {
+        background: #fff;
+        padding: 20px 0;
+        margin: 50px 0 20px;
+
+        .book-intro {
+            height: 278px;
+        }
+
+        .web-rd {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+    
+            .web-detail {
+                width: calc(100% - 320px);
+                height: 278px;
+                padding-top: 8px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                overflow-y: auto;
+                scrollbar-width: none;
+            }
+    
+        }
+    }
+
+
+    
+
+}
