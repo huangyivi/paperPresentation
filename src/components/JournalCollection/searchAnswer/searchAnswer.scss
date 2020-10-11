@@ -1,0 +1,127 @@
+.test {
+  background-color: rosybrown;
+  width: 100%;
+  height: 100px;
+}
+
+.result-box {
+  float: right;
+  width: 100%;
+  text-align: center;
+
+  .result-header {
+    height: 32px;
+    line-height: 28px;
+    padding: 3px 0 3px 20px;
+    border-bottom: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+  }
+
+  div {
+    >span {
+      font-size: 12px;
+      color: #AAAAAA;
+      display: inline-block;
+      width: 80px;
+      height: 28px;
+      float: left;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    >span:first-child {
+      width: 200px;
+      text-align: left;
+    }
+
+    >span:nth-child(2) {
+      text-align: left;
+      width: 90px;
+    }
+
+    >span:nth-child(3) {
+      width: 100px;
+    }
+  }
+
+  .result-body {
+    .result-body-list {
+      height: 28px;
+      padding: 6px 0 0 20px;
+
+      .book-detail {
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+        font-size: 14px;
+        padding: 0;
+        letter-spacing: .04rem;
+        font-family: Arial, Helvetica, sans-serif, "微软雅黑";
+      }
+
+      .book-detail-blue {
+        display: inline-block;
+        width: 60px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        font-size: 12px;
+        color: #2880da;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    }
+
+    .result-body-detail {
+      height: 120px;
+      width: calc(100% - 1px);
+      margin-left: 1px;
+      background: #F8F8F8;
+      padding: 10px 20px 10px 20px;
+      display: none;
+
+      .img-box {
+        width: 66px;
+        height: 88px;
+        float: left;
+        margin-right: 20px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border: none;
+          vertical-align: top;
+        }
+      }
+
+      .result-show {
+        position: relative;
+
+        span {
+          color: #848F98;
+          font-size: 12px;
+          line-height: 18px;
+          padding: 0;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          float: left;
+          width: 260px;
+          height: 18px;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+
+          label {
+            color: #4B5154;
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+
+}
