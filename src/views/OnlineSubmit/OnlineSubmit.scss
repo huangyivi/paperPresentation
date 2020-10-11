@@ -1,6 +1,6 @@
 
 $blueColor:#2880da;
-#OnlineSubmit{
+.OnlineSubmit{
 
     .submit-pane {
         display: flex;
@@ -185,7 +185,7 @@ $blueColor:#2880da;
     .message-list {
 
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         padding: 40px 0;
 
@@ -226,7 +226,7 @@ $blueColor:#2880da;
                     li {
                         display: flex;
                         justify-content: space-between;
-                        width: 270px;
+                        width: 250px;
                         height: 52px;
                         line-height: 52px;
                         font-size: 12px;

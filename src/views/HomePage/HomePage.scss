@@ -1,11 +1,11 @@
-#HomePage {
+.HomePage {
 
     background: rgb(249,249,249);
 
     .book-show {
         margin: 0 auto;
         padding: 10px 0;
-        width: 80%;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -14,7 +14,7 @@
     .list {
         margin: 0 auto;
         padding: 0 15px;
-        width: 80%;
+        width: 100%;
         height: 44px;
         display:flex;
         justify-content: space-around;
@@ -79,7 +79,7 @@
         background-size: 100% 100%;
 
         >div {
-            width: 80%;
+            width: 100%;
             font-size: 18px;
 
             >span {
@@ -100,13 +100,14 @@
     }
 
     .hangye {
-        padding: 30px 0;
+        padding: 30px 5px;
         background: #fff;
 
         .article-show {
             display: flex;
             justify-content: space-between;
-            width: 80%;
+            width: 100%;
+            padding: 0 10px;
             margin: 30px auto 10px;
         }
     }
@@ -122,9 +123,9 @@
         ul {
             
             margin: 10px 0;
-            padding: 30px;
+            padding: 15px 0;
             height: 224px;
-            width: calc(100% - 320px);
+            width: calc(100% - 300px);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -156,7 +157,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        width: 80%;
+        width: 100%;
         margin: 10px auto;
 
         .book-intro {
@@ -164,7 +165,7 @@
         }
 
         .article-table {
-            width: calc(100% - 320px);
+            width: calc(100% - 300px);
             height: 434px;
             margin: 10px 0;
             text-align: center;
@@ -174,7 +175,7 @@
             overflow-y: auto;
             scrollbar-width: none;
 
-            button {
+            .article-look {
                 margin-top: 30px;
                 width: 298px;
                 height: 35px;
@@ -206,15 +207,15 @@
         }
 
         .web-rd {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
     
             .web-detail {
-                width: calc(100% - 320px);
+                width: calc(100% - 275px);
                 height: 278px;
-                padding-top: 8px;
+                padding: 8px 5px 0 0;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
