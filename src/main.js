@@ -12,7 +12,7 @@ Vue.use(iView);
 //全局配置axios
 //在其他组件中使用方法：this.$http.get()/post()
 Vue.prototype.$http = axios;
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({

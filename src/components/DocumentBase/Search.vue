@@ -1,14 +1,14 @@
 <template>
   <div id="search">
     <div>
-      <h1>我是文献库图片</h1>
+      <h1>文献搜索</h1>
     </div>
     <div id="search-up">
       <input type="text" />
       <i-button type="primary" icon="ios-search">搜索</i-button>
     </div>
     <div id="search-type">
-      <input type="radio" name="group1" value="title" id="title" />
+      <input type="radio" name="group1" value="title" id="title" checked />
       <label for="title">文章标题</label>
       <input type="radio" name="group1" value="author" id="author" />
       <label for="author">作者</label>
