@@ -31,7 +31,7 @@ export default {
 $blueColor:#2880da;
 
 .Article {
-    width: 550px;
+    width: 500px;
 
     .article-title {
         display: flex;
@@ -77,7 +77,7 @@ $blueColor:#2880da;
                 text-overflow: ellipsis;
 
                 &:first-child {
-                    width: 400px;
+                    width: 350px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;

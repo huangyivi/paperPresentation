@@ -1,5 +1,5 @@
 <template>
-    <div id="OnlineSubmit">
+    <div class="OnlineSubmit">
         <Banner :imgSrc="imgBase"/>
         <div class="submit-pane">
             <div>

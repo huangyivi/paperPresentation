@@ -1,5 +1,5 @@
 <template>
-    <div id="HomePage">
+    <div class="HomePage">
         <Banner :imgSrc="BaseImg"></Banner>
         <div class="book-show">
             <BookIntro :bookSum="books[0]"/>
@@ -53,7 +53,7 @@
             <BookIntro class="book-intro" :bookSum="books[4]"/>
             <div class="article-table">
                 <Table :columns="columns1" :data="data1"></Table>
-                <button>查看总文献库（{{allNum}}篇）</button>
+                <button class="article-look">查看总文献库（{{allNum}}篇）</button>
             </div>
         </div>
 
@@ -66,17 +66,6 @@
             </div>
         </div>
 
-        <div class="consult-man">
-            <div>
-                ———
-                <span>专业解答</span>
-                ———
-                <p>您的疑问必将得到最专业、诚挚的解答！</p>
-                <div class="man-intro">
-                    <Man v-for="item in man" :key="item.index" :man="item"/>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 <script>
@@ -86,7 +75,6 @@
     import BookIntro from '../../components/HomePage/BookIntro'
     import BookShow from '../../components/HomePage/BookShow'
     import Ad from '../../components/HomePage/Ad'
-    import Man from '../../components/HomePage/Man'
     import Article from '../../components/HomePage/Article'
     import WebIntro from '../../components/HomePage/WebIntro'
 
@@ -99,7 +87,6 @@
             Ad,
             Book,
             BookIntro,
-            Man,
             Article,
             WebIntro,
         },
@@ -192,28 +179,6 @@
                         bookClass: '半月刊',
                         bookResoure: '知网、万方、维普、龙源',
                         bookurl: 'http://54.222.136.26:8080/uimgs/prl/nrpj.jpg',
-                    },
-                ],
-                man: [
-                    {
-                        name: "曹国",
-                        img: "http://zhimaikeji.net/imgs/wf/caoguo.png"
-                    },
-                    {
-                        name: "单海英",
-                        img: "http://zhimaikeji.net/imgs/wf/shanhaiying.png"
-                    },
-                    {
-                        name: "管金娜",
-                        img: "http://zhimaikeji.net/imgs/wf/guanjinna.png"
-                    },
-                    {
-                        name: "李娟",
-                        img: "http://zhimaikeji.net/imgs/wf/lijuan.png"
-                    },
-                    {
-                        name: "于晴",
-                        img: "http://zhimaikeji.net/imgs/wf/yuqing.png"
                     },
                 ],
                 jujiao: {
@@ -370,5 +335,6 @@
 
 <style lang="scss" scoped>
 
-   @import './HomePage.scss'
+@import './HomePage.scss';
+
 </style>
