@@ -1,0 +1,21 @@
+#doc-table {
+    padding: 0 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    width: 100%;
+    min-width: 1120px;
+    min-height: 600px;
+    .table-panel {
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .ivu-page {
+        margin-top: 20px;
+        align-self: center;
+      }
+    }
+  }

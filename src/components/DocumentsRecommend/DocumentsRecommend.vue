@@ -5,26 +5,28 @@
       <h2>推荐文献</h2>
     </div>
     <div class="rec-table">
-      <i-table :columns="columns1" :data="data1"></i-table>
+      <i-table :columns="columns1" :data="docs"></i-table>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "DocumentsRecommend",
+  props: ["docs"],
   data() {
     return {
       columns1: [
         {
           title: "标题",
           key: "title",
-          width : 300,
+          width: 250,
+          align: "center",
           render: (h, params) => {
             return h(
               "a",
               {
                 attrs: {
-                  href: "DocDetails/" + params.row.url,
+                  href: "/DocDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }
@@ -34,124 +36,47 @@ export default {
           }
         },
         {
+          title: "关键词",
+          key: "keyword",
+          width: 150,
+          align: "center"
+        },
+        {
           title: "作者",
-          key: "author"
+          key: "author",
+          align: "center"
         },
         {
           title: "发表时间",
-          key: "date"
+          key: "publishTime",
+          align: "center"
         },
         {
           title: "期刊",
-          key: "journal"
+          key: "fromJournal",
+          width : 200,
+          align: "center",
+          render: (h, params) => {
+            return h(
+              "a",
+              {
+                attrs: {
+                  href: "/JournalDetails/" + params.row.id,
+                  target: "_blank",
+                  title: params.row.title
+                }
+              },
+              params.row.fromJournal
+            );
+          }
         },
         {
-          title: "全网下载量",
-          key: "download"
-        },
-        {
-          title: "热度",
-          key: "hot"
+          title: "文献类型",
+          key: "paperType",
+          align: "center"
         }
       ],
-      data1: [
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-        {
-          title: "高职学生心理健康现状分析及危机干预对策",
-          author: "孙佳伟",
-          date: "2018年19期",
-          journal : "长江期刊",
-          download : 0,
-          hot : 5
-        },
-      ]
+      data1: []
     };
   }
 };
@@ -179,5 +104,24 @@ export default {
   .rec-table {
     margin: 20px 100px;
   }
+}
+</style>
+<style>
+.ivu-table-wrapper {
+  position: relative;
+  border: none;
+  border-bottom: 0;
+  border-right: 0;
+  overflow: hidden;
+}
+.ivu-table::after {
+  content: "";
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 3;
 }
 </style>

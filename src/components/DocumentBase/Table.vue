@@ -1,6 +1,6 @@
 <template>
   <div id="doc-table">
-    <Tabs :animated=false active-key="key1" size="small" type="card" @on-click="getDocs">
+    <Tabs :animated="false" active-key="key1" size="small" type="line" @on-click="getDocs">
       <Tab-pane
         v-for="(item,key) in tabs"
         :name="item"
@@ -8,7 +8,7 @@
         :key="key"
         class="table-panel"
       >
-        <i-table no-data-text="加载中......" stripe :columns="columns1" :data="docs" v-if="isSize"></i-table>
+        <i-table no-data-text="加载中......" :columns="columns1" :data="docs" v-if="isSize"></i-table>
         <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
         <Page
           class="doc-pages"
@@ -79,7 +79,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "DocDetails/" + params.row.url,
+                  href: "/DocDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }
@@ -113,7 +113,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "JournalDetails/" + params.row.id,
+                  href: "/JournalDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }
@@ -145,7 +145,7 @@ export default {
       //当前页码
       currentPage: 1,
       //当前分类
-      currentHead : '',
+      currentHead: "",
       // 是否有数据
       isSize: 1
     };
@@ -159,10 +159,10 @@ export default {
       this.getDocs(this.currentHead);
     },
     getDocs(item) {
-    if(this.currentHead != item){
+      if (this.currentHead != item) {
         this.currentHead = item;
         this.currentPage = 1;
-    }
+      }
       if (item == "全部") {
         item = "";
       }
@@ -209,25 +209,24 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#doc-table {
-  padding: 0 20px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-  width: 100%;
-  min-width: 1120px;
-  min-height: 600px;
-  .table-panel {
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    .ivu-page {
-      margin-top: 20px;
-      align-self: center;
-    }
-  }
+@import './Table.scss';
+</style>
+<style>
+.ivu-table-wrapper {
+  position: relative;
+  border: none;
+  border-bottom: 0;
+  border-right: 0;
+  overflow: hidden;
+}
+.ivu-table::after {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 3;
 }
 </style>
