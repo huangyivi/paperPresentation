@@ -26,7 +26,7 @@ export default {
 #layout{
     width: 100%;
     padding-top: 80px;
-    background-color: rgb(238,238,238);
+    background-color: rgb(249,249,249);
     #router{
         padding: 0 200px;
     }
