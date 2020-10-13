@@ -62,11 +62,11 @@ export default {
     }
   }
   #search-type {
-    padding: 0 40px;
+    justify-self: flex-start;
     width: 100%;
-    min-width: 850px;
+    min-width: 320px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     > * {
       margin: 0 5px;
