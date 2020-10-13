@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-w">
     <div class="jou-coll-title">
       <img src="..\..\..\src\assets\images\all_bnner.jpg" alt />
     </div>
@@ -16,12 +16,12 @@ export default {
   props: {},
 
   components: {
-    JournalCollectionSearch
+    JournalCollectionSearch,
   },
 
   data() {
     return {
-      
+    
     };
   },
 
@@ -32,10 +32,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.min-w {
+  min-width: 1400px;
+}
+
 .jou-coll-title {
   height: 300px;
   width: 100%;
-  min-width: 1455px;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
@@ -46,7 +49,7 @@ export default {
     position: absolute;
     top: 0;
     left: 50%;
-    margin-left: -960px;
+    margin-left: -930px;
   }
 }
 </style>
