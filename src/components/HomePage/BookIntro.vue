@@ -45,7 +45,7 @@ export default {
                 
     margin: 10px 0;
     padding: 26px 26px 0 0;
-    width: 222px;
+    min-width: 222px;
     height: 366px;
     overflow: hidden;
     text-align: right;
