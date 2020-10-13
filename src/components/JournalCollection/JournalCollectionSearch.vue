@@ -26,13 +26,11 @@
                 <Icon type="ios-arrow-down"></Icon>
               </Button>
               <DropdownMenu slot="list">
-                <DropdownItem>不限</DropdownItem>
-                <DropdownItem>核心（南大）</DropdownItem>
-                <DropdownItem>国家级</DropdownItem>
-                <DropdownItem>省级</DropdownItem>
-                <DropdownItem>核心（北大）</DropdownItem>
-                <DropdownItem>核心（北大.南大）</DropdownItem>
-                <DropdownItem>未分级</DropdownItem>
+                <DropdownItem>驴打滚</DropdownItem>
+                <DropdownItem>炸酱面</DropdownItem>
+                <DropdownItem>豆汁儿</DropdownItem>
+                <DropdownItem>冰糖葫芦</DropdownItem>
+                <DropdownItem>北京烤鸭</DropdownItem>
               </DropdownMenu>
             </Dropdown>
             <Dropdown class="drop-down">
@@ -41,16 +39,11 @@
                 <Icon type="ios-arrow-down"></Icon>
               </Button>
               <DropdownMenu slot="list">
-                <DropdownItem>不限</DropdownItem>
-                <DropdownItem>年刊</DropdownItem>
-                <DropdownItem>半年刊</DropdownItem>
-                <DropdownItem>季刊</DropdownItem>
-                <DropdownItem>双月刊</DropdownItem>
-                <DropdownItem>月刊</DropdownItem>
-                <DropdownItem>半月刊</DropdownItem>
-                <DropdownItem>旬刊</DropdownItem>
-                <DropdownItem>周刊</DropdownItem>
-                <DropdownItem>其他</DropdownItem>
+                <DropdownItem>驴打滚</DropdownItem>
+                <DropdownItem>炸酱面</DropdownItem>
+                <DropdownItem>豆汁儿</DropdownItem>
+                <DropdownItem>冰糖葫芦</DropdownItem>
+                <DropdownItem>北京烤鸭</DropdownItem>
               </DropdownMenu>
             </Dropdown>
             <Dropdown class="drop-down">
@@ -59,16 +52,11 @@
                 <Icon type="ios-arrow-down"></Icon>
               </Button>
               <DropdownMenu slot="list">
-                <DropdownItem>不限</DropdownItem>
-                <DropdownItem>0.5以上</DropdownItem>
-                <DropdownItem>1.0以上</DropdownItem>
-                <DropdownItem>2.0以上</DropdownItem>
-                <DropdownItem>3.0以上</DropdownItem>
-                <DropdownItem>4.0以上</DropdownItem>
-                <DropdownItem>5.0以上</DropdownItem>
-                <DropdownItem>6.0以上</DropdownItem>
-                <DropdownItem>7.0以上</DropdownItem>
-                <DropdownItem>8.0以上</DropdownItem>
+                <DropdownItem>驴打滚</DropdownItem>
+                <DropdownItem>炸酱面</DropdownItem>
+                <DropdownItem>豆汁儿</DropdownItem>
+                <DropdownItem>冰糖葫芦</DropdownItem>
+                <DropdownItem>北京烤鸭</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
