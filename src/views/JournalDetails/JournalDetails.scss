@@ -1,0 +1,185 @@
+.min-w {
+  min-width: 1400px;
+}
+
+.j-detail-main {
+  width: 100%;
+  max-width: 1400px;
+  min-width: 1051px;
+  height: 360px;
+
+  margin: 0 auto;
+  padding: 16px;
+  padding-top: 36px;
+  background: url(http://zhimaikeji.net/imgs/wf/qk_bg.png) no-repeat;
+  background-size: 100% 100%;
+
+  .j-detail-img {
+    width: 234px;
+    height: 308px;
+    float: left;
+    margin: 0 34px 0 20px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 290px;
+      border: 9px solid rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .j-detail-message {
+    width: 520px;
+    float: left;
+
+    h1 {
+      display: inline-block;
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      font-size: 36px;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    span,
+    .j-message-lanmu {
+      line-height: 20px;
+      display: inline-block;
+      width: 40%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: .04rem;
+      font-family: Arial, Helvetica, sans-serif, "微软雅黑";
+    }
+
+    label {
+      margin-right: 5%;
+    }
+
+    .j-message-span {
+      padding: 20px 0;
+
+      span:nth-child(odd) {
+        margin-right: 10%;
+      }
+    }
+
+    .j-message-lanmu {
+      line-height: 20px;
+      width: 100%;
+      text-align: justify;
+      float: left;
+
+      span {
+        width: 100%;
+      }
+    }
+  }
+
+  .j-detail-us {
+    float: right;
+    width: 20%;
+
+    a {
+      display: block;
+      width: 91px;
+      height: 30px;
+      background: #f48f1b;
+      border-radius: 4px;
+      color: #fff;
+      line-height: 30px;
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 20px;
+      float: right;
+
+      i {
+        font-family: "iconfont" !important;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        margin-right: 3px;
+      }
+
+      i:before {
+        content: "\2706";
+      }
+    }
+
+    img {
+      width: 100%;
+      float: right;
+      border: none;
+      vertical-align: top;
+    }
+
+    .j-us-phone {
+      width: 95%;
+      padding-top: 20px;
+      float: right;
+      color: #f5cc8e;
+
+      p {
+        width: 100%;
+        line-height: 34px;
+        font-size: 16px;
+
+        label {
+          font-size: 12px;
+          color: #f5cc8e;
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+}
+
+.j-detail-body {
+  width: 100%;
+  max-width: 1400px;
+  min-width: 1051px;
+  background-color: white;
+  height: auto;
+  margin: 0 auto;
+
+  .j-detail-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .jd-left {
+      border-right: 1px solid #e5e5e5;
+      padding: 33px 36px;
+      width: 75%;
+
+      .jd-title {
+        background: #f3f3f3;
+        padding: 8px 20px;
+        margin: 28px 0 0;
+        color: #101010;
+        font-size: 16px;
+        display: block;
+        font-weight: 600;
+
+        span {
+          font-size: 12px;
+          color: #767676;
+          margin-left: 12px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .jd-right {
+      width: 25%;
+      padding: 32px 28px;
+    }
+  }
+
+}

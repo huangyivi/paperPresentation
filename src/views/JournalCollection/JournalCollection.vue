@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import JournalCollectionSearch from "../../components/JournalCollection/JournalCollectionSearch"
+import JournalCollectionSearch from "../../components/JournalCollection/JournalCollectionSearch";
 
 export default {
   name: "JournalCollection",
@@ -20,9 +20,7 @@ export default {
   },
 
   data() {
-    return {
-    
-    };
+    return {};
   },
 
   methods: {},
@@ -42,6 +40,7 @@ export default {
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+  background-color: rgb(0, 158, 255);
 
   img {
     height: 100%;
