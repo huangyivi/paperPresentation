@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="min-w">
+      <!-- 测试分支 -->
     <div class="paper-title">
       <img src="http://zhimaikeji.net/imgs/wf/test_banner.png" alt />
     </div>
@@ -77,12 +78,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.min-w {
+  min-width: 1400px;
+}
+
 .paper-title {
   height: 225px;
   width: 100%;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+  background-color: rgb(0, 120, 132);
 
   img {
     height: 100%;

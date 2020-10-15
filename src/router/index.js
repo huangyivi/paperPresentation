@@ -7,7 +7,8 @@ import JournalRecommend from "@/views/JournalRecommend/JournalRecommend.vue";
 import DocumentBase from "@/views/DocumentBase/DocumentBase.vue";
 import PaperCheck from "@/views/PaperCheck/PaperCheck.vue";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit.vue";
-import DocDetails from "@/views/DocDetails/DocDetails.vue"
+import DocDetails from "@/views/DocDetails/DocDetails.vue";
+import JournalDetails from "@/views/JournalDetails/JournalDetails.vue";
 
 Vue.use(Router)
 
@@ -52,10 +53,14 @@ export default new Router({
         },
         {
           path: 'DocDetails/:docid',
-          name : "DocDetails",
-          component : DocDetails
+          name: 'DocDetails',
+          component: DocDetails
         },
-
+        {
+          path: 'JournalDetails/:jid',
+          name: 'JournalDetails',
+          component: JournalDetails
+        }
       ]
     }
   ]
