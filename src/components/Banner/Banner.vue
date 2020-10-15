@@ -12,7 +12,7 @@ export default {
 <style lang="scss" scoped>
 #doc-banner {
   width: 100%;
-  min-width: 1120px;
+  min-width: 1200px;
   height: 300px;
   background-color: grey;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.16);

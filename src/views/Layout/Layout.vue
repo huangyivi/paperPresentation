@@ -4,12 +4,14 @@
     <Nav/>
     <router-view id="router"></router-view>
     <Footer/>
+    <SideNav/>
   </div>
 </template>
 <script>
 import Header from "./Header/Header";
 import Nav from "./Navigator/Navigator";
 import Footer from "./Footer/Footer";
+import SideNav from "./SideNav/SideNav"
 export default {
   name: "Layout",
   data() {
@@ -18,7 +20,8 @@ export default {
   components: {
     Header,
     Nav,
-    Footer
+    Footer,
+    SideNav
   }
 };
 </script>
