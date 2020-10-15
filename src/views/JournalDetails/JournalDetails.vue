@@ -47,11 +47,7 @@
         <div class="jd-right">
           <JournalDetailsRight></JournalDetailsRight>
         </div>
-        <div class="jd-left">
-          <DetailOnlineSubMission></DetailOnlineSubMission>
-          <p class="jd-title">投稿必看<span>/稿件要求及注意事项</span></p>
-          <SubMissionLook></SubMissionLook>
-        </div>
+        <JournalDetailsLeft></JournalDetailsLeft>
       </div>
     </div>
   </div>
@@ -59,9 +55,7 @@
 
 <script>
 import JournalDetailsRight from "../../components/JournalDetails/JournalDetailsRight/JournalDetailsRight";
-import DetailOnlineSubMission from "../../components/JournalDetails/DetailOnlineSubMission/DetailOnlineSubMission";
-import SubMissionLook from "../../components/JournalDetails/SubMissionLook/SubMissionLook";
-
+import JournalDetailsLeft from "../../components/JournalDetails/JournalDetailsLeft/JournalDetailsLeft";
 
 export default {
   name: "JournalDetails",
@@ -70,17 +64,17 @@ export default {
 
   components: {
     JournalDetailsRight,
-    DetailOnlineSubMission,
-    SubMissionLook,
+    JournalDetailsLeft,
   },
 
   data() {
     return {
       imgSrc: "http://54.222.136.26:8080/uimgs/prl/spjqk.jpg",
-    };
+      visible: false,
+    }
   },
 
-  methods: {},
+  
 
   mounted() {},
 };
