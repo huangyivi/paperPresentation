@@ -1,25 +1,33 @@
 <template>
   <div class="jd-left">
-    <DetailOnlineSubMission></DetailOnlineSubMission>
+    <DetailOnlineSubMission
+      :journalName="JName"
+      :jid="this.$route.params.jid"
+    ></DetailOnlineSubMission>
     <div class="jd-title">投稿必看<span>/稿件要求及注意事项</span></div>
     <SubMissionLook></SubMissionLook>
-
+    <!-- 文献模块 -->
     <div class="jd-title">
       期刊文献<span>/期刊优质文献免费阅读</span>
       <div class="wx-search">
         <div class="jd-dropdown-btn">
-          <input placeholder="刊内搜索" />
+          <input
+            placeholder="刊内搜索"
+            v-model="wxCondition.input"
+            @keyup.enter="getSearchWX"
+          />
           <Icon type="ios-search" size="21" />
         </div>
         <div class="jd-dropdown-btn">
-          <select>
-            <option>2017</option>
-            <option>2016</option>
-            <option>2015</option>
+          <select v-model="wxCondition.year">
+            <option>不限</option>
+            <option>2020</option>
+            <option>2019</option>
           </select>
         </div>
         <div class="jd-dropdown-btn">
-          <select>
+          <select v-model="wxCondition.month">
+            <option>不限</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -38,13 +46,15 @@
     </div>
     <div class="jd-search-ans">
       <div v-for="item in data" :key="item.title" class="list-out">
-        <a class="wx-ans-title" href="#">{{ item.title }}</a>
+        <div class="wx-ans-title">
+          <a href="#">{{ item.title }}</a>
+        </div>
         <p>{{ item.content }}</p>
         <div class="list-bottom">
           <span>{{ item.authod }}</span>
         </div>
       </div>
-      <Page :total="data.length" class="jd-list-page"/>
+      <Page :total="data.length" class="jd-list-page" />
     </div>
 
     <div class="jd-title">发表流程<span>/你需要知道的论文发表流程</span></div>
@@ -67,6 +77,8 @@ export default {
     DetailOnlineSubMission,
     SubMissionLook,
   },
+
+  props: ["JName"],
 
   data() {
     return {
@@ -102,15 +114,53 @@ export default {
             "This is the content, this is the content, this is the content, this is the content.",
         },
       ],
+      wxCondition: {
+        year: "不限",
+        month: "不限",
+        input: "",
+      },
+      WXData: "",
     };
   },
 
   methods: {
-    handleOpen() {
-      this.visible = true;
+    // 年月改变，或者搜索框回车查询
+    getSearchWX() {
+      // 未完成
+      console.log(this.wxCondition);
     },
-    handleClose() {
-      this.visible = false;
+
+    // 进入页面进行搜索所有文献，查询全部
+    getWXFirst() {
+      this.$http
+        .get(`http://39.98.41.126:30007/doc/${this.$route.params.jid}/1/10`)
+        .then((res) => {
+          if (res.data.code === 1) {
+            this.WXData = res.data.data.list;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getTrue(str) {
+      if (str != "不限") return str;
+      else return "";
+    },
+  },
+
+  mounted() {
+    this.getWXFirst();
+  },
+
+  // 检测年月变化
+  watch: {
+    "wxCondition.year": function (newVal, oldVal) {
+      this.getSearchWX();
+    },
+    "wxCondition.month": function (newVal, oldVal) {
+      this.getSearchWX();
     },
   },
 };

@@ -34,8 +34,6 @@ export default {
 .check-duplicate {
   display: inline-block;
   width: 25%;
-  max-width: 300px;
-  min-width: 250px;
   padding: 5px 5px 0;
 
   > div {
