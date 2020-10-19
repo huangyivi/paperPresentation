@@ -31,7 +31,8 @@ export default {
     padding-top: 80px;
     background-color: rgb(248,248,248);
     #router{
-        padding: 0 200px;
+        margin: 0 auto;
+        width: 1200px;
     }
 }
 </style>

@@ -31,7 +31,7 @@ export default {
 
 <style scoped lang="scss">
 .min-w {
-  min-width: 1400px;
+  width: 100%;
 }
 
 .jou-coll-title {
