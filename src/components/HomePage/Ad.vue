@@ -1,6 +1,6 @@
 <template>
   <div id="Ad">
-        <a class="ad-pane" href="" @click.prevent>
+        <a class="ad-pane" href="/OnlineSubmit">
             <img :src="imgSrc" alt="">
         </a>
   </div>

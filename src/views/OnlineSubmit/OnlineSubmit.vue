@@ -9,15 +9,15 @@
             </div>
             <p>ONLINE SUBMISSION</p>
             <div class="submit-title">
-                <span>期刊名称</span>
-                <input type="text">
+                <span>文献名称</span>
+                <input type="text" v-model="docName">
                 <strong>*</strong>
             </div>
             <div class="submit-message">
                 <div>
                     <div>
                         <span>作者姓名</span>
-                        <input type="text">
+                        <input type="text" v-model="author">
                         <strong>*</strong>
                     </div>
                     <p>写第一作者或联系人</p>
@@ -25,12 +25,16 @@
                 <div>
                     <div>
                         <span>联系电话</span>
-                        <input type="text">
+                        <input type="text" v-model="phone">
                         <strong>*</strong>
                     </div>
                     <p>请填写正确的联系电话</p>
                 </div>
-                
+            </div>
+            <div class="submit-title">
+                <span>电子邮箱</span>
+                <input type="text" v-model="email">
+                <strong>*</strong>
             </div>
             <div class="submit-select">
                 <div>
@@ -42,14 +46,62 @@
                 </div>
 
                 <div>
-                    <span>基金项目</span>
+                    <span @click="modal1 = true">基金项目</span>
+                    <Modal
+                        v-model="modal1"
+                        title="论文所属基金选择"
+                        @on-ok="ok"
+                        @on-cancel="cancel">
+                        <p>Content of dialog</p>
+                        <p>Content of dialog</p>
+                        <p>Content of dialog</p>
+                    </Modal>
                     <span>开具发票</span>
+                </div>
+            </div>
+            <div class="message-add">
+                <div class="keywords">
+                    <span>关键词</span>
+                    <div class="tags">
+                        <Tag 
+                        color="primary"
+                        v-for="item in countTags"
+                        :key="item.index"
+                        :name="item"
+                        type="border" 
+                        closable
+                        @on-close="handleClose"
+                        >
+                        {{item}}
+                        </Tag>
+                        <Input
+                        class="input-new-tag"
+                        v-if="inputVisible"
+                        v-model="inputValue"
+                        ref="saveTagInput"
+                        size="small"
+                        @keyup.enter.native="handleInputConfirm"
+                        @blur="handleInputConfirm"
+                        />
+                        <Button v-else
+                        type="primary"
+                        icon="ios-add" 
+                       
+                        size="small" 
+                        @click="handleAdd">
+                            添加标签
+                        </Button>
+                    </div>
+                </div>
+                <div class="summary">
+                    <span>摘要</span>
+                    <textarea cols="30" rows="10" v-model="summary"></textarea>
                 </div>
             </div>
 
             <div>
-                <button>清除</button>
-                <button>提交投稿</button>
+                <Button type="default" size="large" @click="clear">清空</Button>
+                <Button type="primary" size="large">提交投稿</Button>
             </div>
         </div>
         <div class="message-list">
@@ -222,12 +274,59 @@
                         notice: '《建筑工程技术与设计》录用通知 ',
                         time: '2020-09-20',
                     },
-                ]
-
+                ],
+                author:'', //作者
+                phone:'', //电话
+                email:'', //电子邮箱
+                docName: '', //文献名称
+                summary: '', //摘要
+                countTags: ['Java', 'Vue','biaoqian'], //标签组
+                inputVisible: false, //是否显示输入框
+                inputValue: '', //输入框的内容
+                modal1: false,
             }
         },
         components:{
             Banner
+        },
+        methods:{
+            //清空所有
+            clear(){
+                this.author = ''; 
+                this.docName = '';
+                this.phone = '';
+                this.summary = '';
+                this.email = '';
+            },
+            //点击添加标签
+            handleAdd(){
+                //输入框出现
+                this.inputVisible = true;
+                this.$nextTick(_ => {
+                    this.$refs.saveTagInput.$refs.input.focus();
+                });
+            },
+            //删除标签
+            handleClose(event,name){
+                const index = this.countTags.indexOf(name);
+                this.countTags.splice(index,1);
+            },
+            //生成标签
+            handleInputConfirm() {
+                let inputValue = this.inputValue;
+                if (inputValue) {
+                    //添加到数组里
+                    this.countTags.push(inputValue);   
+                }
+                this.inputVisible = false;
+                this.inputValue = '';
+            },
+            //校验邮箱
+            isEmail(email){
+                let reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+                if(!reg.test(email)) return false;
+                else return true;
+            }
         }
     }
     
