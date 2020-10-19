@@ -6,37 +6,58 @@
         <div class="form-input">
           <div class="form-j-name">
             <label>期刊名称</label>
-            <span>食品街</span>
+            <span>{{ journalName }}</span>
           </div>
           <div>
             <label>作者姓名</label>
-            <input type="text" placeholder="写第一作者或联系人 *" />
+            <input
+              type="text"
+              placeholder="写第一作者或联系人 *"
+              v-model="onlineSub.authod"
+            />
           </div>
           <div>
             <label>联系方式</label>
-            <input type="text" placeholder="可以联系到您的手机号 *" />
+            <input
+              type="text"
+              placeholder="可以联系到您的手机号 *"
+              v-model="onlineSub.phone"
+            />
           </div>
           <div>
             <label>电子邮箱</label>
-            <input type="text" placeholder="接收录用通知的邮箱" />
+            <input
+              type="text"
+              placeholder="接收录用通知的邮箱"
+              v-model="onlineSub.email"
+            />
           </div>
           <div>
             <label>联系QQ</label>
-            <input type="text" placeholder="请提供常用的联系qq" />
+            <input
+              type="text"
+              placeholder="请提供常用的联系qq"
+              v-model="onlineSub.qq"
+            />
           </div>
           <div class="form-address">
             <label>邮寄地址</label>
-            <input type="text" placeholder="接收样刊的地址" />
+            <input
+              type="text"
+              placeholder="接收样刊的地址"
+              v-model="onlineSub.address"
+            />
           </div>
           <div>
             <label>上传稿件</label>
             <div class="upfile-btm">选择文件</div>
-            <input type="file" class="upfile-input" />
+            <input type="file" class="upfile-input" @change="getFile($event)" />
+            <span>{{ fileName }}</span>
           </div>
         </div>
         <div class="form-sub">
-          <span class="clear">清空</span>
-          <button class="submit">提交投稿</button>
+          <span class="clear" @click="deleteAll">清空</span>
+          <button class="submit" @click="submitAddFile">提交投稿</button>
         </div>
       </div>
     </div>
@@ -47,154 +68,84 @@
 export default {
   name: "DetailOnlineSubMission",
 
-  props: {},
+  props: ["journalName", "jid"],
 
   components: {},
 
   data() {
-    return {};
+    return {
+      fileName: "注：多个文件请压缩上传",
+      addArr: "", // 上传的文件
+      onlineSub: {
+        authod: "",
+        phone: "",
+        email: "",
+        qq: "",
+        address: "",
+      },
+    };
   },
 
-  methods: {},
+  methods: {
+    getFile(event) {
+      var file = event.target.files;
+      this.fileName = file[0].name;
+      this.addArr = file[0];
+    },
+
+    submitAddFile() {
+      if (!this.onlineSub.authod) {
+        alert("请输入作者姓名！");
+        return;
+      }
+
+      if (!this.onlineSub.phone) {
+        alert("请输入联系方式！");
+        return;
+      }
+
+      if (0 == this.addArr.length) {
+        console.log(this.addArr);
+        alert("文件为空！");
+        return;
+      }
+
+      var formData = new FormData();
+      formData.append("num", this.onlineSub.authod);
+      formData.append("linkId", this.onlineSub.phone);
+      formData.append("rfilename", this.onlineSub.email);
+      formData.append("rfilename", this.onlineSub.qq);
+      formData.append("rfilename", this.onlineSub.address);
+      formData.append("fileUpload", this.addArr);
+
+      
+      // 未完成
+
+      /* this.axios
+        .post(apidate.uploadEnclosure, formData, config)
+        .then((response) => {
+          if (response.data.info == "success") {
+            
+          }
+        }); */
+    },
+
+    deleteAll() {
+      this.onlineSub.authod = "";
+      this.onlineSub.phone = "";
+      this.onlineSub.email = "";
+      this.onlineSub.qq = "";
+      this.onlineSub.address = "";
+      this.onlineSub.addArr = "";
+      this.addArr = "";
+      this.fileName = "注：多个文件请压缩上传";
+    },
+  },
 
   mounted() {},
 };
 </script>
 
 <style scoped lang="scss">
-.dos {
-  width: 100%;
-  height: 273px;
-  overflow: hidden;
-  background-size: 100% 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-
-  .dos-left {
-    height: 100%;
-    width: 216px;
-    background: url(http://zhimaikeji.net/imgs/wf/sub_bg.png) no-repeat;
-    background-size: 100% 100%;
-  }
-
-  .dos-right {
-    width: calc(100% - 216px);
-    height: 100%;
-    background: #e9f6ff;
-    overflow: hidden;
-    padding: 15px 25px 0;
-
-    label {
-      width: 55px;
-      height: 28px;
-      line-height: 28px;
-      color: #787878;
-      font-size: 12px;
-      text-align: right;
-      margin-right: 5px;
-    }
-
-    .form-input {
-      width: 100%;
-
-      div {
-        display: inline-block;
-        width: 47%;
-        margin-bottom: 10px;
-        position: relative;
-      }
-
-      > div:nth-child(2),
-      > div:nth-child(4) {
-        margin-right: 5%;
-      }
-
-      input {
-        width: calc(100% - 60px);
-        height: 26px;
-        background: #fff;
-        border-radius: 4px;
-        border: 1px solid #d8d8d8;
-        padding-left: 10px;
-        font-size: 12px;
-      }
-
-      .form-j-name {
-        width: 100%;
-        color: #101010;
-
-        span {
-          margin-left: 8px;
-        }
-      }
-
-      .form-address {
-        width: 100%;
-      }
-
-      .upfile-btm {
-        width: 76px;
-        height: 26px;
-        background: #fff;
-        border-radius: 4px;
-        border: 1px solid #2980da;
-        text-align: center;
-        line-height: 26px;
-        color: #2980da;
-        font-size: 12px;
-        position: absolute;
-        top: 0;
-        left: 60px;
-      }
-
-      .upfile-input {
-        display: block;
-        width: 76px;
-        height: 28px;
-        position: absolute;
-        top: 0;
-        left: 60px;
-        font-size: 0;
-        opacity: 0;
-        cursor: pointer;
-        padding-left: 0;
-      }
-    }
-
-    .form-sub {
-      width: 200px;
-      height: 30px;
-      float: right;
-      display: flex;
-      margin-right: 0;
-      margin-top: 10px;
-      justify-content: space-between;
-
-      span,
-      button {
-        width: 92px;
-        height: 28px;
-        display: inline-block;
-        line-height: 28px;
-        text-align: center;
-        font-size: 12px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-
-      .clear {
-        color: #2980da;
-        border: 1px solid #2980da;
-      }
-
-      .submit {
-        border: 0;
-        outline: none;
-        background: #2980da;
-        color: #fff;
-      }
-    }
-  }
-}
+@import "DetailOnlineSubMission.scss";
 </style>

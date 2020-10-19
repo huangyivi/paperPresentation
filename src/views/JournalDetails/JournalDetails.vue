@@ -2,33 +2,30 @@
   <div class="min-w">
     <div class="j-detail-main">
       <div class="j-detail-img">
-        <img :src="imgSrc" alt />
+        <img :src="journalDetailData.journalPhoto" alt />
       </div>
       <div class="j-detail-message">
-        <h1>食品街</h1>
+        <h1>{{ journalDetailData.name }}</h1>
         <div class="j-message-span">
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>北京食品科学研究院</span>
-          <span
-            ><label>主管单位</label
-            >中国联合会中国联合会中国联合会中国联合会</span
-          >
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>数据库收录</label>知网、万方、维普</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
-          <span><label>主管单位</label>中国联合会</span>
+          <span><label>主管单位</label>{{ journalDetailData.competentAuthority }}</span>
+          <span><label>审稿周期</label>{{ journalDetailData.reviewCycle }}</span>
+          <span><label>主办单位</label>{{ journalDetailData.sponsor }}</span>
+          <span><label>数据库收录</label>{{ journalDetailData.receiveWebsite }}</span>
+          <span><label>国内刊号</label>{{ journalDetailData.homeNumber }}</span>
+          <span><label>影响因子</label>{{ journalDetailData.impactFactor }}</span>
+          <span><label>国际刊号</label>{{ journalDetailData.interNumber }}</span>
+          <span><label>总发文量</label>{{ journalDetailData.totalVolume }}</span>
+          <span><label>创刊时间</label>{{ journalDetailData.competentAuthority }}</span>
+          <span><label>总下载量</label>{{ journalDetailData.totalDownloads }}</span>
+          <span><label>级别(单位)</label>{{ journalDetailData.journalLevel }}</span>
+          <span><label>总被引领次</label>{{ journalDetailData.totalUsed }}</span>
+          <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">
-          <span
-            ><label>期刊栏目</label>新闻资讯 | 产业财经 | 信息发布 |
-            时尚生活</span
-          >
+          <span>
+            <label>期刊栏目</label>
+            {{ journalDetailData.mainSection }}
+          </span>
         </div>
       </div>
       <div class="j-detail-us">
@@ -38,20 +35,19 @@
           <p><label>咨询热线</label>12345678910</p>
           <p><label>咨询热线</label>12345678910</p>
           <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345678910@qq.com</p>
+          <p><label>咨询热线</label>12345@qq.com</p>
         </div>
       </div>
     </div>
     <div class="j-detail-body">
       <div class="j-detail-flex">
         <div class="jd-right">
-          <JournalDetailsRight></JournalDetailsRight>
+          <JournalDetailsRight
+            :introduction="journalDetailData.journalIntroduction"
+            :JournalHonor="journalDetailData.journalHonors"
+          ></JournalDetailsRight>
         </div>
-        <div class="jd-left">
-          <DetailOnlineSubMission></DetailOnlineSubMission>
-          <p class="jd-title">投稿必看<span>/稿件要求及注意事项</span></p>
-          <SubMissionLook></SubMissionLook>
-        </div>
+        <JournalDetailsLeft :JName="journalDetailData.name"></JournalDetailsLeft>
       </div>
     </div>
   </div>
@@ -59,9 +55,7 @@
 
 <script>
 import JournalDetailsRight from "../../components/JournalDetails/JournalDetailsRight/JournalDetailsRight";
-import DetailOnlineSubMission from "../../components/JournalDetails/DetailOnlineSubMission/DetailOnlineSubMission";
-import SubMissionLook from "../../components/JournalDetails/SubMissionLook/SubMissionLook";
-
+import JournalDetailsLeft from "../../components/JournalDetails/JournalDetailsLeft/JournalDetailsLeft";
 
 export default {
   name: "JournalDetails",
@@ -70,19 +64,41 @@ export default {
 
   components: {
     JournalDetailsRight,
-    DetailOnlineSubMission,
-    SubMissionLook,
+    JournalDetailsLeft,
   },
 
   data() {
     return {
       imgSrc: "http://54.222.136.26:8080/uimgs/prl/spjqk.jpg",
+      visible: false,
+      introduction: "hhhhhhh",
+      JournalHonor: "nb",
+      journalDetailData: "",
     };
   },
 
-  methods: {},
+  methods: {
+    getJournalDetails() {
+      var formdata = new FormData();
+      formdata.append("id", this.$route.params.jid);
+      this.$http
+        .post("http://39.98.41.126:30005/journal/getJournalById", formdata)
+        .then((res) => {
+          if (res.data.code === 1) {
+            this.journalDetailData = res.data.data;
+          } else {
+            alert(res.data.msg);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 
-  mounted() {},
+  mounted() {
+    this.getJournalDetails();
+  },
 };
 </script>
 

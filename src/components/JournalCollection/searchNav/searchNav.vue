@@ -32,7 +32,21 @@ export default {
   },
 
   methods: {
-    
+    getJournalType() {
+      let that = this;
+      let jTypeA = document.querySelector('.search-nav').getElementsByTagName('a');
+      let i;
+      for(i = 0; i < jTypeA.length; i++) {
+        jTypeA[i].onclick = function() {
+          /* console.log(this.innerHTML); */
+          that.$emit('toJCS', this.innerHTML)
+        }
+      }
+    }
+  },
+
+  mounted() {
+    this.getJournalType();
   },
 };
 </script>

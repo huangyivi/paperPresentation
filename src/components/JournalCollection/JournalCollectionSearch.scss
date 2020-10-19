@@ -1,6 +1,13 @@
 .search-main {
   width: 100%;
   margin: 10px auto;
+  max-width: 1400px;
+  min-width: 1051px;
+}
+
+select,
+option {
+  cursor: pointer;
 }
 
 .jou-coll-search {
@@ -67,6 +74,7 @@
 .search-body {
   width: 100%;
   min-height: 480px;
+  margin-top: 36px;
   background-color: transparent;
 
   .search-right {
@@ -82,18 +90,39 @@
 
       >div {
         float: right;
-      }
-
-      .drop-down {
-        margin: 0 8px;
+        height: 100%;
+        line-height: 40px;
+        vertical-align: middle;
       }
 
       .dropdown {
+        display: inline-block;
+        width: 100px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 8px;
+        border-radius: 5px;
         color: black;
         background-color: transparent;
-        border-color: rgba(0, 0, 0, 0.09);
+        border: 1px solid rgba(0, 0, 0, 0.09);
         font-size: 12px;
-        padding: 8px 14px;
+        padding: 0 14px;
+        vertical-align: middle;
+
+        .drop-down {
+          width: 100%;
+          vertical-align: middle;
+          outline: none;
+          border: none;
+          height: 100%;
+          text-align: center;
+          background-color: transparent;
+        }
+
+        span {
+          float: right;
+          cursor: pointer;
+        }
       }
     }
 
@@ -102,4 +131,9 @@
       margin-left: -1px;
     }
   }
+}
+
+.result-page {
+  float: right;
+  margin: 20px 10px;
 }

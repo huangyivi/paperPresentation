@@ -22,26 +22,28 @@
       font-size: 12px;
       color: #AAAAAA;
       display: inline-block;
-      width: 9%;
+      width: 11%;
       height: 28px;
       float: left;
       text-align: center;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      i {
+        font-size: 16px;
+        color: red;
+        font-style: normal;
+      }
     }
 
     >span:first-child {
-      width: 17%;
+      width: 23%;
       text-align: left;
     }
 
     >span:nth-child(2) {
       text-align: left;
-    }
-
-    >span:nth-child(3) {
-      width: 11%;
     }
   }
 
@@ -83,7 +85,6 @@
       margin-left: 1px;
       background: rgba(0, 0, 0, .03);
       padding: 10px 20px 10px 20px;
-      /* display: none; */
 
       .img-box {
         width: 66px;
@@ -126,10 +127,4 @@
       }
     }
   }
-
-}
-
-.result-page {
-  float: right;
-  margin: 20px 10px;
 }

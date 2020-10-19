@@ -1,6 +1,6 @@
 <template>
   <div class="min-w">
-      <!-- 测试分支 -->
+    <!-- 测试分支 -->
     <div class="paper-title">
       <img src="http://zhimaikeji.net/imgs/wf/test_banner.png" alt />
     </div>
@@ -80,6 +80,7 @@ export default {
 <style scoped lang="scss">
 .min-w {
   min-width: 1400px;
+  margin: 0 auto;
 }
 
 .paper-title {
@@ -103,6 +104,8 @@ export default {
 
 .paper-body {
   width: 100%;
-  margin: 26px 0;
+  max-width: 1400px;
+  min-width: 1051px;
+  margin: 26px auto;
 }
 </style>
