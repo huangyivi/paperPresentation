@@ -2,7 +2,12 @@
   <div class="side-container">
     <div class="side-nav">
       <div class="side-box">
-        <div class="box-icon" @mouseover="toFonts($event,'客服')" @mouseleave="toSvg($event)">
+        <div
+          class="box-icon"
+          @mouseover="toFonts($event,'客服')"
+          @mouseleave="toSvg($event)"
+          @click="displayService = true"
+        >
           <svg
             t="1602598872149"
             class="icon"
@@ -160,6 +165,21 @@ export default {
     hidePanel(obj) {
       let div = document.getElementsByClassName(obj);
       div[0].style.transform = "translateX(-150px)";
+    },
+    // 显示客服聊天框
+    displayService(){
+      console.log(this.Global.service)
+      this.Global.service = true;
+    }
+  },
+  computed : {
+    displayService:{
+      get(){
+        return this.$store.state.displayService;
+      },
+      set(val){
+        this.$store.commit('setService',val);
+      }
     }
   }
 };

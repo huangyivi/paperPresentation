@@ -1,14 +1,26 @@
 <template>
-  <div id="bookshelf">
+<div>
+  <div id="search">
+    <div>
+      <h1>我是搜索图片</h1>
+    </div>
+    <div id="search-up">
+      <input type="text" v-model="input"/>
+      <i-button type="primary" icon="ios-search">搜索</i-button>
+    </div>
+  </div>
+<div id="bookshelf">
     <Tabs :animated=false active-key="key1" size="small" type="line">
       <Tab-pane v-for="(item,key) in tabs" :label="item" :key="key" class="books-pane">
         <div id="books">
-          <Book v-for="(item,key) in 24" :key="key" :imgSrc="imgsrc" />
+          <Book v-for="(item,key) in pageSize" :key="key" :imgSrc="imgsrc" />
         </div>
         <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page>
       </Tab-pane>
     </Tabs>
   </div>
+</div>
+  
 </template>
 <script>
 import Book from "../JournalRecommend/Book";
@@ -19,6 +31,7 @@ export default {
   },
   data() {
     return {
+      input : "",
       imgsrc : '',
       tabs: [
         "全部",
@@ -56,57 +69,67 @@ export default {
         "电子",
         "语言",
       ],
-      data1: [],
       // 信息总量
       dataCount: 24,
       // 每页显示
-      pageSize: 24,
+      pageSize: 12,
       //当前页码
       currentPage: 1,
-      historyData: []
+      //当前分类
+      currentHead: "",
+      // 是否有数据
+      isSize: 1,
+      // 期刊数组
+      journals : []
     };
   },
   methods: {
-    // 处理首页
-    handleFirst() {
-      if (this.historyData.length < this.pageSize) {
-        this.data1 = this.historyData;
-      } else {
-        this.data1 = this.historyData.slice(0, this.pageSize);
-      }
-    },
+    // 换页
     changePage(index) {
       var _start = (index - 1) * this.pageSize;
       var _end = index * this.pageSize;
-      this.data1 = this.historyData.slice(_start, _end);
+      this.journals = this.journals.slice(_start, _end);
+      this.currentPage = index;
+      this.getJournals(this.currentHead);
+    },
+    getJournals(item="") {
+      if (this.currentHead != item) {
+        this.currentHead = item;
+        this.currentPage = 1;
+      }
+      if (item == "全部") {
+        item = "";
+      }
+      let data = new FormData();
+      data.append('name',this.input);
+      data.append('pageNum',this.currentPage);
+      data.append('pageSize',this.pageSize);
+      data.append('journalType',item);
+      this.$http
+        .post("http://39.98.41.126:30005/journal/searchRecommendJournal", data,
+          {
+            headers:{
+              "Content-Type" : "multipart/form-data"
+            }
+          }
+        )
+        .then(res => {
+          if (res.data.code == 1) {
+            this.dataCount = res.data.data.total;
+            this.journals = res.data.data.list;
+            this.isSize = res.data.data.size;
+          } else {
+            this.isSize = false;
+          }
+          console.log(res.data.data)
+        });
     }
   },
   created() {
-    this.handleFirst();
+    this.getJournals("");
   }
 };
 </script>
 <style lang="scss" scoped>
-#bookshelf {
-  background-color: #fff;
-  width: 100%;
-  min-width: 1120px;
-  padding: 0px 20px;
-  margin-bottom: 20px;
-  .books-pane {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 20px 0;
-    #books {
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  }
-}
+@import './Bookshelf.scss';
 </style>

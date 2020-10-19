@@ -1,13 +1,11 @@
 <template>
     <div>
         <Banner :imgSrc="BannerSrc"/>
-        <Search/>
         <Table/>
     </div>
 </template>
 <script>
     import Banner from "../../components/Banner/Banner";
-    import Search from "../../components/DocumentBase/Search";
     import Table from "../../components/DocumentBase/Table"
     export default{
         name : "DocumentBase",
@@ -18,7 +16,6 @@
         },
         components:{
             Banner,
-            Search,
             Table
         }
     }

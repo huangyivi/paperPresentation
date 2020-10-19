@@ -5,13 +5,15 @@
     <router-view id="router"></router-view>
     <Footer/>
     <SideNav/>
+    <customer-service/>
   </div>
 </template>
 <script>
 import Header from "./Header/Header";
 import Nav from "./Navigator/Navigator";
 import Footer from "./Footer/Footer";
-import SideNav from "./SideNav/SideNav"
+import SideNav from "./SideNav/SideNav";
+import CustomerService from "../../components/CustomerService/CustomerService"
 export default {
   name: "Layout",
   data() {
@@ -21,7 +23,8 @@ export default {
     Header,
     Nav,
     Footer,
-    SideNav
+    SideNav,
+    CustomerService
   }
 };
 </script>

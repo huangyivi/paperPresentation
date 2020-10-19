@@ -1,18 +1,15 @@
 <template>
     <div>
         <Banner :imgSrc="BannerSrc"/>
-       <Search/>
        <Bookshelf/>
     </div>
 </template>
 <script>
-    import Search from "../../components/JournalRecommend/Search"
     import Bookshelf from "../../components/JournalRecommend/Bookshelf"
     import Banner from "../../components/Banner/Banner"
     export default{
         name : "JournalRecommend",
         components : {
-            Search,
             Bookshelf, 
             Banner
         },

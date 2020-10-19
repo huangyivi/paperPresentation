@@ -1,4 +1,22 @@
 <template>
+<div>
+  <div id="search">
+    <div>
+      <h1>文献搜索</h1>
+    </div>
+    <div id="search-up">
+      <input type="text" v-model="input"/>
+      <i-button type="primary" icon="ios-search" @click="getDocs">搜索</i-button>
+    </div>
+    <div id="search-type">
+      <input class="doc-attach"  type="radio" name="group1" value="1" id="title" @click="changeAttach" checked />
+      <label for="title">文章标题</label>
+      <input class="doc-attach" type="radio" name="group1" value="2" id="author" @click="changeAttach" />
+      <label for="author">作者</label>
+      <input class="doc-attach" type="radio" name="group1" value="3" id="keyword" @click="changeAttach" />
+      <label for="keyword">关键词</label>
+    </div>
+  </div>
   <div id="doc-table">
     <Tabs :animated="false" active-key="key1" size="small" type="line" @on-click="getDocs">
       <Tab-pane
@@ -20,16 +38,18 @@
       </Tab-pane>
     </Tabs>
   </div>
+</div>
+  
 </template>
 <script>
 export default {
   name: "Table",
   data() {
     return {
-      // 输入框
-      input: this.Global.docInput,
-      // 附加条件
-      attach: this.Global.docAttach,
+      // 搜索内容
+      input:"",
+      // 搜索类型
+      attach : 1,
       //标签
       tabs: [
         "全部",
@@ -158,7 +178,7 @@ export default {
       this.currentPage = index;
       this.getDocs(this.currentHead);
     },
-    getDocs(item) {
+    getDocs(item = "") {
       if (this.currentHead != item) {
         this.currentHead = item;
         this.currentPage = 1;
@@ -170,8 +190,8 @@ export default {
         .get("http://39.98.41.126:30007/doc", {
           params: {
             head: item,
-            input: this.input,
-            attach: this.attach,
+            input: this.$store.state.docInput,
+            attach: this.$store.state.docAttach,
             pageNum: this.currentPage,
             pageSize: this.pageSize
           }
@@ -185,27 +205,19 @@ export default {
             this.isSize = false;
           }
         });
+    },
+    changeAttach(){
+      let attachs = document.getElementsByClassName('doc-attach');
+      for(let i=0;i<attachs.length;i++){
+        if(attachs[i].checked == true){
+          this.docAttach = attachs[i].value;
+        }
+      }
     }
   },
   created() {
     this.getDocs("");
   }
-  //   computed: {
-  //     isChangeInput() {
-  //       return this.Global.docInput;
-  //     },
-  //     isChangeAttach() {
-  //       return this.Global.docAttach;
-  //     }
-  //   },
-  //   watch: {
-  //     isChangeInput: (newval, oldval) => {
-  //       alert(newval);
-  //     },
-  //     isChangeAttach: (newval, oldval) => {
-  //       alert(newval);
-  //     }
-  //   }
 };
 </script>
 <style lang="scss" scoped>
