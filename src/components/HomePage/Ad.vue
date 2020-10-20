@@ -1,6 +1,6 @@
 <template>
   <div id="Ad">
-        <a class="ad-pane" href="" @click.prevent>
+        <a class="ad-pane" href="/OnlineSubmit">
             <img :src="imgSrc" alt="">
         </a>
   </div>
@@ -29,7 +29,7 @@ export default {
 
         display: flex;
         justify-content: center;
-        min-width: 1200px;
+        width: 1200px;
         img {
             height: 148px;
             width: 100%;

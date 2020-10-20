@@ -79,7 +79,7 @@ export default {
 
 <style scoped lang="scss">
 .min-w {
-  min-width: 1400px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -105,7 +105,7 @@ export default {
 .paper-body {
   width: 100%;
   max-width: 1400px;
-  min-width: 1051px;
+  width: 1051px;
   margin: 26px auto;
 }
 </style>

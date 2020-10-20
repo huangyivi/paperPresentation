@@ -147,30 +147,75 @@ $blueColor:#2880da;
                 
             }
 
+            &.message-add {
+
+                .keywords {
+
+                    display: flex;
+                    // align-items: center;
+                    min-height: 30px;
+                    margin-bottom: 10px;
+
+                    span {
+                        display: inline-block;
+                        width: 56px;
+                        text-align: left;
+                    }
+
+                    .tags {
+                        margin-left: 10px;
+
+
+                        .input-new-tag {
+                            width: 80px;
+                        }
+                    }
+                }
+
+                .summary {
+                    span {
+                        display: inline-block;
+                        width: 56px;
+                        text-align: left;
+                    }
+                }
+
+                textarea {
+                    margin: 0 5px;
+                    width: calc(100% - 70px);
+                    padding: 5px;
+                    border: 1px #d8d8d8 solid;
+                    border-radius: 5px;
+                    resize: none;
+                    outline: none;
+                    vertical-align: top;
+                }
+            }
+
             &:last-child {
                 margin-top: 20px;
 
-                button {
+                // button {
 
-                    outline: none;
-                    margin: 0 5px;
-                    width: 104px;
-                    height: 36px;
-                    line-height: 36px;
-                    text-align: center;
-                    color: #2880da;
-                    border: 1px solid #2880da;
-                    font-size: 14px;
-                    border-radius: 4px;
-                    background: #fffbef;
-                    cursor: pointer;
+                //     outline: none;
+                //     margin: 0 5px;
+                //     width: 104px;
+                //     height: 36px;
+                //     line-height: 36px;
+                //     text-align: center;
+                //     color: #2880da;
+                //     border: 1px solid #2880da;
+                //     font-size: 14px;
+                //     border-radius: 4px;
+                //     background: #fffbef;
+                //     cursor: pointer;
 
-                    &:last-child {
-                        color: #fff;
-                        background: #2880da;
-                    }
+                //     &:last-child {
+                //         color: #fff;
+                //         background: #2880da;
+                //     }
 
-                }
+                // }
             }
             
         }
@@ -314,6 +359,10 @@ $blueColor:#2880da;
                 }
             }
         }
+    }
+
+    .redBorder {
+        border-color: red;
     }
 
 }
