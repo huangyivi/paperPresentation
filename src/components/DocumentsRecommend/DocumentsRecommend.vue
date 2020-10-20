@@ -86,7 +86,7 @@ export default {
   background-color: #fff;
   margin: 20px 0;
   padding: 10px;
-  min-width: 1120px;
+  width: 100%;
   .rec-title {
     margin: 20px 100px;
     display: flex;

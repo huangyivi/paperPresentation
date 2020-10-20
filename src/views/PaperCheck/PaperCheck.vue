@@ -105,7 +105,7 @@ export default {
 .paper-body {
   width: 100%;
   max-width: 1400px;
-  min-width: 1051px;
+  width: 1051px;
   margin: 26px auto;
 }
 </style>

@@ -29,7 +29,7 @@ export default {
 
         display: flex;
         justify-content: center;
-        min-width: 1200px;
+        width: 1200px;
         img {
             height: 148px;
             width: 100%;

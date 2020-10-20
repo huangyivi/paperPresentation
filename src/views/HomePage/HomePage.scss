@@ -5,7 +5,7 @@
     .book-show {
         margin: 0 auto;
         padding: 10px 0;
-        min-width: 1200px;
+        width: 1200px;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -15,7 +15,7 @@
     .list {
         margin: 0 auto;
         padding: 0 15px;
-        min-width: 1200px;
+        width: 1200px;
         width: 100%;
         height: 44px;
         display:flex;
@@ -133,7 +133,7 @@
     }
 
     .commercial-list {
-        min-width: 1100px;
+        width: 1100px;
     }
 
     .consult-man {
@@ -170,7 +170,7 @@
     .industry {
         padding: 30px 5px;
         background: #fff;
-        min-width: 1200px;
+        width: 1200px;
         .article-show {
             display: flex;
             justify-content: space-between;
@@ -185,7 +185,7 @@
         flex-wrap: nowrap;
         
         .book-intro {
-            min-width: 222px;
+            width: 222px;
             height: 224px;
         }
 
@@ -194,7 +194,7 @@
             margin: 10px 0;
             padding: 15px 0;
             height: 224px;
-            min-width: 978px;
+            width: 978px;
             width: calc(100% - 300px);
             display: flex;
             flex-wrap: wrap;
@@ -236,7 +236,7 @@
         .article-table {
             width: calc(100% - 300px);
             height: 434px;
-            min-width: 978px;
+            width: 978px;
             margin: 10px 0;
             text-align: center;
             background: #fff;
@@ -272,7 +272,7 @@
         background: #fff;
         padding: 20px 0;
         margin: 50px 0 20px;
-        min-width: 1200px;
+        width: 1200px;
         .book-intro {
             height: 278px;
         }
@@ -286,7 +286,7 @@
     
             .web-detail {
                 width: calc(100% - 275px);
-                min-width: 978px;
+                width: 978px;
                 height: 278px;
                 padding: 8px 5px 0 0;
                 display: flex;
