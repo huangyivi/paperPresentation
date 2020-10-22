@@ -2,11 +2,11 @@
   <div class="Book">
       <div class="book-show">
             <div class="book-container">
-                <a class="book-to" href="" @click.prevent>
+                <a class="book-to" :href="getTrueHref(data.id)">
                     <img class="book-img" :src="data.bookurl" alt="">     
                 </a>
-                <a v-show="data.bookEn" class="book-en" href="" @click.prevent>{{data.bookEn}}</a>
-                <a v-show="data.bookName" class="book-name" href="" @click.prevent>{{data.bookName}}</a>
+                <a v-show="data.bookEn" class="book-en" :href="getTrueHref(data.id)">{{data.bookEn}}</a>
+                <a v-show="data.bookName" class="book-name" :href="getTrueHref(data.id)">{{data.bookName}}</a>
                 <div class="second-line">
                     <span>{{data.bookClass}}</span>
                     |
@@ -37,12 +37,23 @@ export default {
         }
     },
 
-    methods(){
-
+    methods: {
+        getTrueHref(id){
+            return '/JournalDetails/' + id;
+        }
     },
 
     mounted(){
         this.data = this.book;
+    },
+
+    watch:{
+        book: {
+            handle(newVal,oldVal){
+                this.data = this.book;
+            }
+        },
+        deep: true,
     }
 
 
@@ -78,6 +89,7 @@ export default {
                         width: 100%;
                         height: 100%;
                         border: 4px solid #efefef;
+                        transition: all .5s;
 
                         &:hover {
                         border-color: #FF8F00;
@@ -91,6 +103,7 @@ export default {
                     margin-top: 10px;
                     font-size: 14px;
                     text-align: center;
+                    transition: all .5s;
 
                     &:hover {
                         color: #FF8F00;
@@ -103,6 +116,7 @@ export default {
                     margin-top: 10px;
                     font-size: 14px;
                     text-align: center;
+                    transition: all .5s;
 
                     &:hover {
                         color: #FF8F00;
