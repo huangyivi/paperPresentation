@@ -25,7 +25,7 @@
                 <div>
                     <div>
                         <span>联系电话</span>
-                        <input type="text" v-model="phone">
+                        <input type="text" v-model="phone" :class="{redBorder: phoneState}">
                         <strong>*</strong>
                     </div>
                     <p>请填写正确的联系电话</p>
@@ -33,7 +33,7 @@
             </div>
             <div class="submit-title">
                 <span>电子邮箱</span>
-                <input type="text" v-model="email">
+                <input type="text" v-model="email" :class="{redBorder: emailState}">
                 <strong>*</strong>
             </div>
             <div class="submit-select">
@@ -48,15 +48,35 @@
                 <div>
                     <span @click="modal1 = true">基金项目</span>
                     <Modal
-                        v-model="modal1"
-                        title="论文所属基金选择"
-                        @on-ok="ok"
-                        @on-cancel="cancel">
-                        <p>Content of dialog</p>
-                        <p>Content of dialog</p>
-                        <p>Content of dialog</p>
+                    v-model="modal1"
+                    >
+                        <p slot="header" style="color:#2880da;background:#fff;text-align:center;font-size:20px;">
+                            论文所属基金选择
+                        </p>
+                        <div class="fund-pane">
+                            <div>
+                                <label>项目号：</label>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <label>项目名称：</label>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <label>立项单位/部门：</label>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <label>项目名称(英文)：</label>
+                                <input type="text">
+                            </div>
+                            <div>
+                                <label>项目备注：</label>
+                                <input type="text">
+                            </div>
+                        </div>
                     </Modal>
-                    <span>开具发票</span>
+                    <!-- <span>开具发票</span> -->
                 </div>
             </div>
             <div class="message-add">
@@ -101,10 +121,10 @@
 
             <div>
                 <Button type="default" size="large" @click="clear">清空</Button>
-                <Button type="primary" size="large">提交投稿</Button>
+                <Button type="primary" size="large" @click="submitDocu">提交投稿</Button>
             </div>
         </div>
-        <div class="message-list">
+        <!-- <div class="message-list">
             <div class="new-magazines">
                 <p> 最新投稿</p>
                 <div>
@@ -116,7 +136,7 @@
                         </li>
                     </ul>
                     <ul>
-                        <li  v-for="item in magazines.slice(6,12)" :key="item.index">
+                        <li  v-for="item in magazines.slice(-6)" :key="item.index">
                             <span>{{item.author}}</span>
                             <span :title="item.works">{{item.works}}</span>
                             <span>{{item.time}}</span>
@@ -138,7 +158,7 @@
                         </li>
                     </ul>
                     <ul>
-                        <li  v-for="item in messages.slice(6,12)" :key="item.index">
+                        <li  v-for="item in messages.slice(-6)" :key="item.index">
                             <a href="" @click.prevent>
                                 <span :title="item.notice">{{item.notice}}</span>
                                 <span>{{item.time}}</span>
@@ -147,7 +167,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -158,123 +178,8 @@
         data(){
             return{
                 imgBase: 'http://zhimaikeji.net/imgs/wf/onlineSub.png',
-                magazines: [
-                    {
-                        author: '利己',
-                        works: '《全面小康，我们来了》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《核心力量训练对青少年跨栏运动员跨栏步节奏的影响》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己6',
-                        works: '《核心力量训练对青少年跨栏运动员跨栏步节奏的影响》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己3',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己1',
-                        works: '《核心力量训练对青少年跨栏运动员跨栏步节奏的影响》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己13',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己2',
-                        works: '《核心力量训练对青少年跨栏运动员跨栏步节奏的影响》',
-                        time: '2020-10-23',
-                    },
-                    {
-                        author: '利己4',
-                        works: '《文艺生活》',
-                        time: '2020-10-23',
-                    },
-                ],
-                messages: [
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《建筑工程技术与设计》录用通知 ',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《检验检疫学刊》编辑部 录用证明',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《建筑工程技术与设计》录用通知 ',
-                        time: '2020-09-20',
-                    },
-                    {
-                        notice: '《建筑工程技术与设计》录用通知 ',
-                        time: '2020-09-20',
-                    },
-                ],
+                // magazines: [],  
+                // messages: [],   
                 author:'', //作者
                 phone:'', //电话
                 email:'', //电子邮箱
@@ -284,6 +189,8 @@
                 inputVisible: false, //是否显示输入框
                 inputValue: '', //输入框的内容
                 modal1: false,
+                emailState: false,  //邮箱输入框状态
+                phoneState: false,  //电话输入框状态
             }
         },
         components:{
@@ -326,7 +233,80 @@
                 let reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
                 if(!reg.test(email)) return false;
                 else return true;
+            },
+            //检查电话
+            isPhone(phone){
+                let reg = /^1[0-9]{10}$/;;
+                if(!reg.test(phone)) return false;
+                else return true;
+            },
+            //提交投稿
+            submitDocu(){
+                let data = new FormData();
+                let time = new Date();
+                time = time.toLocaleDateString();
+                console.log(time);
+                let state = this.checkParams();
+                if(!state){
+                    console.log(false);
+                }
+                data.append('title',this.docName);
+                data.append('keyword',this.countTags);
+                data.append('author',this.author);
+                data.append('publishTime',time);
+                data.append('email',this.email);
+                data.append('phone',this.phone);
+                // data.append('paperType',)
+            },
+            //检查
+            checkParams(){
+                let state = true;
+                this.phoneState = false;
+                this.emailState = false;
+                if(!this.isEmail(this.email)){
+                    this.emailState = true;
+                    state = false;
+                }
+                if(!this.isPhone(this.phone)){
+                    this.phoneState = true;
+                    state = false;
+                }
+
+                if(!state){
+                    this.$Message.error('请检查字段');
+                }
+
+                return state;
             }
+            /*
+            获取最新投稿
+            getNewDocu(){
+                this.$http.get('http://39.98.41.126:30007/doc',{
+                    params:{
+                        pageNum: 1,
+                        pageSize: 12,
+                    }
+                })
+                .then(res=>{
+                    let data = res.data.data;
+                    console.log(res);
+                    data.list.forEach((item,index)=>{
+                        this.magazines.push({
+                            author: item.author,
+                            works: `《${item.title}》`,
+                            time: item.publishTime,
+                        });
+                        this.messages.push({
+                            notice: `《${item.fromJournal}》 录用证明`,
+                            time: item.publishTime,
+                        })
+                    })
+                })
+            }
+            */
+        },
+        mounted(){
+            // this.getNewDocu();
         }
     }
     

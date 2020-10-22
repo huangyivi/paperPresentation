@@ -82,7 +82,7 @@ export default {
       var formdata = new FormData();
       formdata.append("id", this.$route.params.jid);
       this.$http
-        .post("http://39.98.41.126:30005/journal/getJournalById", formdata)
+        .post("http://39.98.41.126:30004/journal/getJournalById", formdata)
         .then((res) => {
           if (res.data.code === 1) {
             this.journalDetailData = res.data.data;

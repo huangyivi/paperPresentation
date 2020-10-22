@@ -26,20 +26,34 @@
 
     <!-- 国内期刊 -->
     <ul class="inter-list list">
-      <li v-for="item in interList" :key="item.index">{{item}}</li>
+      <li 
+      :class="{active: index == interListIndex}" 
+      v-for="(item,index) in interList" 
+      :key="item.index"
+      @click="changeInterPage(index)"
+      >
+      {{item}}
+      </li>
       <a href="/JournalRecommend">查看全部</a>
     </ul>
-    <!-- <BookShow :bookSum="books[2]"/> -->
+
     <div class="book-show guonei-show">
       <BookIntro class="book-intro" :bookSum="books[2]" />
-      <Book class="book" v-for="item in domestic.slice(-9)" :key="item.index" :book="item" />
+      <Book class="book" v-for="item in domestic" :key="item.index" :book="item" />
     </div>
     <Ad :imgSrc="gongchengImg" />
 
     <!-- 行业 -->
     <div class="industry">
       <ul class="commercial-list list">
-        <li v-for="item in commercial" :key="item.index">{{item}}</li>
+        <li 
+        :class="{active: index == industryIndex}" 
+        v-for="(item, index) in commercial" 
+        :key="item.index"
+        @click="changeIndustryPage(index)"
+        >
+        {{item}}
+        </li>
         <a href="/DocumentBase">查看全部</a>
       </ul>
       <div class="article-show">
@@ -60,13 +74,20 @@
 
     <!-- 最新文献 -->
     <ul class="list">
-      <li v-for="item in commercial" :key="item.index">{{item}}</li>
+      <li 
+      :class="{active: index == newListIndex}" 
+      v-for="(item,index) in commercial" 
+      :key="item.index"
+      @click="changeNewDocu(index)"
+      >
+      {{item}}
+      </li>
       <a href="/DocumentBase">查看全部</a>
     </ul>
     <div class="new-article">
       <BookIntro class="book-intro" :bookSum="books[4]" />
       <div class="article-table">
-        <Table :columns="columns1" :data="data1"></Table>
+        <Table :columns="columns1" :data="newDocu.slice(0,6)"></Table>
         <a class="article-look" href="/DocumentBase">查看总文献库（{{allNum}}篇）</a>
       </div>
     </div>
@@ -192,54 +213,12 @@ export default {
         "机械",
         "建筑"
       ],
-      books2: [
-        {
-          bookName: "内燃机与配件",
-          bookRank: "国家级",
-          bookClass: "半月刊",
-          // bookResoure: '知网、万方、维普、龙源',
-          bookurl: "http://54.222.136.26:8080/uimgs/prl/nrpj.jpg",
-          bookEn: "dakfjakfjka"
-        },
-        {
-          bookName: "nimm",
-          bookRank: "国家级",
-          bookClass: "半月刊",
-          bookResoure: "知网、万方、维普、龙源",
-          bookurl: "http://54.222.136.26:8080/uimgs/prl/nrpj.jpg"
-        },
-        {
-          bookName: "nimm",
-          bookRank: "国家级",
-          bookClass: "半月刊",
-          // bookResoure: '知网、万方、维普、龙源',
-          bookurl: "http://54.222.136.26:8080/uimgs/prl/nrpj.jpg"
-        },
-        {
-          bookName: "nimm",
-          bookRank: "国家级",
-          bookClass: "半月刊",
-          bookResoure: "知网、万方、维普、龙源",
-          bookurl: "http://54.222.136.26:8080/uimgs/prl/nrpj.jpg"
-        }
-      ],
       jujiao: {
         title: "行业聚焦",
         num: 1010,
         intro: "为您整理行业最热门文献",
         articles: [
-          {
-            name: "·互联网金融模式研究111111111111111111111111111111111",
-            time: "2012年12期"
-          },
-          {
-            name: "·互联网金融模式研究",
-            time: "2012年12期"
-          },
-          {
-            name: "·互联网金融模式研究",
-            time: "2012年12期"
-          }
+         
         ]
       },
       qianyan: {
@@ -247,18 +226,7 @@ export default {
         num: 292049,
         intro: "最新发表的优质文献",
         articles: [
-          {
-            name: "·互联网金融模式研究111111111111111111111111111111111",
-            time: "2012年12期"
-          },
-          {
-            name: "·互联网金融模式研究",
-            time: "2012年12期"
-          },
-          {
-            name: "·互联网金融模式研究",
-            time: "2012年12期"
-          }
+          
         ]
       },
       articleCheck: [
@@ -275,7 +243,20 @@ export default {
         {
           title: "标题",
           key: "title",
-          width: "400"
+          width: "400",
+          render: (h, params) => {
+            return h(
+              "a",
+              {
+                attrs: {
+                  href: "/DocDetails/" + params.row.id,
+                  target: "_blank",
+                  title: params.row.title
+                }
+              },
+              params.row.title
+            );
+          }
         },
         {
           title: "作者",
@@ -291,45 +272,7 @@ export default {
           // width: "300",
         }
       ],
-      data1: [
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        },
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        },
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        },
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        },
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        },
-        {
-          title: "高光谱图像修复算法的自适应稀疏编码实现",
-          author: "许肖阳",
-          time: "2020年1期",
-          magazine: "西藏研究"
-        }
-      ],
-      allNum: 23424,
+      allNum: '',
       //网站研发
       webs: [
         {
@@ -378,8 +321,14 @@ export default {
       preciseBook: [], //精品期刊
       international: [], //国际征稿
       domestic: [],//国内征稿
+      front: [], //行业前沿
+      focusing: [], //行业聚焦
+      newDocu: [], //最新文献
       //轮播时间
       recordTime: '',
+      interListIndex: -1,  //国内期刊导航栏索引
+      industryIndex: -1,  //行业导航栏索引
+      newListIndex: -1, //最新文献导航栏索引
     };
   },
   
@@ -410,13 +359,14 @@ export default {
       formdata.append('pageNum',1);
       formdata.append('pageSize',30);
       this.$http
-        .post('http://39.98.41.126:30005/journal/searchJournal',formdata)
+        .post('http://39.98.41.126:30004/journal/searchJournal',formdata)
         .then(res=>{
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
           data.list.forEach((item,index)=>{
             this.preciseBook.push({
+              id: item.id,
               bookName: item.name,  //书名
               bookRank: item.journalLevel, //刊级
               bookClass: item.releaseCycle,  //书类别
@@ -424,6 +374,7 @@ export default {
               bookurl: item.journalPhoto,  //图片地址
             });
             this.international.push({
+              id: item.id,
               bookEn: this.randomString(parseInt((Math.random() + 1)*10)),
               bookName:item.name, //书名
               bookRank: item.journalLevel, //刊级
@@ -431,15 +382,17 @@ export default {
               bookurl: item.journalPhoto,  //图片地址
             });
             this.domestic.push({
+              id: item.id,
               bookName: item.name,  //书名
               bookRank: item.journalLevel, //刊级
               bookClass: item.releaseCycle,  //书类别
               bookurl: item.journalPhoto,  //图片地址
             })
-          })
+          });
+          this.domestic = this.domestic.slice(-9);
         });
     },
-    //随机生成字符串
+    //随机生成字符串(来充当英文)
     randomString(n) {  
       let str = 'abcdefghijklmn pqrstuvwxz 9876543210';
       let tmp = '',
@@ -459,10 +412,111 @@ export default {
         }
       })
       .then(res=>{
-        console.log(res);
+        let data = res.data.data;
+        this.allNum = data.total;
+        this.qianyan.num = data.total;
+        this.jujiao.num = data.total;
+        data.list.forEach((item,index)=>{
+          //行业前沿
+          this.qianyan.articles.push({
+            id: item.id,
+            name: item.title,  //标题
+            time: item.publishTime  //时间
+          });
+          //最新文献
+          this.newDocu.push({
+            id: item.id, //id
+            title: item.title,  //标题
+            author: item.author,  //作者
+            time: item.publishTime, //刊期
+            magazine: item.fromJournal,  //期刊
+          },)
+        });
+        this.jujiao.articles = this.qianyan.articles.slice(-6);   //行业聚焦
+        this.qianyan.articles = this.qianyan.articles.slice(0,6);
+        
+        
       }).catch(err=>{
         console.log(err);
       })
+    },
+    //切换国内征稿
+    changeInterPage(index){
+      this.interListIndex = index;
+      this.domestic.length = 0;  //清空一波数组
+      var data = new FormData();
+      data.append('pageNum',1);
+      data.append('pageSize',9);
+      data.append('name',this.interList[index]);  //名称
+      this.$http.post('http://39.98.41.126:30004/journal/searchRecommendJournal',data)
+      .then(res=>{
+        // console.log(res);
+        let data = res.data.data;
+        data.list.forEach((item,index)=>{
+            this.domestic.push({
+              bookName: item.name,  //书名
+              bookRank: item.journalLevel, //刊级
+              bookClass: item.releaseCycle,  //书类别
+              bookurl: item.journalPhoto,  //图片地址
+            })
+          });     
+      }).catch(err=>{
+        console.log(err);
+      });
+    },
+    //切换行业
+    changeIndustryPage(index){
+      this.industryIndex = index;
+      this.qianyan.articles.length = 0;
+      this.jujiao.articles.length = 0;
+      this.$http.get('http://39.98.41.126:30007/doc',{
+        params:{
+          head: this.commercial[index],
+          pageNum: 1,
+          pageSize: 12,
+        }
+      }).then(res=>{
+        let data = res.data.data;
+        data.list.forEach((item,index)=>{
+          //行业前沿
+          this.qianyan.articles.push({
+            id: item.id,
+            name: item.title,  //标题
+            time: item.publishTime  //时间
+          });
+        });
+        this.jujiao.articles = this.qianyan.articles.slice(-6);  //行业聚焦
+        this.qianyan.articles = this.qianyan.articles.slice(0,6);
+        
+      })
+    },
+    //切换最新文献
+    changeNewDocu(index){
+      this.newListIndex = index;
+      this.newDocu.length = 0;
+      this.$http.get('http://39.98.41.126:30007/doc',{
+        params: {
+          head: this.commercial[index],
+          pageNum: 1,
+          pageSize: 6,
+        }
+      })
+      .then(res=>{
+        let data = res.data.data;
+        data.list.forEach((item,index)=>{
+          //最新文献
+          this.newDocu.push({
+            id: item.id, //id
+            title: item.title,  //标题
+            author: item.author,  //作者
+            time: item.publishTime, //刊期
+            magazine: item.fromJournal,  //期刊
+          },)
+        });        
+      }).catch(err=>{
+        console.log(err);
+      })
+      
     }
   },
   mounted(){

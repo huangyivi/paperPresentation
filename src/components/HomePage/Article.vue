@@ -9,9 +9,12 @@
       </div>
       <ul>
           <li v-for="item in article.articles" :key="item.index">
-              <span>{{item.name}}</span>
+              <a :href="getTrueHref(item.id)" target="blank">
+                  <span>{{item.name}}</span>
+              </a>
               <span>{{item.time}}</span>
           </li>
+          <h3 v-show="!article.articles.length">暂无数据</h3>
       </ul>
   </div>
 </template>
@@ -23,6 +26,19 @@ export default {
     data(){
         return {
         }
+    },
+    methods: {
+        getTrueHref(id){
+            return '/DocDetails/' + id;
+        }
+    },
+    wathc: {
+        article: {
+            handle(newVal,oldVal){
+                return this.article;
+            }
+        },
+        deep: true
     }
 }
 </script>
@@ -62,13 +78,20 @@ $blueColor:#2880da;
 
     ul {
 
+        max-height: 464px;
+
         li {
             display: flex;
             justify-content: space-between;
             height: 44px;
             line-height: 44px;
+            
             border-bottom: 1px dashed #d8d8d8;
             cursor: pointer;
+
+            a {
+                color: #5f5f5f;
+            }
 
             span {
 
@@ -84,9 +107,17 @@ $blueColor:#2880da;
                 }
             }
 
-            &:hover {
+            &:hover,
+            &:hover a {
                 color: $blueColor;
             }
+        }
+
+        h3 {
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 30px;
         }
     }
 
