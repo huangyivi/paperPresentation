@@ -1,29 +1,16 @@
 .chat-container {
     .chat-history {
+      padding: 5px;
       height: 250px;
       border: 1px solid rgba(0, 0, 0, 0.16);
       border-radius: 10px 10px 0 0;
-      overflow-y: auto;
-      .chat-content {
-        margin: 10px;
-        .server-name {
-          font-weight: 600;
-          color: rgb(6, 128, 178);
-        }
-        .customer-name {
-          font-weight: 600;
-          color: rgb(95, 217, 88);
-        }
-      }
-      .chat-tip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      #chat-history{
         width: 100%;
-        display: flex;
-        justify-content: center;
-        > span {
-          padding: 5px;
-          border-radius: 10px;
-          background-color: #cccccc;
-        }
+        height: 240px;
+        overflow-y: auto;
       }
     }
     .chat-utils {
@@ -50,4 +37,8 @@
       justify-content: flex-end;
       align-items: center;
     }
+  }
+
+  .poptip{
+    text-align: center;
   }

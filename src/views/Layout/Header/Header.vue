@@ -6,9 +6,7 @@
         <p>咨询电话:13041179055</p>
       </div>
       <div id="right-session">
-        <a href="#">登录</a>
-        <a href="#">|</a>
-        <a href="#">注册</a>
+        <a href="#">管理员登录</a>
       </div>
     </div>
   </div>
