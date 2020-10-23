@@ -6,14 +6,14 @@
     </div>
     <div id="search-up">
       <input type="text" v-model="input"/>
-      <i-button type="primary" icon="ios-search">搜索</i-button>
+      <i-button type="primary" icon="ios-search" @click="getJournals(journalType)">搜索</i-button>
     </div>
   </div>
 <div id="bookshelf">
-    <Tabs :animated=false active-key="key1" size="small" type="line">
-      <Tab-pane v-for="(item,key) in tabs" :label="item" :key="key" class="books-pane">
+    <Tabs :animated=false active-key="key1" size="small" type="line" @on-click="getJournals">
+      <Tab-pane v-for="(item,key) in tabs" :name="item" :label="item" :key="key" class="books-pane">
         <div id="books">
-          <Book v-for="(item,key) in pageSize" :key="key" :imgSrc="imgsrc" />
+          <Book v-for="(item,key) in journals" :key="key" :imgSrc="item.journalPhoto" :title="item.name" :level="item.journalLevel" :cycle="item.releaseCycle" :id="'/journalDetails/' + item.id"/>
         </div>
         <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page>
       </Tab-pane>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       input : "",
-      imgsrc : '',
+      journalType : "",
       tabs: [
         "全部",
         "OA期刊",
@@ -70,9 +70,9 @@ export default {
         "语言",
       ],
       // 信息总量
-      dataCount: 24,
+      dataCount: 0,
       // 每页显示
-      pageSize: 12,
+      pageSize: 24,
       //当前页码
       currentPage: 1,
       //当前分类
@@ -100,13 +100,14 @@ export default {
       if (item == "全部") {
         item = "";
       }
+      this.journalType = item;
       let data = new FormData();
       data.append('name',this.input);
       data.append('pageNum',this.currentPage);
       data.append('pageSize',this.pageSize);
       data.append('journalType',item);
       this.$http
-        .post("http://39.98.41.126:30005/journal/searchRecommendJournal", data,
+        .post("http://39.98.41.126:30004/journal/searchRecommendJournal", data,
           {
             headers:{
               "Content-Type" : "multipart/form-data"
@@ -121,7 +122,6 @@ export default {
           } else {
             this.isSize = false;
           }
-          console.log(res.data.data)
         });
     }
   },

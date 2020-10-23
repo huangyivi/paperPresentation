@@ -13,7 +13,7 @@ import Header from "./Header/Header";
 import Nav from "./Navigator/Navigator";
 import Footer from "./Footer/Footer";
 import SideNav from "./SideNav/SideNav";
-import CustomerService from "../../components/CustomerService/CustomerService"
+import CustomerService from "../CustomerService/CustomerService"
 export default {
   name: "Layout",
   data() {
