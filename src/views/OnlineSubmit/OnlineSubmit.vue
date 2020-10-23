@@ -10,14 +10,14 @@
             <p>ONLINE SUBMISSION</p>
             <div class="submit-title">
                 <span>文献名称</span>
-                <input type="text" v-model="docName">
+                <input type="text" v-model="docName" :class="{redBorder: State.docName}">
                 <strong>*</strong>
             </div>
             <div class="submit-message">
                 <div>
                     <div>
                         <span>作者姓名</span>
-                        <input type="text" v-model="author">
+                        <input type="text" v-model="author" :class="{redBorder:State.author}">
                         <strong>*</strong>
                     </div>
                     <p>写第一作者或联系人</p>
@@ -25,7 +25,7 @@
                 <div>
                     <div>
                         <span>联系电话</span>
-                        <input type="text" v-model="phone" :class="{redBorder: phoneState}">
+                        <input type="text" v-model="phone" :class="{redBorder: State.phone}">
                         <strong>*</strong>
                     </div>
                     <p>请填写正确的联系电话</p>
@@ -33,7 +33,7 @@
             </div>
             <div class="submit-title">
                 <span>电子邮箱</span>
-                <input type="text" v-model="email" :class="{redBorder: emailState}">
+                <input type="text" v-model="email" :class="{redBorder: State.email}">
                 <strong>*</strong>
             </div>
             <div class="submit-select">
@@ -115,7 +115,7 @@
                 </div>
                 <div class="summary">
                     <span>摘要</span>
-                    <textarea cols="30" rows="10" v-model="summary"></textarea>
+                    <textarea cols="30" rows="10" v-model="summary" :class="{redBorder:State.summary}"></textarea>
                 </div>
             </div>
 
@@ -185,12 +185,19 @@
                 email:'', //电子邮箱
                 docName: '', //文献名称
                 summary: '', //摘要
-                countTags: ['Java', 'Vue','biaoqian'], //标签组
+                countTags: [], //标签组
                 inputVisible: false, //是否显示输入框
                 inputValue: '', //输入框的内容
                 modal1: false,
-                emailState: false,  //邮箱输入框状态
-                phoneState: false,  //电话输入框状态
+                emailState: false,  
+                phoneState: false,  
+                State: {
+                    email:false, //邮箱输入框状态
+                    phone: false, //电话输入框状态
+                    author: false, //作者输入框状态
+                    docName: false, //文献名输入框状态
+                    summary: false //摘要输入框状态
+                }
             }
         },
         components:{
@@ -245,10 +252,10 @@
                 let data = new FormData();
                 let time = new Date();
                 time = time.toLocaleDateString();
-                console.log(time);
-                let state = this.checkParams();
-                if(!state){
-                    console.log(false);
+                //检查字段
+                let state = this.checkParams();  
+                if(state) {
+                    this.$Message.success('成功');
                 }
                 data.append('title',this.docName);
                 data.append('keyword',this.countTags);
@@ -261,21 +268,42 @@
             //检查
             checkParams(){
                 let state = true;
-                this.phoneState = false;
-                this.emailState = false;
-                if(!this.isEmail(this.email)){
-                    this.emailState = true;
+                let arr = [];  //错误数组
+                //红框警告消失
+                for(let key in this.State){
+                    this.State[key] = false;
+                }
+                if(!this.docName){
+                    this.State.docName = true;
+                    arr.push('文献名');
                     state = false;
                 }
-                if(!this.isPhone(this.phone)){
-                    this.phoneState = true;
+                if(!this.author) {
+                    this.State.author = true;
+                    arr.push('作者名');
                     state = false;
                 }
-
-                if(!state){
-                    this.$Message.error('请检查字段');
+                if(!this.isPhone(this.phone) || !this.phone){
+                    this.State.phone = true;
+                    state = false;
+                    arr.push('电话');
                 }
-
+                if(!this.isEmail(this.email) || !this.email){
+                    this.State.email = true;
+                    state = false;
+                    arr.push('邮箱');
+                }
+                if(!this.summary) {
+                    this.State.summary = true;
+                    arr.push('摘要');
+                    state = false;
+                }
+                let sum ='';
+                arr.forEach((item,index)=>{
+                    sum += `${item}、`;
+                })
+                if(!state) this.$Message.error(sum.slice(0,-1) + '有误');  //提示
+                
                 return state;
             }
             /*
@@ -307,6 +335,43 @@
         },
         mounted(){
             // this.getNewDocu();
+        },
+        watch: {
+            docName(val,oldval) {
+                if(val){
+                    this.State.docName = false;
+                } else {
+                    this.State.docName = true;
+                }
+            },
+            author(val,oldval) {
+                if(val){
+                    this.State.author = false;
+                } else {
+                    this.State.author = true;
+                }
+            },
+            email(val,oldval) {
+                if(val){
+                    this.State.email = false;
+                } else {
+                    this.State.email = true;
+                }
+            },
+            phone(val,oldval) {
+                if(val){
+                    this.State.phone = false;
+                } else {
+                    this.State.phone = true;
+                }
+            },
+            summary(val,oldval) {
+                if(val){
+                    this.State.summary = false;
+                } else {
+                    this.State.summary = true;
+                }
+            }
         }
     }
     
