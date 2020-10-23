@@ -56,10 +56,16 @@
               p-id="4265"
             />
           </svg>
-        </div> -->
+        </div>-->
       </div>
       <div>
-        <textarea type="text" class="chat-area" id="chat-area" v-model="content"></textarea>
+        <textarea
+          type="text"
+          class="chat-area"
+          id="chat-area"
+          v-model="content"
+          @keyup.enter="sendMsg"
+        ></textarea>
       </div>
       <div class="chat-footer">
         <Poptip v-model="visible">
@@ -292,15 +298,15 @@ export default {
     },
     // 获取聊天id
     getClientId() {
+      let data = new FormData();
+      data.append("chat", sessionStorage.getItem("chat"));
       this.$http
-        .post("http://39.98.41.126:30001/chat/chatId")
+        .post("http://39.98.41.126:30001/chat/chatId", data)
         .then(res => {
           if (res.data.code == 1) {
             console.log(res.data);
-            this.clientId = res.data.data.chatId;
-            if (!sessionStorage.getItem("chat")) {
-              sessionStorage.setItem("chat", res.data.data.chat);
-            }
+            this.clientId = res.data.data;
+            sessionStorage.setItem("chat", res.data.data);
             console.log("获取用户id成功!");
           }
         })
@@ -336,7 +342,6 @@ export default {
                   date.getSeconds(),
                 content: `您好，我是${this.serverName},请问您需要咨询什么业务？`
               });
-
               console.log("获取客服id成功！");
             } else {
               let date = new Date();
@@ -356,6 +361,50 @@ export default {
 
               console.log("当前客服不在线");
             }
+          })
+          .then(() => {
+            this.getHistory();
+          })
+          .catch(err => {
+            console.log("服务器连接已断开");
+          });
+      }
+    },
+    // 获取历史记录
+    getHistory() {
+      if (this.serverId) {
+        this.$http
+          .post(
+            `http://39.98.41.126:30001/chat/${this.clientId}/history/${this.serverId}`
+          )
+          .then(res => {
+            console.log(res.data);
+            let data = res.data.data;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].sender.roleType == 1) {
+                this.history.push({
+                  type: 1,
+                  name: "我",
+                  date: data[i].time.slice(0, 10),
+                  time: data[i].time.slice(11, 19),
+                  content: data[i].content
+                });
+              } else {
+                this.history.push({
+                  type: 2,
+                  name: data[i].sender.username,
+                  date: data[i].time.slice(0, 10),
+                  time: data[i].time.slice(11, 19),
+                  content: data[i].content
+                });
+              }
+            }
+          })
+          .then(() => {
+            setTimeout(() => {
+              let chat = document.getElementById("chat-history");
+              chat.scrollTop = chat.scrollHeight;
+            },1000);
           });
       }
     },
@@ -382,11 +431,15 @@ export default {
               time: data.time.slice(11, 19),
               content: data.content
             });
+            that.$Message.info({
+              content : '客服发来消息！',
+              duration : 2
+            });
           });
           // 用户等待获取客服服务
-          window.socket.subscribe("/user/queue/chat/serverOnline",res=>{
-            that.getService()
-          })
+          window.socket.subscribe("/user/queue/chat/serverOnline", res => {
+            that.getService();
+          });
         });
       }
     },
@@ -402,10 +455,9 @@ export default {
     // 隐藏客服对话框
     this.display = false;
     this.getClientId();
-    this.getService();
   },
   destroyed() {
-    this.closeSocket();
+    // this.closeSocket();
   }
 };
 </script>
