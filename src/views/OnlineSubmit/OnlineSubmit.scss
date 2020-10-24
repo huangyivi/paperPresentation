@@ -128,6 +128,16 @@ $blueColor:#2880da;
                                 cursor: pointer;
                             }
                         }
+
+                        .file-name {
+                            margin-left: 10px;
+                            width: 100px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            text-align: left;
+                            font-size: 12px;
+                        }
                     }
 
                     &:last-child{

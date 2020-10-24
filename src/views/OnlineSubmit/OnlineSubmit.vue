@@ -41,8 +41,9 @@
                     <span>上传稿件</span>
                     <div>
                         选择文件
-                        <input type="file">
+                        <input type="file" accept=".text,.txt,.doc,.docx" @change="getFile($event)">
                     </div>
+                    <p v-show="docName" class="file-name">{{file.name}}</p>
                 </div>
 
                 <div>
@@ -197,14 +198,15 @@
                     author: false, //作者输入框状态
                     docName: false, //文献名输入框状态
                     summary: false //摘要输入框状态
-                }
+                },
+                file: '',
             }
         },
         components:{
             Banner
         },
         methods:{
-            //清空所有
+            //清空所有字段
             clear(){
                 this.author = ''; 
                 this.docName = '';
@@ -247,29 +249,66 @@
                 if(!reg.test(phone)) return false;
                 else return true;
             },
+            //获取文件
+            getFile(event){
+                this.file = event.target.files[0];
+            },
             //提交投稿
             submitDocu(){
-                let data = new FormData();
-                let time = new Date();
-                time = time.toLocaleDateString();
+                
                 //检查字段
                 let state = this.checkParams();  
-                if(state) {
-                    this.$Message.success('成功');
-                }
+                //错误时阻止用户提交
+                if(!state) {
+                    return false;
+                } 
+                
+                //表单数据，分两个接口
+                let data = new FormData();
                 data.append('title',this.docName);
                 data.append('keyword',this.countTags);
                 data.append('author',this.author);
-                data.append('publishTime',time);
                 data.append('email',this.email);
                 data.append('phone',this.phone);
-                // data.append('paperType',)
+                data.append('abstractText',this.summary);
+                //文件上传
+                let fileData = new FormData();
+                //后缀名
+                let suffix = this.file.name.slice(this.file.name.indexOf('\.'),this.file.name.length);
+                //修改文件名
+                let newfile = new File([this.file],this.docName + suffix);
+                fileData.append('file',newfile);
+                
+                this.$http.post('http://39.98.41.126:30007/con/stc',data).then(res=>{
+                    
+                    if(res.data.code != 1) {
+                        return false
+                    }
+
+                    //上传文件
+                    //配置请求头
+                    let config = {
+                        headers:{'Content-Type':'multipart/form-data'}
+                    };
+                    return this.$http.post('http://39.98.41.126:30007/con/fu',fileData,config);
+                }).then(res=>{
+                    
+                    if(res.data.code == 1){
+                        this.$Message.success('投稿成功');
+                    } else {
+                        this.$Message.error('投稿失败');
+                    }
+
+                }).catch(err=>{
+                    console.log(err);
+                });
+                
             },
             //检查
             checkParams(){
                 let state = true;
-                let arr = [];  //错误数组
-                //红框警告消失
+                let arr = [];  //含错误字段的数组
+                //消除红框警告样式
                 for(let key in this.State){
                     this.State[key] = false;
                 }
@@ -292,6 +331,14 @@
                     this.State.email = true;
                     state = false;
                     arr.push('邮箱');
+                }
+                if(!this.file) {
+                    state = false;
+                    arr.push('文件选择');
+                }
+                if(!this.countTags.length) {
+                    state = false;
+                    arr.push('关键词');
                 }
                 if(!this.summary) {
                     this.State.summary = true;
@@ -334,12 +381,15 @@
             */
         },
         mounted(){
-            // this.getNewDocu();
+            
         },
         watch: {
             docName(val,oldval) {
                 if(val){
                     this.State.docName = false;
+                    if(this.file) {
+                        this.file.name = val;
+                    }
                 } else {
                     this.State.docName = true;
                 }
