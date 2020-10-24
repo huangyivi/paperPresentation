@@ -4,7 +4,7 @@
       <img :src="img" alt />
       <h3>{{ title }}</h3>
       <p>{{ detail }}</p>
-      <a :href="href">立即检测</a>
+      <a :href="href" target="_blank">立即检测</a>
     </div>
   </div>
 </template>
@@ -12,18 +12,7 @@
 <script>
 export default {
   name: "CheckDuplicate",
-
   props: ["img", "title", "detail", "href"],
-
-  components: {},
-
-  data() {
-    return {};
-  },
-
-  methods: {},
-
-  mounted() {},
 };
 </script>
 
