@@ -51,7 +51,7 @@
                     <Modal
                     v-model="modal1"
                     >
-                        <p slot="header" style="color:#2880da;background:#fff;text-align:center;font-size:20px;">
+                        <p slot="header" style="color:white;text-align:center;font-size:20px;">
                             论文所属基金选择
                         </p>
                         <div class="fund-pane">

@@ -2,12 +2,12 @@
   <div id="foot-container">
     <div id="foot-nav">
       <div>
-        <a href="#">关于我们</a>
-        <a href="#">在线投稿</a>
-        <a href="#">发表流程</a>
-        <a href="#">投稿须知</a>
-        <a href="#">联系我们</a>
-        <a href="#">文章检查</a>
+        <a href="/JournalCollection">期刊大全</a>
+        <a href="/OnlineSubmit">在线投稿</a>
+        <a href="/JournalRecommend">期刊推荐</a>
+        <a href="/DocumentBase">文献查询</a>
+        <a>联系我们</a>
+        <a href="/PaperCheck">文章检查</a>
       </div>
     </div>
     <div id="foot-info">
@@ -35,7 +35,7 @@
               </div>
               <div class="sub-info">
                 <p>电话:</p>
-                <p>123456789</p>
+                <p>17666665234</p>
               </div>
             </div>
             <div id="email">
@@ -74,42 +74,20 @@
               </div>
               <div class="sub-info">
                 <p>邮箱:</p>
-                <p>123456789@qq.com</p>
+                <p>429075156@qq.com</p>
               </div>
             </div>
           </div>
           <div id="copyright">
             <p>
-              期刊网发表并收录600余种期刊，提供论文发表；国际、国内优质期刊杂志投稿；文稿翻译；专著出版；专利申请、转让；免费论文下载等服务。
+              期刊网发表并收录多种期刊，提供论文发表；国际、国内优质期刊杂志投稿；文稿翻译；专著出版；专利申请、转让；论文查重等服务。
             </p>
-            <p>京ICP备17058905号-2</p>
             <p>
               本站少量资源属于网络共享如有侵权请您联系我们，将在第一时间删除。
             </p>
             <p>
               如有一般问题，请给我们留言，我们会马上回复您。您也可以直接拨打电话，与我们的服务团队或专家交谈。
             </p>
-          </div>
-        </div>
-        <div id="right-info">
-          <div id="right-up">
-            <div id="user-name">
-              <p>姓名：</p>
-              <input type="text" />
-            </div>
-            <div id="user-phone">
-              <p>电话：</p>
-              <input type="text" />
-            </div>
-          </div>
-          <div id="right-mid">
-            <div id="user-advice">
-              <p>您的宝贵意见：</p>
-              <textarea name id cols="30" rows="10"></textarea>
-            </div>
-          </div>
-          <div id="right-down">
-            <i-button type="info">好了，就这些</i-button>
           </div>
         </div>
       </div>

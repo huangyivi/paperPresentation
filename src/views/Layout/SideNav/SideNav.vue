@@ -84,15 +84,17 @@
     </div>
     <div class="side-details">
       <div class="side-service">
-        <p>客服电话</p>
-        <p>xxxxxxxxxxx</p>
+        <p>联系电话</p>
+        <p>17666665234</p>
         <p>———————</p>
         <p>投稿 合著 独著</p>
         <p>编委 论文 专著</p>
         <p>专利申请&转让</p>
       </div>
       <div class="side-wechat">
-        <div class="side-QRCode">我是二维码</div>
+        <div class="side-QRCode">
+          <img src="../../../assets/images/wechat.jpg" class="wechat">
+        </div>
       </div>
     </div>
   </div>

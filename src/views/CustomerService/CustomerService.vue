@@ -8,7 +8,7 @@
       scrollable
       v-model="display"
     >
-      <p slot="header" style="color: #fff;text-align: center;">
+      <p slot="header" style="color: #fff; text-align: center">
         <span>期刊发表网欢迎您</span>
       </p>
       <p slot="close">
@@ -17,9 +17,9 @@
       <div class="chat-history">
         <ul id="chat-history">
           <message
-            v-for="(item,key) in history"
+            v-for="(item, key) in history"
             :key="key"
-            :class="item.type == 1?'chat-customer' : 'chat-server'"
+            :class="item.type == 1 ? 'chat-customer' : 'chat-server'"
             :content="item.content"
             :date="item.date"
             :time="item.time"
@@ -69,8 +69,10 @@
       </div>
       <div class="chat-footer">
         <Poptip v-model="visible">
-          <Button icon="md-arrow-round-up" type="primary" @click="sendMsg">发送</Button>
-          <div slot="content" class="poptip">{{alert}}</div>
+          <Button icon="md-arrow-round-up" type="primary" @click="sendMsg"
+            >发送</Button
+          >
+          <div slot="content" class="poptip">{{ alert }}</div>
         </Poptip>
       </div>
     </Modal>
@@ -92,16 +94,16 @@ export default {
       serverId: "",
       serverName: "",
       // 提示框
-      visible: false
+      visible: false,
     };
   },
   components: {
     Emoji,
-    Message
+    Message,
   },
   methods: {
     ok() {},
-    cancel() {}
+    cancel() {},
   },
   computed: {
     display: {
@@ -110,8 +112,8 @@ export default {
       },
       set(val) {
         this.$store.commit("setService", val);
-      }
-    }
+      },
+    },
   },
   methods: {
     handleEmotion(val) {
@@ -237,7 +239,7 @@ export default {
         "街舞",
         "献吻",
         "左太极",
-        "右太极"
+        "右太极",
       ];
       let index = list.indexOf(word);
       return `$${index}&`;
@@ -276,7 +278,7 @@ export default {
         date: date.getMonth() + 1 + "-" + date.getDate(),
         time:
           date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(),
-        content: this.content
+        content: this.content,
       });
       // 发送至服务端
       let formdata = new FormData();
@@ -286,7 +288,7 @@ export default {
           `http://39.98.41.126:30001/chat/${this.clientId}/sendTo/${this.serverId}`,
           formdata
         )
-        .then(res => {
+        .then((res) => {
           console.log("发送成功！");
         });
       this.content = "";
@@ -299,14 +301,17 @@ export default {
     // 获取聊天id
     getClientId() {
       let data = new FormData();
-      data.append("chat", sessionStorage.getItem("chat"));
+      data.append("chat", localStorage.getItem("chat"));
+      console.log(localStorage.getItem("chat"));
+
       this.$http
         .post("http://39.98.41.126:30001/chat/chatId", data)
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 1) {
             console.log(res.data);
             this.clientId = res.data.data;
-            sessionStorage.setItem("chat", res.data.data);
+            localStorage.setItem("chat", res.data.data);
+            console.log(localStorage.getItem("chat"));
             console.log("获取用户id成功!");
           }
         })
@@ -320,7 +325,7 @@ export default {
       if (this.serverId == "") {
         this.$http
           .post("http://39.98.41.126:30001/chat/getService/" + this.clientId)
-          .then(res => {
+          .then((res) => {
             if (res.data.code === 1) {
               this.serverId = res.data.data.id;
               this.serverName = res.data.data.username;
@@ -340,7 +345,7 @@ export default {
                   date.getMinutes() +
                   ":" +
                   date.getSeconds(),
-                content: `您好，我是${this.serverName},请问您需要咨询什么业务？`
+                content: `您好，我是${this.serverName},请问您需要咨询什么业务？`,
               });
               console.log("获取客服id成功！");
             } else {
@@ -356,7 +361,7 @@ export default {
                   ":" +
                   date.getSeconds(),
                 content:
-                  "当前无客服在线，请拨打电话：xxxxxxxxx 或者 扫描左侧微信二维码联系我们。"
+                  "当前无客服在线，请拨打电话：17666665234 或者 扫描左侧微信二维码联系我们。",
               });
 
               console.log("当前客服不在线");
@@ -365,7 +370,7 @@ export default {
           .then(() => {
             this.getHistory();
           })
-          .catch(err => {
+          .catch((err) => {
             console.log("服务器连接已断开");
           });
       }
@@ -377,7 +382,7 @@ export default {
           .post(
             `http://39.98.41.126:30001/chat/${this.clientId}/history/${this.serverId}`
           )
-          .then(res => {
+          .then((res) => {
             console.log(res.data);
             let data = res.data.data;
             for (let i = 0; i < data.length; i++) {
@@ -387,7 +392,7 @@ export default {
                   name: "我",
                   date: data[i].time.slice(0, 10),
                   time: data[i].time.slice(11, 19),
-                  content: data[i].content
+                  content: data[i].content,
                 });
               } else {
                 this.history.push({
@@ -395,7 +400,7 @@ export default {
                   name: data[i].sender.username,
                   date: data[i].time.slice(0, 10),
                   time: data[i].time.slice(11, 19),
-                  content: data[i].content
+                  content: data[i].content,
                 });
               }
             }
@@ -404,7 +409,7 @@ export default {
             setTimeout(() => {
               let chat = document.getElementById("chat-history");
               chat.scrollTop = chat.scrollHeight;
-            },1000);
+            }, 1000);
           });
       }
     },
@@ -418,10 +423,10 @@ export default {
         // 获取Stomp子协议的客户端对象
         window.socket = Stomp.over(socket);
         // 发起websocket连接
-        window.socket.connect({}, function(res) {
+        window.socket.connect({}, function (res) {
           console.log("连接成功！");
           // 用户接收客服信息
-          window.socket.subscribe("/user/queue/chat", function(msg) {
+          window.socket.subscribe("/user/queue/chat", function (msg) {
             let data = JSON.parse(msg.body);
             console.log(data);
             that.history.push({
@@ -429,15 +434,15 @@ export default {
               name: that.serverName,
               date: data.time.slice(0, 10),
               time: data.time.slice(11, 19),
-              content: data.content
+              content: data.content,
             });
             that.$Message.info({
-              content : '客服发来消息！',
-              duration : 2
+              content: "客服发来消息！",
+              duration: 2,
             });
           });
           // 用户等待获取客服服务
-          window.socket.subscribe("/user/queue/chat/serverOnline", res => {
+          window.socket.subscribe("/user/queue/chat/serverOnline", (res) => {
             that.getService();
           });
         });
@@ -449,7 +454,7 @@ export default {
         console.log("链接已经断开！");
       });
       window.socket = null;
-    }
+    },
   },
   created() {
     // 隐藏客服对话框
@@ -457,8 +462,8 @@ export default {
     this.getClientId();
   },
   destroyed() {
-    // this.closeSocket();
-  }
+    this.closeSocket();
+  },
 };
 </script>
 <style lang="scss" scoped>

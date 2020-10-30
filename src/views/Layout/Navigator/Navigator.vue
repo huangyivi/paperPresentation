@@ -1,7 +1,7 @@
 <template>
   <div id="nav-container">
     <div>
-      <div id="mav-logo">我是logo</div>
+      <div id="mav-logo">期刊发表网</div>
       <div id="nav-content">
         <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
           <router-link to="/">
@@ -25,7 +25,7 @@
         </Menu>
       </div>
       <div id="nav-search">
-        <i-input>
+        <!-- <i-input>
           <i-select :model.sync="select" slot="prepend" style="width: 80px">
             <i-option value="magazine">期刊</i-option>
             <i-option value="paper">文献</i-option>
@@ -37,7 +37,7 @@
             <i-option value="abstract">摘要</i-option>
           </i-select>
           <i-button slot="append" icon="ios-search"></i-button>
-        </i-input>
+        </i-input> -->
       </div>
     </div>
   </div>
@@ -71,6 +71,10 @@ export default {
     height: 100%;
     margin: auto auto;
     
+    #mav-logo{
+      font-size: 24px;
+    }
+
     #nav-content {
       display: flex;
       flex-direction: column;
@@ -79,6 +83,7 @@ export default {
 
     #nav-search {
       float: left;
+      width: 100px;
     }
   }
 }

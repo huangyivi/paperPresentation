@@ -3,7 +3,7 @@
     <div>
       <div id="left-session">
         <p>您好，欢迎来到期刊发表网</p>
-        <p>咨询电话:13041179055</p>
+        <p>咨询电话:17666665234</p>
       </div>
       <div id="right-session">
         <a href="#">管理员登录</a>
