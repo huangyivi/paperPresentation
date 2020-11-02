@@ -265,38 +265,53 @@ export default {
         }, 2000);
       }
       // 转换表情包
-      this.content = this.content.replace(
+      let theContent = this.content.replace(
         /\$/gi,
         '<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/'
       );
-      this.content = this.content.replace(/\&/gi, '.gif" align="middle">');
+      theContent = theContent.replace(/\&/gi, '.gif" align="middle">');
       // 获取日期
       let date = new Date();
-      this.history.push({
-        type: 1,
-        name: "我",
-        date: date.getMonth() + 1 + "-" + date.getDate(),
-        time:
-          date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(),
-        content: this.content,
-      });
       // 发送至服务端
       let formdata = new FormData();
-      formdata.append("content", this.content);
+      formdata.append("content", theContent);
       this.$http
         .post(
           `http://39.98.41.126:30001/chat/${this.clientId}/sendTo/${this.serverId}`,
           formdata
         )
         .then((res) => {
-          console.log("发送成功！");
+          if (res.data.code === 1) {
+            console.log("发送成功！");
+            this.history.push({
+              type: 1,
+              name: "我",
+              date: date.getMonth() + 1 + "-" + date.getDate(),
+              time:
+                date.getHours() +
+                ":" +
+                date.getMinutes() +
+                ":" +
+                date.getSeconds(),
+              content: theContent,
+            });
+            this.content = "";
+            document.getElementById("chat-area").focus();
+            setTimeout(() => {
+              let chat = document.getElementById("chat-history");
+              if (chat) {
+                chat.scrollTop = chat.scrollHeight;
+              }
+            });
+          } else {
+            this.$Message.warning("客服已离线！");
+            this.alert = "当前客服不在线！";
+            setTimeout(() => {
+              this.visible = false;
+            }, 2000);
+            return;
+          }
         });
-      this.content = "";
-      document.getElementById("chat-area").focus();
-      setTimeout(() => {
-        let chat = document.getElementById("chat-history");
-        chat.scrollTop = chat.scrollHeight;
-      });
     },
     // 获取聊天id
     getClientId() {
@@ -316,8 +331,8 @@ export default {
           }
         })
         .then(() => {
-          this.getService();
           this.initWebSocket();
+          // this.getService();
         });
     },
     // 获取客服服务
@@ -330,23 +345,6 @@ export default {
               this.serverId = res.data.data.id;
               this.serverName = res.data.data.username;
               let date = new Date();
-              this.history.push({
-                type: 2,
-                name: this.serverName,
-                date:
-                  date.getFullYear() +
-                  "-" +
-                  (date.getMonth() + 1) +
-                  "-" +
-                  date.getDate(),
-                time:
-                  date.getHours() +
-                  ":" +
-                  date.getMinutes() +
-                  ":" +
-                  date.getSeconds(),
-                content: `您好，我是${this.serverName},请问您需要咨询什么业务？`,
-              });
               console.log("获取客服id成功！");
             } else {
               let date = new Date();
@@ -408,8 +406,10 @@ export default {
           .then(() => {
             setTimeout(() => {
               let chat = document.getElementById("chat-history");
-              chat.scrollTop = chat.scrollHeight;
-            }, 1000);
+              if (chat) {
+                chat.scrollTop = chat.scrollHeight;
+              }
+            });
           });
       }
     },
@@ -425,6 +425,7 @@ export default {
         // 发起websocket连接
         window.socket.connect({}, function (res) {
           console.log("连接成功！");
+          that.getService();
           // 用户接收客服信息
           window.socket.subscribe("/user/queue/chat", function (msg) {
             let data = JSON.parse(msg.body);
@@ -440,10 +441,17 @@ export default {
               content: "客服发来消息！",
               duration: 2,
             });
+            setTimeout(() => {
+              let chat = document.getElementById("chat-history");
+              if (chat) {
+                chat.scrollTop = chat.scrollHeight;
+              }
+            });
           });
           // 用户等待获取客服服务
           window.socket.subscribe("/user/queue/chat/serverOnline", (res) => {
             that.getService();
+            that.$Message.info("客服已上线");
           });
         });
       }

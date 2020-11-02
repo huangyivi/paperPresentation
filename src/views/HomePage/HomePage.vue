@@ -359,7 +359,7 @@ export default {
       formdata.append('pageNum',1);
       formdata.append('pageSize',30);
       this.$http
-        .post('http://39.98.41.126:30004/journal/searchJournal',formdata)
+        .post('http://39.98.41.126:30001/journal/searchJournal',formdata)
         .then(res=>{
           console.log(res.data.data);
           let data = res.data.data;
@@ -405,7 +405,7 @@ export default {
     },
     //获取文献
     getDocument(){
-      this.$http.get('http://39.98.41.126:30007/doc',{
+      this.$http.get('http://39.98.41.126:30001/doc',{
         params: {
           pageNum: 1,
           pageSize: 18,
@@ -448,7 +448,7 @@ export default {
       data.append('pageNum',1);
       data.append('pageSize',9);
       data.append('name',this.interList[index]);  //名称
-      this.$http.post('http://39.98.41.126:30004/journal/searchRecommendJournal',data)
+      this.$http.post('http://39.98.41.126:30001/journal/searchRecommendJournal',data)
       .then(res=>{
         // console.log(res);
         let data = res.data.data;
@@ -469,7 +469,7 @@ export default {
       this.industryIndex = index;
       this.qianyan.articles.length = 0;
       this.jujiao.articles.length = 0;
-      this.$http.get('http://39.98.41.126:30007/doc',{
+      this.$http.get('http://39.98.41.126:30001/doc',{
         params:{
           head: this.commercial[index],
           pageNum: 1,
@@ -494,7 +494,7 @@ export default {
     changeNewDocu(index){
       this.newListIndex = index;
       this.newDocu.length = 0;
-      this.$http.get('http://39.98.41.126:30007/doc',{
+      this.$http.get('http://39.98.41.126:30001/doc',{
         params: {
           head: this.commercial[index],
           pageNum: 1,

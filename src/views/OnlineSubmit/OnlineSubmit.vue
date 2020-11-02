@@ -279,7 +279,7 @@
                 let newfile = new File([this.file],this.docName + suffix);
                 fileData.append('file',newfile);
                 
-                this.$http.post('http://39.98.41.126:30007/con/stc',data).then(res=>{
+                this.$http.post('http://39.98.41.126:30001/con/stc',data).then(res=>{
                     
                     if(res.data.code != 1) {
                         return false
@@ -290,7 +290,7 @@
                     let config = {
                         headers:{'Content-Type':'multipart/form-data'}
                     };
-                    return this.$http.post('http://39.98.41.126:30007/con/fu',fileData,config);
+                    return this.$http.post('http://39.98.41.126:30001/con/fu',fileData,config);
                 }).then(res=>{
                     
                     if(res.data.code == 1){
@@ -356,7 +356,7 @@
             /*
             获取最新投稿
             getNewDocu(){
-                this.$http.get('http://39.98.41.126:30007/doc',{
+                this.$http.get('http://39.98.41.126:30001/doc',{
                     params:{
                         pageNum: 1,
                         pageSize: 12,
