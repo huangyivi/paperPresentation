@@ -50,7 +50,7 @@ export default {
     overflow: hidden;
     text-align: right;
     background-repeat: no-repeat;
-    
+    background-size: cover;
     >p {
 
         font-size: 12px;

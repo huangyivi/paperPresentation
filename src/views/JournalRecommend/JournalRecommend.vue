@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="doc-banner">
-      <img src="https://img.zcool.cn/community/013a585ba07606a801213dea85ff57.jpg@1280w_1l_2o_100sh.jpg" alt />
+      <img src="../../assets/images/periodicals.jpg" alt />
     </div>
     <Bookshelf />
   </div>

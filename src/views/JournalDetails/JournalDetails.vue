@@ -18,7 +18,7 @@
           <span><label>创刊时间</label>{{ journalDetailData.competentAuthority }}</span>
           <span><label>总下载量</label>{{ journalDetailData.totalDownloads }}</span>
           <span><label>级别(单位)</label>{{ journalDetailData.journalLevel }}</span>
-          <span><label>总被引领次</label>{{ journalDetailData.totalUsed }}</span>
+          <span><label>被引领次</label>{{ journalDetailData.totalUsed }}</span>
           <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">

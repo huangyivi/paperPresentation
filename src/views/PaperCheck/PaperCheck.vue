@@ -2,7 +2,7 @@
   <div class="min-w">
     <!-- 测试分支 -->
     <div class="paper-title">
-      <img src="http://zhimaikeji.net/imgs/wf/test_banner.png" alt />
+      <img src="../../assets/images/papercheck.jpg" alt />
     </div>
     <div class="paper-body">
       <CheckDuplicate
@@ -115,12 +115,7 @@ export default {
 
   img {
     height: 100%;
-    border: none;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 50%;
-    margin-left: -960px;
+    width: 100%;
   }
 }
 

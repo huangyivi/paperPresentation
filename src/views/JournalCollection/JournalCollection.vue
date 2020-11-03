@@ -1,7 +1,7 @@
 <template>
   <div class="min-w">
     <div class="jou-coll-title">
-      <img src="..\..\..\src\assets\images\all_bnner.jpg" alt />
+      <img src="../../assets/images/periodicals.jpg" alt />
     </div>
     <JournalCollectionSearch></JournalCollectionSearch>
   </div>
@@ -44,11 +44,7 @@ export default {
 
   img {
     height: 100%;
-    border: none;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -930px;
+    width: 100%;
   }
 }
 </style>

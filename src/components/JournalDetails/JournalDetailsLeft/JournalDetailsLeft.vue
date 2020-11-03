@@ -16,7 +16,7 @@
             v-model="wxCondition"
             @keyup.enter="getSearchWX"
           />
-          <Icon type="ios-search" size="21" />
+          <Icon type="ios-search" size="21" id="search"/>
         </div>
       </div>
     </div>

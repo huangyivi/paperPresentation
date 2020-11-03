@@ -125,46 +125,46 @@ export default {
   data() {
     return {
       BaseImg: require("../../assets/images/index_banner1.png"),
-      jounralsImg: "http://zhimaikeji.net/imgs/wf/ad1.png",
+      jounralsImg: require("../../assets/images/journalsDemand.jpg"),
       zhenggaoImg: require("../../assets/images/zhenggao.png"),
-      gongchengImg: "http://zhimaikeji.net/imgs/wf/ad3.jpg",
+      gongchengImg: require("../../assets/images/engineering.jpg"),
       books: [
         {
           bookid: 1,
           bookNum: 47,
-          bookImg: "http://zhimaikeji.net/imgs/wf/paper_sub.png",
+          bookImg: require("../../assets/images/clock.jpg"),
           bookTitle: "精品期刊",
           bookEn: "FINE JOURNALS"
         },
         {
           bookid: 2,
           bookNum: 33,
-          bookImg: "http://zhimaikeji.net/imgs/wf/intel_qk.png",
+          bookImg: require("../../assets/images/building.jpg"),
           bookTitle: "国际征稿",
           bookEn: "INTERNATIONAL JOURNALS"
         },
         {
           bookid: 3,
           bookNum: 390,
-          bookImg: "http://zhimaikeji.net/imgs/wf/china_sub.png",
+          bookImg: require("../../assets/images/mountain.jpg"),
           bookTitle: "国内征稿",
           bookEn: "INTERNATIONAL JOURNALS"
         },
         {
           bookid: 4,
-          bookImg: "http://zhimaikeji.net/imgs/wf/test_bg.png",
+          bookImg: require("../../assets/images/sky.jpg"),
           bookTitle: "文章检测",
           bookEn: "ARTICLE DETECTION"
         },
         {
           bookid: 5,
-          bookImg: "http://zhimaikeji.net/imgs/wf/new_lw.png",
+          bookImg: require("../../assets/images/thegreatwall.jpg"),
           bookTitle: "最新文献",
           bookEn: "LATEST LITERATURE"
         },
         {
           bookid: 6,
-          bookImg: "http://zhimaikeji.net/imgs/wf/zhimai_dev.png",
+          bookImg: require("../../assets/images/sea.jpg"),
           bookTitle: "网站研发",
           bookEn: `RESEARCH<br/>AND DEVELOPMENT`
         }

@@ -317,13 +317,11 @@ export default {
     getClientId() {
       let data = new FormData();
       data.append("chat", localStorage.getItem("chat"));
-      console.log(localStorage.getItem("chat"));
 
       this.$http
         .post("http://39.98.41.126:30001/chat/chatId", data)
         .then((res) => {
           if (res.data.code == 1) {
-            console.log(res.data);
             this.clientId = res.data.data;
             localStorage.setItem("chat", res.data.data);
             console.log(localStorage.getItem("chat"));

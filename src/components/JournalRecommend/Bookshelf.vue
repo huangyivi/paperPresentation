@@ -1,12 +1,9 @@
 <template>
 <div>
   <div id="search">
-    <div>
-      <h1>我是搜索图片</h1>
-    </div>
     <div id="search-up">
-      <input type="text" v-model="input"/>
-      <i-button type="primary" icon="ios-search" @click="getJournals(journalType)">搜索</i-button>
+      <input type="text" v-model="input" @keyup.enter="getJournals(journalType)"/>
+      <i-button type="primary" icon="ios-search"  @click="getJournals(journalType)">搜索</i-button>
     </div>
   </div>
 <div id="bookshelf">
@@ -15,6 +12,7 @@
         <div id="books">
           <Book v-for="(item,key) in journals" :key="key" :imgSrc="item.journalPhoto" :title="item.name" :level="item.journalLevel" :cycle="item.releaseCycle" :id="'/journalDetails/' + item.id"/>
         </div>
+        <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
         <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page>
       </Tab-pane>
     </Tabs>

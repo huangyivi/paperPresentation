@@ -1,12 +1,9 @@
 <template>
 <div>
   <div id="search">
-    <div>
-      <h1>文献搜索</h1>
-    </div>
     <div id="search-up">
-      <input type="text" v-model="input"/>
-      <i-button type="primary" icon="ios-search" @click="getDocs">搜索</i-button>
+      <input type="text" v-model="input" @keyup.enter="getDocs(currentHead)"/>
+      <i-button type="primary" icon="ios-search"  @click="getDocs(currentHead)">搜索</i-button>
     </div>
     <div id="search-type">
       <input class="doc-attach"  type="radio" name="group1" value="1" id="title" @click="changeAttach" checked />
@@ -190,8 +187,8 @@ export default {
         .get("http://39.98.41.126:30001/doc", {
           params: {
             head: item,
-            input: this.$store.state.docInput,
-            attach: this.$store.state.docAttach,
+            input: this.input,
+            attach: this.attach,
             pageNum: this.currentPage,
             pageSize: this.pageSize
           }
