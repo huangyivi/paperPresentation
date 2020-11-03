@@ -30,10 +30,8 @@
         <a href="#"><i></i>在线咨询</a>
         <img src="http://zhimaikeji.net/imgs/wf/contact_us.png" alt />
         <div class="j-us-phone">
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345@qq.com</p>
+          <p><label>咨询热线</label>17666665234</p>
+          <p><label>咨询邮箱</label>429075156@qq.com</p>
         </div>
       </div>
     </div>
