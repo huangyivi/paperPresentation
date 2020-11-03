@@ -1,9 +1,5 @@
 <template>
   <div class="jd-left">
-<!--     <DetailOnlineSubMission
-      :journalName="JName"
-      :jid="this.$route.params.jid"
-    ></DetailOnlineSubMission> -->
     <div class="jd-title">投稿必看<span>/稿件要求及注意事项</span></div>
     <SubMissionLook></SubMissionLook>
     <!-- 文献模块 -->
@@ -23,7 +19,7 @@
     <div class="jd-search-ans">
       <div v-for="item in WXData" :key="item.title" class="list-out">
         <div class="wx-ans-title">
-          <a href="#">{{ item.title }}</a>
+          <a :href='"/DocDetails/" + item.id' >{{ item.title }}</a>
         </div>
         <p>{{ item.abstractText }}</p>
         <div class="list-bottom">
@@ -43,14 +39,12 @@
 </template>
 
 <script>
-import DetailOnlineSubMission from "../DetailOnlineSubMission/DetailOnlineSubMission";
 import SubMissionLook from "../SubMissionLook/SubMissionLook";
 
 export default {
   name: "JournalDetailsLeft",
 
   components: {
-    DetailOnlineSubMission,
     SubMissionLook,
   },
 
@@ -69,7 +63,7 @@ export default {
     // 搜索框回车查询
     getSearchWX() {
       this.$http
-        .get(`http://39.98.41.126:30001/doc/${this.$route.params.jid}/${this.nowPage}/5/${this.wxCondition}`)
+        .get(`http://39.98.41.126:30007/doc/${this.$route.params.jid}/${this.nowPage}/5/${this.wxCondition}`)
         .then((res) => {
           if (res.data.code === 1) {
             console.log(res);

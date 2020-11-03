@@ -15,10 +15,8 @@
           <span><label>影响因子</label>{{ journalDetailData.impactFactor }}</span>
           <span><label>国际刊号</label>{{ journalDetailData.interNumber }}</span>
           <span><label>总发文量</label>{{ journalDetailData.totalVolume }}</span>
-          <span><label>创刊时间</label>{{ journalDetailData.competentAuthority }}</span>
-          <span><label>总下载量</label>{{ journalDetailData.totalDownloads }}</span>
           <span><label>级别(单位)</label>{{ journalDetailData.journalLevel }}</span>
-          <span><label>被引领次</label>{{ journalDetailData.totalUsed }}</span>
+          <span><label>被引频次</label>{{ journalDetailData.totalUsed }}</span>
           <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">
@@ -82,7 +80,7 @@ export default {
       var formdata = new FormData();
       formdata.append("id", this.$route.params.jid);
       this.$http
-        .post("http://39.98.41.126:30001/journal/getJournalById", formdata)
+        .post("http://39.98.41.126:30007/journal/getJournalById", formdata)
         .then((res) => {
           if (res.data.code === 1) {
             this.journalDetailData = res.data.data;
