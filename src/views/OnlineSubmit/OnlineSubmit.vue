@@ -420,9 +420,9 @@ export default {
     docName(val, oldval) {
       if (val) {
         this.State.docName = false;
-        if (this.file) {
-          this.file.name = val;
-        }
+        // if (this.file) {
+        //   this.file.name = val;
+        // }
       } else {
         this.State.docName = true;
       }
