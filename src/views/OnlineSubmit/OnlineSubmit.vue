@@ -311,7 +311,7 @@ export default {
       fileData.append("file", newfile);
 
       this.$http
-        .post("http://39.98.41.126:30007/con/stc", data)
+        .post(this.domain + "con/stc", data)
         .then((res) => {
           if (res.data.code != 1) {
             return false;
@@ -323,7 +323,7 @@ export default {
             headers: { "Content-Type": "multipart/form-data" },
           };
           return this.$http.post(
-            "http://39.98.41.126:30007/con/fu",
+            this.domain + "con/fu",
             fileData,
             config
           );
@@ -391,7 +391,7 @@ export default {
     /*
             获取最新投稿
             getNewDocu(){
-                this.$http.get('http://39.98.41.126:30007/doc',{
+                this.$http.get(this.domain + "doc",{
                     params:{
                         pageNum: 1,
                         pageSize: 12,

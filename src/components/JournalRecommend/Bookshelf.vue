@@ -105,7 +105,7 @@ export default {
       data.append('pageSize',this.pageSize);
       data.append('journalType',item);
       this.$http
-        .post("http://39.98.41.126:30007/journal/searchRecommendJournal", data,
+        .post(this.domain + "journal/searchRecommendJournal", data,
           {
             headers:{
               "Content-Type" : "multipart/form-data"

@@ -184,7 +184,7 @@ export default {
         item = "";
       }
       this.$http
-        .get("http://39.98.41.126:30007/doc", {
+        .get(this.domain + "doc", {
           params: {
             head: item,
             input: this.input,

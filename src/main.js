@@ -13,6 +13,7 @@ Vue.use(iView);
 //在其他组件中使用方法：this.$http.get()/post()
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
+Vue.prototype.domain = "http://39.98.41.126:30007/"
 //  忽略警告
 // Vue.config.silent = true;
 /* eslint-disable no-new */
