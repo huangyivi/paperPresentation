@@ -68,7 +68,7 @@ export default {
     getDetails() {
       // 获取文献详细信息
       this.$http
-        .get(`http://39.98.41.126:30001/doc/${this.$route.params.docid}`)
+        .get(`http://39.98.41.126:30007/doc/${this.$route.params.docid}`)
         .then(res => {
           if (res.data.code === 1) {
             this.title = res.data.data.title;
@@ -93,7 +93,7 @@ export default {
       var formdata = new FormData();
       formdata.append("id", this.journalId);
       this.$http
-        .post("http://39.98.41.126:30001/journal/getJournalById", formdata)
+        .post("http://39.98.41.126:30007/journal/getJournalById", formdata)
         .then(res => {
           if (res.data.code === 1) {
             this.imgSrc = res.data.data.journalPhoto;
@@ -106,7 +106,7 @@ export default {
     getRecoms() {
       // 获取推荐文献
       this.$http
-        .get(`http://39.98.41.126:30001/doc/${this.journalId}/1/10`)
+        .get(`http://39.98.41.126:30007/doc/${this.journalId}/1/10`)
         .then(res => {
           if(res.data.code === 1){
             this.docs = res.data.data.list

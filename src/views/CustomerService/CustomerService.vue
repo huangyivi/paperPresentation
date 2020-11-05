@@ -277,7 +277,7 @@ export default {
       formdata.append("content", theContent);
       this.$http
         .post(
-          `http://39.98.41.126:30001/chat/${this.clientId}/sendTo/${this.serverId}`,
+          `http://39.98.41.126:30007/chat/${this.clientId}/sendTo/${this.serverId}`,
           formdata
         )
         .then((res) => {
@@ -319,7 +319,7 @@ export default {
       data.append("chat", localStorage.getItem("chat"));
 
       this.$http
-        .post("http://39.98.41.126:30001/chat/chatId", data)
+        .post("http://39.98.41.126:30007/chat/chatId", data)
         .then((res) => {
           if (res.data.code == 1) {
             this.clientId = res.data.data;
@@ -337,7 +337,7 @@ export default {
     getService() {
       if (this.serverId == "") {
         this.$http
-          .post("http://39.98.41.126:30001/chat/getService/" + this.clientId)
+          .post("http://39.98.41.126:30007/chat/getService/" + this.clientId)
           .then((res) => {
             if (res.data.code === 1) {
               this.serverId = res.data.data.id;
@@ -376,7 +376,7 @@ export default {
       if (this.serverId) {
         this.$http
           .post(
-            `http://39.98.41.126:30001/chat/${this.clientId}/history/${this.serverId}`
+            `http://39.98.41.126:30007/chat/${this.clientId}/history/${this.serverId}`
           )
           .then((res) => {
             console.log(res.data);
@@ -416,7 +416,7 @@ export default {
       if (!window.socket) {
         let that = this;
         let socket = new SockJs(
-          "http://39.98.41.126:30001/ws-websocket?" + this.clientId
+          "http://39.98.41.126:30007/ws-websocket?" + this.clientId
         );
         // 获取Stomp子协议的客户端对象
         window.socket = Stomp.over(socket);
