@@ -65,7 +65,7 @@
               @change="getFile($event)"
             />
           </div>
-          <p v-show="docName" class="file-name">{{ file.name }}</p>
+          <p v-show="file" class="file-name">{{ file.name }}</p>
         </div>
 
         <div>
@@ -123,9 +123,10 @@
               v-if="inputVisible"
               v-model="inputValue"
               ref="saveTagInput"
+              placeholder="回车以确定"
               size="small"
               @keyup.enter.native="handleInputConfirm"
-              @blur="handleInputConfirm"
+              @on-blur="handleInputConfirm"
             />
             <Button
               v-else
@@ -228,7 +229,7 @@ export default {
         docName: false, //文献名输入框状态
         summary: false, //摘要输入框状态
       },
-      file: "",
+      file: "", //文件
     };
   },
   components: {
@@ -242,6 +243,10 @@ export default {
       this.phone = "";
       this.summary = "";
       this.email = "";
+      this.file = "";
+      if (this.countTags.length) {
+        this.countTags.splice(0,this.countTags.length);
+      }
     },
     //点击添加标签
     handleAdd() {
