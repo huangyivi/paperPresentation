@@ -15,10 +15,8 @@
           <span><label>影响因子</label>{{ journalDetailData.impactFactor }}</span>
           <span><label>国际刊号</label>{{ journalDetailData.interNumber }}</span>
           <span><label>总发文量</label>{{ journalDetailData.totalVolume }}</span>
-          <span><label>创刊时间</label>{{ journalDetailData.competentAuthority }}</span>
-          <span><label>总下载量</label>{{ journalDetailData.totalDownloads }}</span>
           <span><label>级别(单位)</label>{{ journalDetailData.journalLevel }}</span>
-          <span><label>被引领次</label>{{ journalDetailData.totalUsed }}</span>
+          <span><label>被引频次</label>{{ journalDetailData.totalUsed }}</span>
           <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">
@@ -32,10 +30,8 @@
         <a href="#"><i></i>在线咨询</a>
         <img src="http://zhimaikeji.net/imgs/wf/contact_us.png" alt />
         <div class="j-us-phone">
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345678910</p>
-          <p><label>咨询热线</label>12345@qq.com</p>
+          <p><label>咨询热线</label>17666665234</p>
+          <p><label>咨询邮箱</label>429075156@qq.com</p>
         </div>
       </div>
     </div>

@@ -230,14 +230,14 @@ export default {
         ]
       },
       articleCheck: [
-        "http://zhimaikeji.net/imgs/test1.png",
-        "http://zhimaikeji.net/imgs/test2.png",
-        "http://zhimaikeji.net/imgs/test3.png",
-        "http://zhimaikeji.net/imgs/test4.png",
-        "http://zhimaikeji.net/imgs/test5.png",
-        "http://zhimaikeji.net/imgs/test6.png",
-        "http://zhimaikeji.net/imgs/test7.png",
-        "http://zhimaikeji.net/imgs/test8.png"
+        require('../../assets/images/cnki.jpg'),
+        require('../../assets/images/wanfang.jpg'),
+        require('../../assets/images/wpeducation.jpg'),
+        require('../../assets/images/paperyy.jpg'),
+        require('../../assets/images/turnitin.png'),
+        require('../../assets/images/Gocheck.png'),
+        require('../../assets/images/Paper Pass.png'),
+        require('../../assets/images/PaperOK.png')
       ],
       columns1: [
         {
@@ -364,6 +364,8 @@ export default {
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
+          this.books[1].bookNum = data.total;
+          this.books[2].bookNum = data.total;
           data.list.forEach((item,index)=>{
             this.preciseBook.push({
               id: item.id,

@@ -32,10 +32,10 @@ export default {
             return '/DocDetails/' + id;
         }
     },
-    wathc: {
+    watch: {
         article: {
             handle(newVal,oldVal){
-                return this.article;
+                this.article = newVal;
             }
         },
         deep: true
