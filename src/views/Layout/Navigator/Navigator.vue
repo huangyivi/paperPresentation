@@ -1,7 +1,10 @@
 <template>
   <div id="nav-container">
     <div>
-      <div id="mav-logo">期刊发表网</div>
+      <div id="nav-logo">
+        <img src="../../../assets/images/logo.png" alt="">
+        期刊发表网
+        </div>
       <div id="nav-content">
         <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
           <router-link to="/">
@@ -71,7 +74,15 @@ export default {
     height: 100%;
     margin: auto auto;
     
-    #mav-logo{
+    #nav-logo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
       font-size: 24px;
     }
 
