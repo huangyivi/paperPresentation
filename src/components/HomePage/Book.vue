@@ -5,14 +5,14 @@
                 <a class="book-to" :href="getTrueHref(data.id)">
                     <img class="book-img" :src="data.bookurl" alt="">     
                 </a>
-                <a v-show="data.bookEn" class="book-en" :href="getTrueHref(data.id)">{{data.bookEn}}</a>
+                <!-- <a v-show="data.bookEn" class="book-en" :href="getTrueHref(data.id)">{{data.bookEn}}</a> -->
                 <a v-show="data.bookName" class="book-name" :href="getTrueHref(data.id)">{{data.bookName}}</a>
                 <div class="second-line">
                     <span>{{data.bookClass}}</span>
                     |
                     <span>{{data.bookRank}}</span>
                 </div>
-                <div v-show="data.bookResoure">
+                <div class="fromJournal" v-show="data.bookResoure">
                     <span>收录:</span>
                     <span>{{data.bookResoure}}</span>
                 </div>
@@ -143,6 +143,16 @@ export default {
 
                     >span {
                         margin: 0 2px;
+                    }
+                }
+
+                .fromJournal {
+                    margin: 0 10px;
+                    max-height: 50px;
+                    overflow: auto;
+
+                    &::-webkit-scrollbar {
+                        width: 0;
                     }
                 }
         
