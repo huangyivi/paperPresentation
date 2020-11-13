@@ -9,8 +9,6 @@
         <div class="j-message-span">
           <span><label>主管单位</label>{{ journalDetailData.competentAuthority }}</span>
           <span><label>审稿周期</label>{{ journalDetailData.reviewCycle }}</span>
-          <span><label>主办单位</label>{{ journalDetailData.sponsor }}</span>
-          <span><label>数据库收录</label>{{ journalDetailData.receiveWebsite }}</span>
           <span><label>国内刊号</label>{{ journalDetailData.homeNumber }}</span>
           <span><label>影响因子</label>{{ journalDetailData.impactFactor }}</span>
           <span><label>国际刊号</label>{{ journalDetailData.interNumber }}</span>
@@ -20,6 +18,12 @@
           <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">
+          <span><label>主办单位</label>{{ journalDetailData.sponsor }}</span>
+        </div>
+        <div class="j-message-lanmu">
+          <span><label>数据库收录</label>{{ journalDetailData.receiveWebsite }}</span>
+        </div>
+        <div class="j-message-lanmu">
           <span>
             <label>期刊栏目</label>
             {{ journalDetailData.mainSection }}
@@ -27,8 +31,7 @@
         </div>
       </div>
       <div class="j-detail-us">
-        <a href="#"><i></i>在线咨询</a>
-        <img src="http://zhimaikeji.net/imgs/wf/contact_us.png" alt />
+        <a href="/paperhub/client/">返回首页</a>
         <div class="j-us-phone">
           <p><label>咨询热线</label>17666665234</p>
           <p><label>咨询邮箱</label>429075156@qq.com</p>

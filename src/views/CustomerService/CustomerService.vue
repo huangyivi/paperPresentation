@@ -319,7 +319,7 @@ export default {
         .then((res) => {
           if (res.data.code == 1) {
             this.clientId = res.data.data;
-            localStorage.setItem("chat", res.data.data);
+            localStorage.setItem("customer_chat", res.data.data);
             console.log(localStorage.getItem("customer_chat"));
             console.log("获取用户id成功!");
           }

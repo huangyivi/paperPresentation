@@ -67,9 +67,14 @@ export default {
   methods: {
     getDetails() {
       // 获取文献详细信息
+      const dmsg = this.$Message.loading({
+          content: "Loading...",
+          duration: 0,
+        });
       this.$http
         .get(this.domain + `doc/${this.$route.params.docid}`)
         .then(res => {
+          setTimeout(dmsg, 0);
           if (res.data.code === 1) {
             this.title = res.data.data.title;
             this.content = res.data.data.abstractText;
