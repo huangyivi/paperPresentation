@@ -57,7 +57,8 @@
       >
         {{ item }}
       </li>
-      <a href="/paperhub/client/JournalRecommend">查看全部</a>
+      <!-- <a href="/paperhub/client/JournalRecommend">查看全部</a> -->
+      <router-link to="/JournalRecommend">查看全部</router-link>
     </ul>
 
     <div class="book-show guonei-show">
@@ -85,7 +86,8 @@
         >
           {{ item }}
         </li>
-        <a href="/paperhub/client/DocumentBase">查看全部</a>
+        <!-- <a href="/paperhub/client/DocumentBase">查看全部</a> -->
+        <router-link to="/DocumentBase">查看全部</router-link>
       </ul>
       <div class="article-show">
         <Article :article="jujiao" />
@@ -98,7 +100,8 @@
       <BookIntro class="book-intro" :bookSum="books[3]" />
       <ul>
         <li v-for="item in articleCheck" :key="item.index">
-          <a href="/paperhub/client/PaperCheck"><img :src="item" alt /></a>
+          <!-- <a href="/paperhub/client/PaperCheck"><img :src="item" alt /></a> -->
+          <router-link to="/PaperCheck"><img :src="item" alt /></router-link>
         </li>
       </ul>
     </div>
@@ -113,15 +116,17 @@
       >
         {{ item }}
       </li>
-      <a href="/paperhub/client/DocumentBase">查看全部</a>
+      <!-- <a href="/paperhub/client/DocumentBase">查看全部</a> -->
+      <router-link to="/DocumentBase">查看全部</router-link>
     </ul>
     <div class="new-article">
       <BookIntro class="book-intro" :bookSum="books[4]" />
       <div class="article-table">
         <Table :columns="columns1" :data="newDocu.slice(0, 6)"></Table>
-        <a class="article-look" href="/paperhub/client/DocumentBase"
+        <!-- <a class="article-look" href="/paperhub/client/DocumentBase"
           >查看总文献库（{{ allNum }}篇）</a
-        >
+        > -->
+        <router-link class="article-look" to="/DocumentBase">查看总文献库（{{ allNum }}篇）</router-link>
       </div>
     </div>
 
@@ -384,12 +389,17 @@ export default {
     },
     //获取期刊
     getJournal() {
+       const docsmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       var formdata = new FormData();
       formdata.append("pageNum", 1);
       formdata.append("pageSize", 30);
       this.$http
         .post(this.domain + "journal/searchJournal", formdata)
         .then((res) => {
+          setTimeout(docsmsg,0);
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
@@ -406,7 +416,7 @@ export default {
             });
             this.international.push({
               id: item.id,
-              bookEn: this.randomString(parseInt((Math.random() + 1) * 10)),
+              // bookEn: this.randomString(parseInt((Math.random() + 1) * 10)),
               bookName: item.name, //书名
               bookRank: item.journalLevel, //刊级
               bookClass: item.releaseCycle, //书类别
@@ -421,21 +431,18 @@ export default {
             });
           });
           this.domestic = this.domestic.slice(-9);
+        }).catch(err=>{
+          console.log(err,"期刊");
+          setTimeout(docsmsg,0);
+          this.$Message.error('服务器连接失败')
         });
-    },
-    //随机生成字符串(来充当英文)
-    randomString(n) {
-      let str = "abcdefghijklmn pqrstuvwxz 9876543210";
-      let tmp = "",
-        i = 0,
-        l = str.length;
-      for (i = 0; i < n; i++) {
-        tmp += str.charAt(Math.floor(Math.random() * l));
-      }
-      return tmp;
     },
     //获取文献
     getDocument() {
+       const docsmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
         .get(this.domain + "doc", {
           params: {
@@ -444,6 +451,7 @@ export default {
           },
         })
         .then((res) => {
+          setTimeout(docsmsg,0);
           let data = res.data.data;
           this.allNum = data.total;
           this.qianyan.num = data.total;
@@ -468,7 +476,9 @@ export default {
           this.qianyan.articles = this.qianyan.articles.slice(0, 6);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err,"文献");
+          setTimeout(docsmsg,0);
+          this.$Message.error('服务器连接失败')
         });
     },
     //切换国内征稿
@@ -479,12 +489,16 @@ export default {
       data.append("pageNum", 1);
       data.append("pageSize", 9);
       data.append("name", this.interList[index]); //名称
+      const docsmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
         .post(this.domain + "journal/searchRecommendJournal", data)
         .then((res) => {
           let data = res.data.data;
-
-          if ((data.list.length)) {
+          setTimeout(docsmsg,0);
+          if (data.list.length) {
             data.list.forEach((item, index) => {
               this.domestic.push({
                 bookName: item.name, //书名
@@ -494,16 +508,22 @@ export default {
               });
             });
             this.isNoData = false;
-          }else{
+          } else {
             this.isNoData = true;
           }
         })
         .catch((err) => {
           console.log(err);
+          setTimeout(docsmsg,0);
+          this.$Message.error('服务器连接失败')
         });
     },
     //切换行业
     changeIndustryPage(index) {
+        const docsmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.industryIndex = index;
       this.qianyan.articles.length = 0;
       this.jujiao.articles.length = 0;
@@ -516,6 +536,7 @@ export default {
           },
         })
         .then((res) => {
+          setTimeout(docsmsg,0);
           let data = res.data.data;
           data.list.forEach((item, index) => {
             //行业前沿
@@ -527,12 +548,20 @@ export default {
           });
           this.jujiao.articles = this.qianyan.articles.slice(-6); //行业聚焦
           this.qianyan.articles = this.qianyan.articles.slice(0, 6);
+        }).catch(err=>{
+          console.log(err);
+          setTimeout(docsmsg,0);
+          this.$Message.error('服务器连接失败')
         });
     },
     //切换最新文献
     changeNewDocu(index) {
       this.newListIndex = index;
       this.newDocu.length = 0;
+       const docsmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
         .get(this.domain + "doc", {
           params: {
@@ -543,6 +572,7 @@ export default {
         })
         .then((res) => {
           let data = res.data.data;
+          setTimeout(docsmsg,0);
           data.list.forEach((item, index) => {
             //最新文献
             this.newDocu.push({
@@ -556,6 +586,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          setTimeout(docsmsg,0);
+          this.$Message.error('服务器连接失败')
         });
     },
   },

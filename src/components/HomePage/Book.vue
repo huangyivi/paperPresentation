@@ -2,11 +2,15 @@
   <div class="Book">
       <div class="book-show">
             <div class="book-container">
-                <a class="book-to" :href="getTrueHref(data.id)">
+                <!-- <a class="book-to" :href="getTrueHref(data.id)">
                     <img class="book-img" :src="data.bookurl" alt="">     
-                </a>
+                </a> -->
+                <router-link class="book-to" :to="getTrueHref(data.id)">
+                    <img class="book-img" :src="data.bookurl" alt="">
+                </router-link>
                 <!-- <a v-show="data.bookEn" class="book-en" :href="getTrueHref(data.id)">{{data.bookEn}}</a> -->
-                <a v-show="data.bookName" class="book-name" :href="getTrueHref(data.id)">{{data.bookName}}</a>
+                <!-- <a v-show="data.bookName" class="book-name" :href="getTrueHref(data.id)">{{data.bookName}}</a> -->
+                <router-link v-show="data.bookName" class="book-name" :to="getTrueHref(data.id)">{{data.bookName}}</router-link>
                 <div class="second-line">
                     <span>{{data.bookClass}}</span>
                     |
@@ -39,7 +43,7 @@ export default {
 
     methods: {
         getTrueHref(id){
-            return '/paperhub/client/JournalDetails/' + id;
+            return '/JournalDetails/' + id;
         }
     },
 

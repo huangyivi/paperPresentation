@@ -9,9 +9,12 @@
       </div>
       <ul>
           <li v-for="item in article.articles" :key="item.index">
-              <a :href="getTrueHref(item.id)" target="blank">
+              <!-- <a :href="getTrueHref(item.id)" target="blank">
                   <span>{{item.name}}</span>
-              </a>
+              </a> -->
+              <router-link :to="getTrueHref(item.id)">
+                  <span>{{item.name}}</span>
+              </router-link>
               <span>{{item.time}}</span>
           </li>
           <h3 v-show="!article.articles.length">暂无数据</h3>
@@ -29,7 +32,7 @@ export default {
     },
     methods: {
         getTrueHref(id){
-            return '/paperhub/client/DocDetails/' + id;
+            return '/DocDetails/' + id;
         }
     },
     watch: {

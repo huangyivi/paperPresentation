@@ -1,8 +1,11 @@
 <template>
   <div id="Ad">
-        <a class="ad-pane" href="/paperhub/client/OnlineSubmit">
+        <!-- <a class="ad-pane" href="/paperhub/client/OnlineSubmit">
             <img :src="imgSrc" alt="">
-        </a>
+        </a> -->
+        <router-link class="ad-pane" to="/OnlineSubmit">
+            <img :src="imgSrc" alt="">
+        </router-link>
   </div>
 </template>
 
