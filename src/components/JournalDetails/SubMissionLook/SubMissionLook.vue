@@ -15,7 +15,7 @@
       </div>
       <div>
         <label>摘要</label>
-        <span>200-300字符（以中文字数统计）</span>
+        <span>200-250字符（以中文字数统计）</span>
       </div>
       <div>
         <label>参考文献</label>

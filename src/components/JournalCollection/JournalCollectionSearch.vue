@@ -156,13 +156,19 @@ export default {
       );
       formdata.append("pageNum", this.realLabels.pageNum);
       formdata.append("pageSize", this.realLabels.pageSize);
+      const loadingMsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
         .post(this.domain + "journal/searchJournal", formdata)
         .then((res) => {
+          setTimeout(loadingMsg, 0);
           if (res.data.code === 1) {
             this.journalData = res.data.data;
+            this.$Message.success("获取成功");
           } else {
-            alert(res.data.msg);
+            this.$Message.error(res.data.msg);
           }
         })
         .catch((err) => {
