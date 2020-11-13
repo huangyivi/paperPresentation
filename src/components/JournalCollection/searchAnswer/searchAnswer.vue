@@ -24,7 +24,7 @@
             <a
               class="book-detail"
               target="_blank"
-              :href="'JournalDetails/' + item.id"
+              :href="'/paperhub/client/JournalDetails/' + item.id"
               >{{ item.name }}</a
             >
           </span>
@@ -49,7 +49,7 @@
         </div>
         <div class="result-body-detail" style="display: none">
           <div class="img-box">
-            <a target="_blank" :href="'JournalDetails/' + item.id">
+            <a target="_blank" :href="'/paperhub/client/JournalDetails/' + item.id">
               <img :src="item.journalPhoto" />
             </a>
           </div>

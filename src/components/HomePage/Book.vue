@@ -39,7 +39,7 @@ export default {
 
     methods: {
         getTrueHref(id){
-            return '/JournalDetails/' + id;
+            return '/paperhub/client/JournalDetails/' + id;
         }
     },
 

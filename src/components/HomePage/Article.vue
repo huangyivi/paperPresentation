@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         getTrueHref(id){
-            return '/DocDetails/' + id;
+            return '/paperhub/client/DocDetails/' + id;
         }
     },
     watch: {

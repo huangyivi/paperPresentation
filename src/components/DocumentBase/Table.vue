@@ -96,7 +96,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "/DocDetails/" + params.row.id,
+                  href: "/paperhub/client/DocDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }
@@ -130,7 +130,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "/JournalDetails/" + params.row.id,
+                  href: "/paperhub/client/JournalDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title
                 }

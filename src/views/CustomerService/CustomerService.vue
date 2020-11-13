@@ -101,10 +101,6 @@ export default {
     Emoji,
     Message,
   },
-  methods: {
-    ok() {},
-    cancel() {},
-  },
   computed: {
     display: {
       get() {
@@ -316,7 +312,7 @@ export default {
     // 获取聊天id
     getClientId() {
       let data = new FormData();
-      data.append("chat", localStorage.getItem("chat"));
+      data.append("chat", localStorage.getItem("customer_chat"));
 
       this.$http
         .post(this.domain + "chat/chatId", data)
@@ -324,7 +320,7 @@ export default {
           if (res.data.code == 1) {
             this.clientId = res.data.data;
             localStorage.setItem("chat", res.data.data);
-            console.log(localStorage.getItem("chat"));
+            console.log(localStorage.getItem("customer_chat"));
             console.log("获取用户id成功!");
           }
         })
@@ -435,9 +431,9 @@ export default {
               time: data.time.slice(11, 19),
               content: data.content,
             });
-            that.$Message.info({
-              content: "客服发来消息！",
-              duration: 5,
+            that.$Notice.info({
+              desc: "客服发来消息！",
+              duration: 3,
             });
             setTimeout(() => {
               let chat = document.getElementById("chat-history");

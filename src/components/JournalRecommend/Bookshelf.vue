@@ -10,7 +10,7 @@
     <Tabs :animated=false active-key="key1" size="small" type="line" @on-click="getJournals">
       <Tab-pane v-for="(item,key) in tabs" :name="item" :label="item" :key="key" class="books-pane">
         <div id="books">
-          <Book v-for="(item,key) in journals" :key="key" :imgSrc="item.journalPhoto" :title="item.name" :level="item.journalLevel" :cycle="item.releaseCycle" :id="'/journalDetails/' + item.id"/>
+          <Book v-for="(item,key) in journals" :key="key" :imgSrc="item.journalPhoto" :title="item.name" :level="item.journalLevel" :cycle="item.releaseCycle" :id="'/paperhub/client/journalDetails/' + item.id"/>
         </div>
         <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
         <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page>

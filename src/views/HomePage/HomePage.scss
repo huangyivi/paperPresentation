@@ -127,13 +127,18 @@
     }
 
     .guonei-show {
-
         .book-intro {
             height: 332px;
         }
 
         .book {
             height: 332px;
+        }
+        .no-data{
+            width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 

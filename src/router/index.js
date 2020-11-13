@@ -9,11 +9,12 @@ import PaperCheck from "@/views/PaperCheck/PaperCheck.vue";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit.vue";
 import DocDetails from "@/views/DocDetails/DocDetails.vue";
 import JournalDetails from "@/views/JournalDetails/JournalDetails.vue";
-
+import Errors from "@/views/Error/Error"
 Vue.use(Router)
 
 export default new Router({
   mode: "history",
+  base: "/paperhub/client/",
   routes: [
     {
       name: 'layout',
@@ -62,6 +63,11 @@ export default new Router({
           component: JournalDetails
         }
       ]
+    },
+    {
+      path: '*',
+      name : 'Error',
+      component : Errors
     }
   ]
 })

@@ -19,7 +19,7 @@
     <div class="jd-search-ans">
       <div v-for="item in WXData" :key="item.title" class="list-out">
         <div class="wx-ans-title">
-          <a :href='"/DocDetails/" + item.id' >{{ item.title }}</a>
+          <a :href='"/paperhub/client/DocDetails/" + item.id' >{{ item.title }}</a>
         </div>
         <p>{{ item.abstractText }}</p>
         <div class="list-bottom">

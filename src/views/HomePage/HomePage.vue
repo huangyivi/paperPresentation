@@ -3,58 +3,89 @@
     <!-- 轮播图 -->
     <div class="round-chart">
       <transition name="runbo">
-        <Banner :class="{banner:!show,former:show}" v-if="show" :imgSrc="BaseImg" key="1"></Banner>
-        <Banner :class="{banner:show,former:!show}" v-else-if="!show" :imgSrc="BaseImg" key="2"></Banner>
+        <Banner
+          :class="{ banner: !show, former: show }"
+          v-if="show"
+          :imgSrc="BaseImg"
+          key="1"
+        ></Banner>
+        <Banner
+          :class="{ banner: show, former: !show }"
+          v-else-if="!show"
+          :imgSrc="BaseImg"
+          key="2"
+        ></Banner>
       </transition>
       <ul>
-        <li :class="{active: index === picIndex}" v-for="(item,index) in imgs" :key="index" @click="changePics(index)">
-        </li>
+        <li
+          :class="{ active: index === picIndex }"
+          v-for="(item, index) in imgs"
+          :key="index"
+          @click="changePics(index)"
+        ></li>
       </ul>
     </div>
     <!-- 精品期刊 -->
     <div class="book-show">
       <BookIntro :bookSum="books[0]" />
-      <Book v-for="item in preciseBook.slice(0,9)" :key="item.index" :book="item" />
+      <Book
+        v-for="item in preciseBook.slice(0, 9)"
+        :key="item.index"
+        :book="item"
+      />
     </div>
     <Ad :imgSrc="jounralsImg" />
     <!-- 国际期刊 -->
     <div class="book-show guoji-show">
       <BookIntro class="book-intro" :bookSum="books[1]" />
-      <Book class="book" v-for="item in international.slice(2,11)" :key="item.index" :book="item" />
+      <Book
+        class="book"
+        v-for="item in international.slice(2, 11)"
+        :key="item.index"
+        :book="item"
+      />
     </div>
     <Ad :imgSrc="zhenggaoImg" />
 
     <!-- 国内期刊 -->
     <ul class="inter-list list">
-      <li 
-      :class="{active: index == interListIndex}" 
-      v-for="(item,index) in interList" 
-      :key="item.index"
-      @click="changeInterPage(index)"
+      <li
+        :class="{ active: index == interListIndex }"
+        v-for="(item, index) in interList"
+        :key="item.index"
+        @click="changeInterPage(index)"
       >
-      {{item}}
+        {{ item }}
       </li>
-      <a href="/JournalRecommend">查看全部</a>
+      <a href="/paperhub/client/JournalRecommend">查看全部</a>
     </ul>
 
     <div class="book-show guonei-show">
       <BookIntro class="book-intro" :bookSum="books[2]" />
-      <Book class="book" v-for="item in domestic" :key="item.index" :book="item" />
+      <Book
+        class="book"
+        v-for="item in domestic"
+        :key="item.index"
+        :book="item"
+      />
+      <div class="no-data" v-if="isNoData">
+        <h1>暂无数据</h1>
+      </div>
     </div>
     <Ad :imgSrc="gongchengImg" />
 
     <!-- 行业 -->
     <div class="industry">
       <ul class="commercial-list list">
-        <li 
-        :class="{active: index == industryIndex}" 
-        v-for="(item, index) in commercial" 
-        :key="item.index"
-        @click="changeIndustryPage(index)"
+        <li
+          :class="{ active: index == industryIndex }"
+          v-for="(item, index) in commercial"
+          :key="item.index"
+          @click="changeIndustryPage(index)"
         >
-        {{item}}
+          {{ item }}
         </li>
-        <a href="/DocumentBase">查看全部</a>
+        <a href="/paperhub/client/DocumentBase">查看全部</a>
       </ul>
       <div class="article-show">
         <Article :article="jujiao" />
@@ -67,28 +98,30 @@
       <BookIntro class="book-intro" :bookSum="books[3]" />
       <ul>
         <li v-for="item in articleCheck" :key="item.index">
-          <a href="/PaperCheck"><img :src="item" alt /></a>
+          <a href="/paperhub/client/PaperCheck"><img :src="item" alt /></a>
         </li>
       </ul>
     </div>
 
     <!-- 最新文献 -->
     <ul class="list">
-      <li 
-      :class="{active: index == newListIndex}" 
-      v-for="(item,index) in commercial" 
-      :key="item.index"
-      @click="changeNewDocu(index)"
+      <li
+        :class="{ active: index == newListIndex }"
+        v-for="(item, index) in commercial"
+        :key="item.index"
+        @click="changeNewDocu(index)"
       >
-      {{item}}
+        {{ item }}
       </li>
-      <a href="/DocumentBase">查看全部</a>
+      <a href="/paperhub/client/DocumentBase">查看全部</a>
     </ul>
     <div class="new-article">
       <BookIntro class="book-intro" :bookSum="books[4]" />
       <div class="article-table">
-        <Table :columns="columns1" :data="newDocu.slice(0,6)"></Table>
-        <a class="article-look" href="/DocumentBase">查看总文献库（{{allNum}}篇）</a>
+        <Table :columns="columns1" :data="newDocu.slice(0, 6)"></Table>
+        <a class="article-look" href="/paperhub/client/DocumentBase"
+          >查看总文献库（{{ allNum }}篇）</a
+        >
       </div>
     </div>
 
@@ -120,10 +153,11 @@ export default {
     Book,
     BookIntro,
     Article,
-    WebIntro
+    WebIntro,
   },
   data() {
     return {
+      isNoData: false,
       BaseImg: require("../../assets/images/index_banner1.png"),
       jounralsImg: require("../../assets/images/journalsDemand.jpg"),
       zhenggaoImg: require("../../assets/images/zhenggao.png"),
@@ -134,40 +168,40 @@ export default {
           bookNum: 47,
           bookImg: require("../../assets/images/clock.jpg"),
           bookTitle: "精品期刊",
-          bookEn: "FINE JOURNALS"
+          bookEn: "FINE JOURNALS",
         },
         {
           bookid: 2,
           bookNum: 33,
           bookImg: require("../../assets/images/building.jpg"),
           bookTitle: "国际征稿",
-          bookEn: "INTERNATIONAL JOURNALS"
+          bookEn: "INTERNATIONAL JOURNALS",
         },
         {
           bookid: 3,
           bookNum: 390,
           bookImg: require("../../assets/images/mountain.jpg"),
           bookTitle: "国内征稿",
-          bookEn: "INTERNATIONAL JOURNALS"
+          bookEn: "INTERNATIONAL JOURNALS",
         },
         {
           bookid: 4,
           bookImg: require("../../assets/images/sky.jpg"),
           bookTitle: "文章检测",
-          bookEn: "ARTICLE DETECTION"
+          bookEn: "ARTICLE DETECTION",
         },
         {
           bookid: 5,
           bookImg: require("../../assets/images/thegreatwall.jpg"),
           bookTitle: "最新文献",
-          bookEn: "LATEST LITERATURE"
+          bookEn: "LATEST LITERATURE",
         },
         {
           bookid: 6,
           bookImg: require("../../assets/images/sea.jpg"),
           bookTitle: "网站研发",
-          bookEn: `RESEARCH<br/>AND DEVELOPMENT`
-        }
+          bookEn: `RESEARCH<br/>AND DEVELOPMENT`,
+        },
       ],
       interList: [
         "经济",
@@ -189,7 +223,7 @@ export default {
         "通信",
         "电力",
         "社会",
-        "企划"
+        "企划",
       ],
       commercial: [
         "OA期刊",
@@ -211,33 +245,29 @@ export default {
         "农业",
         "工业",
         "机械",
-        "建筑"
+        "建筑",
       ],
       jujiao: {
         title: "行业聚焦",
         num: 1010,
         intro: "为您整理行业最热门文献",
-        articles: [
-         
-        ]
+        articles: [],
       },
       qianyan: {
         title: "行业前沿",
         num: 292049,
         intro: "最新发表的优质文献",
-        articles: [
-          
-        ]
+        articles: [],
       },
       articleCheck: [
-        require('../../assets/images/cnki.jpg'),
-        require('../../assets/images/wanfang.jpg'),
-        require('../../assets/images/wpeducation.jpg'),
-        require('../../assets/images/paperyy.jpg'),
-        require('../../assets/images/turnitin.png'),
-        require('../../assets/images/Gocheck.png'),
-        require('../../assets/images/Paper Pass.png'),
-        require('../../assets/images/PaperOK.png')
+        require("../../assets/images/cnki.jpg"),
+        require("../../assets/images/wanfang.jpg"),
+        require("../../assets/images/wpeducation.jpg"),
+        require("../../assets/images/paperyy.jpg"),
+        require("../../assets/images/turnitin.png"),
+        require("../../assets/images/Gocheck.png"),
+        require("../../assets/images/Paper Pass.png"),
+        require("../../assets/images/PaperOK.png"),
       ],
       columns1: [
         {
@@ -249,66 +279,66 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "/DocDetails/" + params.row.id,
+                  href: "/paperhub/client/DocDetails/" + params.row.id,
                   target: "_blank",
-                  title: params.row.title
-                }
+                  title: params.row.title,
+                },
               },
               params.row.title
             );
-          }
+          },
         },
         {
           title: "作者",
-          key: "author"
+          key: "author",
         },
         {
           title: "刊期",
-          key: "time"
+          key: "time",
         },
         {
           title: "期刊",
-          key: "magazine"
+          key: "magazine",
           // width: "300",
-        }
+        },
       ],
-      allNum: '',
+      allNum: "",
       //网站研发
       webs: [
         {
           id: "01",
           intro: "智能主编",
-          text: `总投入500万，历时2年，服务于期刊社的自动编排印系统，已有多家期刊社应用此系统，是出版行业向人工智能技术的应用系统，口碑反馈良好。`
+          text: `总投入500万，历时2年，服务于期刊社的自动编排印系统，已有多家期刊社应用此系统，是出版行业向人工智能技术的应用系统，口碑反馈良好。`,
         },
         {
           id: "02",
           intro: "在线写作",
           text: `目前仅为1.0版本，未来将在2.0及3.0版本增加参考拟题，参考摘要，参考大纲，多人异地同时写作、
-                            科大讯飞听你说等智能辅助工具，帮助您随时随地进行创作`
+                            科大讯飞听你说等智能辅助工具，帮助您随时随地进行创作`,
         },
         {
           id: "03",
           intro: "查重系统",
-          text: `目前该查重系统技术虽已成熟，系统已开发完成，测试结果良好，但因版权文献库内容正在丰富中，期待不久的未来能为广大客户服务`
+          text: `目前该查重系统技术虽已成熟，系统已开发完成，测试结果良好，但因版权文献库内容正在丰富中，期待不久的未来能为广大客户服务`,
         },
         {
           id: "04",
           intro: "期刊分析",
-          text: `结合全网1万期刊5000万往期文献大数据研发的智能小工具，可清晰了解国内所有期刊的发文量。`
+          text: `结合全网1万期刊5000万往期文献大数据研发的智能小工具，可清晰了解国内所有期刊的发文量。`,
         },
         {
           id: "05",
           intro: "推荐发表",
-          text: `对您的文章进行诊断，从写作方向、篇幅、查重结果、格式、文字表达错误等所有方面进行诊断，根据全网期刊大数据进行准确匹配适合发表的期刊。`
+          text: `对您的文章进行诊断，从写作方向、篇幅、查重结果、格式、文字表达错误等所有方面进行诊断，根据全网期刊大数据进行准确匹配适合发表的期刊。`,
         },
         {
           id: "06",
           intro: "术语查询",
-          text: `基于全国科学技术名词审定委员会公布的各行业术语标准用语及英文对照开发的查询小工具。`
-        }
+          text: `基于全国科学技术名词审定委员会公布的各行业术语标准用语及英文对照开发的查询小工具。`,
+        },
       ],
       //轮播图图片
-      imgs:[
+      imgs: [
         require("../../assets/images/index_banner1.png"),
         require("../../assets/images/index_banner2.png"),
         require("../../assets/images/index_banner3.png"),
@@ -320,30 +350,29 @@ export default {
       //新数据处理
       preciseBook: [], //精品期刊
       international: [], //国际征稿
-      domestic: [],//国内征稿
+      domestic: [], //国内征稿
       front: [], //行业前沿
       focusing: [], //行业聚焦
       newDocu: [], //最新文献
       //轮播时间
-      recordTime: '',
-      interListIndex: -1,  //国内期刊导航栏索引
-      industryIndex: -1,  //行业导航栏索引
+      recordTime: "",
+      interListIndex: -1, //国内期刊导航栏索引
+      industryIndex: -1, //行业导航栏索引
       newListIndex: -1, //最新文献导航栏索引
     };
   },
-  
-  methods:{
+
+  methods: {
     //自动轮播
-    roundChange(){
-      this.recordTime = setInterval(()=>{
+    roundChange() {
+      this.recordTime = setInterval(() => {
         this.picIndex++;
-        if(this.picIndex >= this.imgs.length)
-          this.picIndex = 0;
-        this.changePics(this.picIndex);   
-      },5000);
+        if (this.picIndex >= this.imgs.length) this.picIndex = 0;
+        this.changePics(this.picIndex);
+      }, 5000);
     },
     //点击选项显示图片
-    changePics(index){
+    changePics(index) {
       //清除
       clearInterval(this.recordTime);
       //切换show展示哪部分banner，实现过渡效果
@@ -354,178 +383,187 @@ export default {
       this.roundChange();
     },
     //获取期刊
-    getJournal(){
+    getJournal() {
       var formdata = new FormData();
-      formdata.append('pageNum',1);
-      formdata.append('pageSize',30);
+      formdata.append("pageNum", 1);
+      formdata.append("pageSize", 30);
       this.$http
-        .post(this.domain + "journal/searchJournal",formdata)
-        .then(res=>{
+        .post(this.domain + "journal/searchJournal", formdata)
+        .then((res) => {
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
           this.books[1].bookNum = data.total;
           this.books[2].bookNum = data.total;
-          data.list.forEach((item,index)=>{
+          data.list.forEach((item, index) => {
             this.preciseBook.push({
               id: item.id,
-              bookName: item.name,  //书名
+              bookName: item.name, //书名
               bookRank: item.journalLevel, //刊级
-              bookClass: item.releaseCycle,  //书类别
+              bookClass: item.releaseCycle, //书类别
               bookResoure: item.receiveWebsite, //书收录
-              bookurl: item.journalPhoto,  //图片地址
+              bookurl: item.journalPhoto, //图片地址
             });
             this.international.push({
               id: item.id,
-              bookEn: this.randomString(parseInt((Math.random() + 1)*10)),
-              bookName:item.name, //书名
+              bookEn: this.randomString(parseInt((Math.random() + 1) * 10)),
+              bookName: item.name, //书名
               bookRank: item.journalLevel, //刊级
               bookClass: item.releaseCycle, //书类别
-              bookurl: item.journalPhoto,  //图片地址
+              bookurl: item.journalPhoto, //图片地址
             });
             this.domestic.push({
               id: item.id,
-              bookName: item.name,  //书名
+              bookName: item.name, //书名
               bookRank: item.journalLevel, //刊级
-              bookClass: item.releaseCycle,  //书类别
-              bookurl: item.journalPhoto,  //图片地址
-            })
+              bookClass: item.releaseCycle, //书类别
+              bookurl: item.journalPhoto, //图片地址
+            });
           });
           this.domestic = this.domestic.slice(-9);
         });
     },
     //随机生成字符串(来充当英文)
-    randomString(n) {  
-      let str = 'abcdefghijklmn pqrstuvwxz 9876543210';
-      let tmp = '',
-          i = 0,
-          l = str.length;
+    randomString(n) {
+      let str = "abcdefghijklmn pqrstuvwxz 9876543210";
+      let tmp = "",
+        i = 0,
+        l = str.length;
       for (i = 0; i < n; i++) {
         tmp += str.charAt(Math.floor(Math.random() * l));
       }
       return tmp;
     },
     //获取文献
-    getDocument(){
-      this.$http.get(this.domain + "doc",{
-        params: {
-          pageNum: 1,
-          pageSize: 18,
-        }
-      })
-      .then(res=>{
-        let data = res.data.data;
-        this.allNum = data.total;
-        this.qianyan.num = data.total;
-        this.jujiao.num = data.total;
-        data.list.forEach((item,index)=>{
-          //行业前沿
-          this.qianyan.articles.push({
-            id: item.id,
-            name: item.title,  //标题
-            time: item.publishTime  //时间
+    getDocument() {
+      this.$http
+        .get(this.domain + "doc", {
+          params: {
+            pageNum: 1,
+            pageSize: 18,
+          },
+        })
+        .then((res) => {
+          let data = res.data.data;
+          this.allNum = data.total;
+          this.qianyan.num = data.total;
+          this.jujiao.num = data.total;
+          data.list.forEach((item, index) => {
+            //行业前沿
+            this.qianyan.articles.push({
+              id: item.id,
+              name: item.title, //标题
+              time: item.publishTime, //时间
+            });
+            //最新文献
+            this.newDocu.push({
+              id: item.id, //id
+              title: item.title, //标题
+              author: item.author, //作者
+              time: item.publishTime, //刊期
+              magazine: item.fromJournal, //期刊
+            });
           });
-          //最新文献
-          this.newDocu.push({
-            id: item.id, //id
-            title: item.title,  //标题
-            author: item.author,  //作者
-            time: item.publishTime, //刊期
-            magazine: item.fromJournal,  //期刊
-          },)
+          this.jujiao.articles = this.qianyan.articles.slice(-6); //行业聚焦
+          this.qianyan.articles = this.qianyan.articles.slice(0, 6);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        this.jujiao.articles = this.qianyan.articles.slice(-6);   //行业聚焦
-        this.qianyan.articles = this.qianyan.articles.slice(0,6);
-        
-        
-      }).catch(err=>{
-        console.log(err);
-      })
     },
     //切换国内征稿
-    changeInterPage(index){
+    changeInterPage(index) {
       this.interListIndex = index;
-      this.domestic.length = 0;  //清空一波数组
+      this.domestic.length = 0; //清空一波数组
       var data = new FormData();
-      data.append('pageNum',1);
-      data.append('pageSize',9);
-      data.append('name',this.interList[index]);  //名称
-      this.$http.post(this.domain + "journal/searchRecommendJournal",data)
-      .then(res=>{
-        // console.log(res);
-        let data = res.data.data;
-        data.list.forEach((item,index)=>{
-            this.domestic.push({
-              bookName: item.name,  //书名
-              bookRank: item.journalLevel, //刊级
-              bookClass: item.releaseCycle,  //书类别
-              bookurl: item.journalPhoto,  //图片地址
-            })
-          });     
-      }).catch(err=>{
-        console.log(err);
-      });
+      data.append("pageNum", 1);
+      data.append("pageSize", 9);
+      data.append("name", this.interList[index]); //名称
+      this.$http
+        .post(this.domain + "journal/searchRecommendJournal", data)
+        .then((res) => {
+          let data = res.data.data;
+
+          if ((data.list.length)) {
+            data.list.forEach((item, index) => {
+              this.domestic.push({
+                bookName: item.name, //书名
+                bookRank: item.journalLevel, //刊级
+                bookClass: item.releaseCycle, //书类别
+                bookurl: item.journalPhoto, //图片地址
+              });
+            });
+            this.isNoData = false;
+          }else{
+            this.isNoData = true;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     //切换行业
-    changeIndustryPage(index){
+    changeIndustryPage(index) {
       this.industryIndex = index;
       this.qianyan.articles.length = 0;
       this.jujiao.articles.length = 0;
-      this.$http.get(this.domain + "doc",{
-        params:{
-          head: this.commercial[index],
-          pageNum: 1,
-          pageSize: 12,
-        }
-      }).then(res=>{
-        let data = res.data.data;
-        data.list.forEach((item,index)=>{
-          //行业前沿
-          this.qianyan.articles.push({
-            id: item.id,
-            name: item.title,  //标题
-            time: item.publishTime  //时间
+      this.$http
+        .get(this.domain + "doc", {
+          params: {
+            head: this.commercial[index],
+            pageNum: 1,
+            pageSize: 12,
+          },
+        })
+        .then((res) => {
+          let data = res.data.data;
+          data.list.forEach((item, index) => {
+            //行业前沿
+            this.qianyan.articles.push({
+              id: item.id,
+              name: item.title, //标题
+              time: item.publishTime, //时间
+            });
           });
+          this.jujiao.articles = this.qianyan.articles.slice(-6); //行业聚焦
+          this.qianyan.articles = this.qianyan.articles.slice(0, 6);
         });
-        this.jujiao.articles = this.qianyan.articles.slice(-6);  //行业聚焦
-        this.qianyan.articles = this.qianyan.articles.slice(0,6);
-        
-      })
     },
     //切换最新文献
-    changeNewDocu(index){
+    changeNewDocu(index) {
       this.newListIndex = index;
       this.newDocu.length = 0;
-      this.$http.get(this.domain + "doc",{
-        params: {
-          head: this.commercial[index],
-          pageNum: 1,
-          pageSize: 6,
-        }
-      })
-      .then(res=>{
-        let data = res.data.data;
-        data.list.forEach((item,index)=>{
-          //最新文献
-          this.newDocu.push({
-            id: item.id, //id
-            title: item.title,  //标题
-            author: item.author,  //作者
-            time: item.publishTime, //刊期
-            magazine: item.fromJournal,  //期刊
-          },)
-        });        
-      }).catch(err=>{
-        console.log(err);
-      })
-      
-    }
+      this.$http
+        .get(this.domain + "doc", {
+          params: {
+            head: this.commercial[index],
+            pageNum: 1,
+            pageSize: 6,
+          },
+        })
+        .then((res) => {
+          let data = res.data.data;
+          data.list.forEach((item, index) => {
+            //最新文献
+            this.newDocu.push({
+              id: item.id, //id
+              title: item.title, //标题
+              author: item.author, //作者
+              time: item.publishTime, //刊期
+              magazine: item.fromJournal, //期刊
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  mounted(){
+  mounted() {
     this.roundChange();
     this.getJournal();
     this.getDocument();
-  }
+  },
 };
 </script>
 
