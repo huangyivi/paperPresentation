@@ -183,6 +183,10 @@ export default {
       if (item == "全部") {
         item = "";
       }
+      const tmsg = this.$Message.loading({
+                    content: 'Loading...',
+                    duration: 0
+                });
       this.$http
         .get(this.domain + "doc", {
           params: {
@@ -194,6 +198,7 @@ export default {
           }
         })
         .then(res => {
+          setTimeout(tmsg, 0);
           if (res.data.code == 1) {
             this.dataCount = res.data.data.total;
             this.docs = res.data.data.list;

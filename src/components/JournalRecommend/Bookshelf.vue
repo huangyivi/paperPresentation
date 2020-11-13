@@ -1,36 +1,69 @@
 <template>
-<div>
-  <div id="search">
-    <div id="search-up">
-      <input type="text" v-model="input" @keyup.enter="getJournals(journalType)"/>
-      <i-button type="primary" icon="ios-search"  @click="getJournals(journalType)">搜索</i-button>
+  <div>
+    <div id="search">
+      <div id="search-up">
+        <input
+          type="text"
+          v-model="input"
+          @keyup.enter="getJournals(journalType)"
+        />
+        <i-button
+          type="primary"
+          icon="ios-search"
+          @click="getJournals(journalType)"
+          >搜索</i-button
+        >
+      </div>
+    </div>
+    <div id="bookshelf">
+      <Tabs
+        :animated="false"
+        active-key="key1"
+        size="small"
+        type="line"
+        @on-click="getJournals"
+      >
+        <Tab-pane
+          v-for="(item, key) in tabs"
+          :name="item"
+          :label="item"
+          :key="key"
+          class="books-pane"
+        >
+          <div id="books">
+            <Book
+              v-for="(item, key) in journals"
+              :key="key"
+              :imgSrc="item.journalPhoto"
+              :title="item.name"
+              :level="item.journalLevel"
+              :cycle="item.releaseCycle"
+              :id="'/paperhub/client/journalDetails/' + item.id"
+            />
+          </div>
+          <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
+          <Page
+            :total="dataCount"
+            :page-size="pageSize"
+            show-total
+            @on-change="changePage"
+          ></Page>
+        </Tab-pane>
+      </Tabs>
     </div>
   </div>
-<div id="bookshelf">
-    <Tabs :animated=false active-key="key1" size="small" type="line" @on-click="getJournals">
-      <Tab-pane v-for="(item,key) in tabs" :name="item" :label="item" :key="key" class="books-pane">
-        <div id="books">
-          <Book v-for="(item,key) in journals" :key="key" :imgSrc="item.journalPhoto" :title="item.name" :level="item.journalLevel" :cycle="item.releaseCycle" :id="'/paperhub/client/journalDetails/' + item.id"/>
-        </div>
-        <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
-        <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changePage"></Page>
-      </Tab-pane>
-    </Tabs>
-  </div>
-</div>
-  
 </template>
 <script>
 import Book from "../JournalRecommend/Book";
 export default {
   name: "Bookshelf",
   components: {
-    Book
+    Book,
   },
   data() {
     return {
-      input : "",
-      journalType : "",
+      input: "",
+      journalType: "",
       tabs: [
         "全部",
         "OA期刊",
@@ -78,7 +111,7 @@ export default {
       // 是否有数据
       isSize: 1,
       // 期刊数组
-      journals : []
+      journals: [],
     };
   },
   methods: {
@@ -90,7 +123,7 @@ export default {
       this.currentPage = index;
       this.getJournals(this.currentHead);
     },
-    getJournals(item="") {
+    getJournals(item = "") {
       if (this.currentHead != item) {
         this.currentHead = item;
         this.currentPage = 1;
@@ -100,19 +133,22 @@ export default {
       }
       this.journalType = item;
       let data = new FormData();
-      data.append('name',this.input);
-      data.append('pageNum',this.currentPage);
-      data.append('pageSize',this.pageSize);
-      data.append('journalType',item);
+      data.append("name", this.input);
+      data.append("pageNum", this.currentPage);
+      data.append("pageSize", this.pageSize);
+      data.append("journalType", item);
+      const jRecMsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
-        .post(this.domain + "journal/searchRecommendJournal", data,
-          {
-            headers:{
-              "Content-Type" : "multipart/form-data"
-            }
-          }
-        )
-        .then(res => {
+        .post(this.domain + "journal/searchRecommendJournal", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          setTimeout(jRecMsg, 0);
           if (res.data.code == 1) {
             this.dataCount = res.data.data.total;
             this.journals = res.data.data.list;
@@ -121,13 +157,13 @@ export default {
             this.isSize = false;
           }
         });
-    }
+    },
   },
   created() {
     this.getJournals("");
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
-@import './Bookshelf.scss';
+@import "./Bookshelf.scss";
 </style>
