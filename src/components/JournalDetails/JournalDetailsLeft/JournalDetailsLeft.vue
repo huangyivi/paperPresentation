@@ -32,7 +32,7 @@
     <div class="jd-title">发表流程<span>/你需要知道的论文发表流程</span></div>
     <img
       class="progress-img"
-      src="http://zhimaikeji.net/imgs/wf/progress.png"
+      src="../../../assets/images/process.png"
       alt
     />
   </div>
@@ -62,15 +62,19 @@ export default {
   methods: {
     // 搜索框回车查询
     getSearchWX() {
+      const loadingMsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
       this.$http
         .get(this.domain + `doc/${this.$route.params.jid}/${this.nowPage}/5/${this.wxCondition}`)
         .then((res) => {
+          setTimeout(loadingMsg, 0);
           if (res.data.code === 1) {
-            console.log(res);
             this.WXData = res.data.data.list;
             this.total = res.data.data.total;
           } else {
-            alert(res.data.msg);
+            this.$Message.error(res.data.msg);
           }
         })
         .catch((err) => {
