@@ -2,17 +2,26 @@
   <div class="HomePage">
     <!-- 轮播图 -->
     <div class="round-chart">
-      <transition name="runbo">
-        <Banner class="banner" v-if="show == 0" :imgSrc="imgs[0]" key="1"></Banner>
-        <Banner class="banner" v-else-if="show == 1" :imgSrc="imgs[1]" key="2"></Banner>
-        <Banner class="banner" v-else-if="show == 2" :imgSrc="imgs[2]" key="3"></Banner>
-        <Banner class="banner" v-else-if="show == 3" :imgSrc="imgs[3]" key="4"></Banner>
-      </transition>
+      <!-- <transition-group name="runbo"> -->
+      <div class="banner doc-banner" v-show="show == 0">
+        <img src="../../assets/images/index_banner1.png" />
+      </div>
+      <div class="banner doc-banner" v-show="show == 1">
+        <img src="../../assets/images/index_banner2.png" />
+      </div>
+      <div class="banner doc-banner" v-show="show == 2">
+        <img src="../../assets/images/index_banner3.png" />
+      </div>
+      <div class="banner doc-banner" v-show="show == 3">
+        <img src="../../assets/images/index_banner4.png" />
+      </div>
+
+      <!-- </transition-group> -->
 
       <ul>
         <li
           :class="{ active: index === show }"
-          v-for="(item, index) in imgs"
+          v-for="index in [0, 1, 2, 3]"
           :key="index"
           @click="changePics(index)"
         ></li>
@@ -137,18 +146,14 @@
   </div>
 </template>
 <script>
-import Banner from "../../components/Banner/Banner";
 import Book from "../../components/HomePage/Book";
 import BookIntro from "../../components/HomePage/BookIntro";
-import BookShow from "../../components/HomePage/BookShow";
 import Ad from "../../components/HomePage/Ad";
 import Article from "../../components/HomePage/Article";
 import WebIntro from "../../components/HomePage/WebIntro";
 
 export default {
   components: {
-    Banner,
-    BookShow,
     Ad,
     Book,
     BookIntro,
@@ -158,7 +163,7 @@ export default {
   data() {
     return {
       isNoData: false,
-      BaseImg: require("../../assets/images/index_banner1.png"),
+      // BaseImg: require("../../assets/images/index_banner1.png"),
       jounralsImg: require("../../assets/images/journalsDemand.jpg"),
       zhenggaoImg: require("../../assets/images/zhenggao.png"),
       gongchengImg: require("../../assets/images/engineering.jpg"),
@@ -337,15 +342,9 @@ export default {
           text: `基于全国科学技术名词审定委员会公布的各行业术语标准用语及英文对照开发的查询小工具。`,
         },
       ],
-      //轮播图图片
-      imgs: [
-        require("../../assets/images/index_banner1.png"),
-        require("../../assets/images/index_banner2.png"),
-        require("../../assets/images/index_banner3.png"),
-        require("../../assets/images/index_banner4.png"),
-      ],
       picIndex: 0, //对应第几张
-      show: 0, //展示第几张
+      show: 0,
+      showPages: [true, false, false, false], //展示第几张
 
       //新数据处理
       preciseBook: [], //精品期刊
@@ -367,11 +366,12 @@ export default {
     roundChange() {
       this.recordTime = setInterval(() => {
         this.show++;
-        if (this.show >= this.imgs.length) this.show = 0;
+        if (this.show > 3) this.show = 0;
       }, 5000);
     },
     //点击选项显示图片
     changePics(index) {
+      console.log(index);
       //清除
       clearInterval(this.recordTime);
       //切换show展示哪部分banner，实现过渡效果

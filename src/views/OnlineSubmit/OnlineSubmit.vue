@@ -208,8 +208,6 @@
   </div>
 </template>
 <script>
-import Banner from "../../components/Banner/Banner";
-
 export default {
   data() {
     return {
@@ -235,9 +233,6 @@ export default {
       },
       file: "", //文件
     };
-  },
-  components: {
-    Banner,
   },
   methods: {
     //清空所有字段
