@@ -3,22 +3,15 @@
     <!-- 轮播图 -->
     <div class="round-chart">
       <transition name="runbo">
-        <Banner
-          :class="{ banner: !show, former: show }"
-          v-if="show"
-          :imgSrc="BaseImg"
-          key="1"
-        ></Banner>
-        <Banner
-          :class="{ banner: show, former: !show }"
-          v-else-if="!show"
-          :imgSrc="BaseImg"
-          key="2"
-        ></Banner>
+        <Banner class="banner" v-if="show == 0" :imgSrc="imgs[0]" key="1"></Banner>
+        <Banner class="banner" v-else-if="show == 1" :imgSrc="imgs[1]" key="2"></Banner>
+        <Banner class="banner" v-else-if="show == 2" :imgSrc="imgs[2]" key="3"></Banner>
+        <Banner class="banner" v-else-if="show == 3" :imgSrc="imgs[3]" key="4"></Banner>
       </transition>
+
       <ul>
         <li
-          :class="{ active: index === picIndex }"
+          :class="{ active: index === show }"
           v-for="(item, index) in imgs"
           :key="index"
           @click="changePics(index)"
@@ -126,7 +119,9 @@
         <!-- <a class="article-look" href="/paperhub/client/DocumentBase"
           >查看总文献库（{{ allNum }}篇）</a
         > -->
-        <router-link class="article-look" to="/DocumentBase">查看总文献库（{{ allNum }}篇）</router-link>
+        <router-link class="article-look" to="/DocumentBase"
+          >查看总文献库（{{ allNum }}篇）</router-link
+        >
       </div>
     </div>
 
@@ -350,7 +345,7 @@ export default {
         require("../../assets/images/index_banner4.png"),
       ],
       picIndex: 0, //对应第几张
-      show: true, //是否展示
+      show: 0, //展示第几张
 
       //新数据处理
       preciseBook: [], //精品期刊
@@ -371,9 +366,8 @@ export default {
     //自动轮播
     roundChange() {
       this.recordTime = setInterval(() => {
-        this.picIndex++;
-        if (this.picIndex >= this.imgs.length) this.picIndex = 0;
-        this.changePics(this.picIndex);
+        this.show++;
+        if (this.show >= this.imgs.length) this.show = 0;
       }, 5000);
     },
     //点击选项显示图片
@@ -381,15 +375,14 @@ export default {
       //清除
       clearInterval(this.recordTime);
       //切换show展示哪部分banner，实现过渡效果
-      this.show = !this.show;
-      this.picIndex = index;
-      this.BaseImg = this.imgs[parseInt(index)];
+      this.show = index;
       //自动轮播
       this.roundChange();
     },
+
     //获取期刊
     getJournal() {
-       const docsmsg = this.$Message.loading({
+      const docsmsg = this.$Message.loading({
         content: "Loading...",
         duration: 0,
       });
@@ -399,7 +392,7 @@ export default {
       this.$http
         .post(this.domain + "journal/searchJournal", formdata)
         .then((res) => {
-          setTimeout(docsmsg,0);
+          setTimeout(docsmsg, 0);
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
@@ -431,15 +424,16 @@ export default {
             });
           });
           this.domestic = this.domestic.slice(-9);
-        }).catch(err=>{
-          console.log(err,"期刊");
-          setTimeout(docsmsg,0);
-          this.$Message.error('服务器连接失败')
+        })
+        .catch((err) => {
+          console.log(err, "期刊");
+          setTimeout(docsmsg, 0);
+          this.$Message.error("服务器连接失败");
         });
     },
     //获取文献
     getDocument() {
-       const docsmsg = this.$Message.loading({
+      const docsmsg = this.$Message.loading({
         content: "Loading...",
         duration: 0,
       });
@@ -451,7 +445,7 @@ export default {
           },
         })
         .then((res) => {
-          setTimeout(docsmsg,0);
+          setTimeout(docsmsg, 0);
           let data = res.data.data;
           this.allNum = data.total;
           this.qianyan.num = data.total;
@@ -476,9 +470,9 @@ export default {
           this.qianyan.articles = this.qianyan.articles.slice(0, 6);
         })
         .catch((err) => {
-          console.log(err,"文献");
-          setTimeout(docsmsg,0);
-          this.$Message.error('服务器连接失败')
+          console.log(err, "文献");
+          setTimeout(docsmsg, 0);
+          this.$Message.error("服务器连接失败");
         });
     },
     //切换国内征稿
@@ -497,7 +491,7 @@ export default {
         .post(this.domain + "journal/searchRecommendJournal", data)
         .then((res) => {
           let data = res.data.data;
-          setTimeout(docsmsg,0);
+          setTimeout(docsmsg, 0);
           if (data.list.length) {
             data.list.forEach((item, index) => {
               this.domestic.push({
@@ -514,13 +508,13 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg,0);
-          this.$Message.error('服务器连接失败')
+          setTimeout(docsmsg, 0);
+          this.$Message.error("服务器连接失败");
         });
     },
     //切换行业
     changeIndustryPage(index) {
-        const docsmsg = this.$Message.loading({
+      const docsmsg = this.$Message.loading({
         content: "Loading...",
         duration: 0,
       });
@@ -536,7 +530,7 @@ export default {
           },
         })
         .then((res) => {
-          setTimeout(docsmsg,0);
+          setTimeout(docsmsg, 0);
           let data = res.data.data;
           data.list.forEach((item, index) => {
             //行业前沿
@@ -548,17 +542,18 @@ export default {
           });
           this.jujiao.articles = this.qianyan.articles.slice(-6); //行业聚焦
           this.qianyan.articles = this.qianyan.articles.slice(0, 6);
-        }).catch(err=>{
+        })
+        .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg,0);
-          this.$Message.error('服务器连接失败')
+          setTimeout(docsmsg, 0);
+          this.$Message.error("服务器连接失败");
         });
     },
     //切换最新文献
     changeNewDocu(index) {
       this.newListIndex = index;
       this.newDocu.length = 0;
-       const docsmsg = this.$Message.loading({
+      const docsmsg = this.$Message.loading({
         content: "Loading...",
         duration: 0,
       });
@@ -572,7 +567,7 @@ export default {
         })
         .then((res) => {
           let data = res.data.data;
-          setTimeout(docsmsg,0);
+          setTimeout(docsmsg, 0);
           data.list.forEach((item, index) => {
             //最新文献
             this.newDocu.push({
@@ -586,8 +581,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg,0);
-          this.$Message.error('服务器连接失败')
+          setTimeout(docsmsg, 0);
+          this.$Message.error("服务器连接失败");
         });
     },
   },
