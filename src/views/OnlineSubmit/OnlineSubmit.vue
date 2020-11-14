@@ -63,7 +63,7 @@
             选择文件
             <input
               type="file"
-              accept=".text,.txt,.doc,.docx"
+              accept=".doc,.docx"
               @change="getFile($event)"
             />
           </div>
