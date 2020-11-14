@@ -335,7 +335,11 @@ export default {
         .then((res) => {
           if (res.data.code == 1) {
             this.$Message.success("投稿成功");
-            this.clear();
+            // this.clear();
+            // for(let item in this.State){
+            //   this.State[item] = false;
+            // }
+            this.$router.go(0);
           } else {
             this.$Message.error("投稿失败");
           }
