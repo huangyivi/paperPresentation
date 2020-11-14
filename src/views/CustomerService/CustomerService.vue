@@ -315,7 +315,11 @@ export default {
       data.append("chat", localStorage.getItem("customer_chat"));
 
       this.$http
-        .post(this.domain + "chat/chatId", data)
+        .post(this.domain + "chat/chatId", data,{},{
+          headers : {
+            'token' : "welcome"
+          }
+        })
         .then((res) => {
           if (res.data.code == 1) {
             this.clientId = res.data.data;
