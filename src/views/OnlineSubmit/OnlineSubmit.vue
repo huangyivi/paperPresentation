@@ -15,6 +15,7 @@
         <input
           type="text"
           v-model="docName"
+          maxlength="255"
           :class="{ redBorder: State.docName }"
         />
         <strong>*</strong>
@@ -26,6 +27,7 @@
             <input
               type="text"
               v-model="author"
+              maxlength="100"
               :class="{ redBorder: State.author }"
             />
             <strong>*</strong>
@@ -122,6 +124,7 @@
               class="input-new-tag"
               v-if="inputVisible"
               v-model="inputValue"
+              maxlength="25"
               ref="saveTagInput"
               placeholder="回车以确定"
               size="small"
@@ -144,6 +147,7 @@
           <textarea
             cols="30"
             rows="10"
+            maxlength="300"
             v-model="summary"
             :class="{ redBorder: State.summary }"
           ></textarea>
