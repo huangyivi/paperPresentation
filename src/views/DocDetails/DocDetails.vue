@@ -30,10 +30,10 @@
       </div>
 
       <div class="journal-info">
-        <div class="journal-img">
+        <div class="journal-img" @click="toJournal">
           <img :src="imgSrc" alt />
         </div>
-        <div>
+        <div class="journal-name" @click="toJournal">
           <label>期刊：</label>
           <b>{{journal}}</b>
         </div>
@@ -120,6 +120,9 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    toJournal() {
+        window.open(`/paperhub/client/JournalDetails/${this.journalId}`);
     }
   },
   created() {

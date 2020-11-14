@@ -187,6 +187,7 @@ export default {
                     content: 'Loading...',
                     duration: 0
                 });
+                console.log(this.attach)
       this.$http
         .get(this.domain + "doc", {
           params: {
@@ -211,8 +212,8 @@ export default {
     changeAttach(){
       let attachs = document.getElementsByClassName('doc-attach');
       for(let i=0;i<attachs.length;i++){
-        if(attachs[i].checked == true){
-          this.docAttach = attachs[i].value;
+        if(attachs[i].checked){
+          this.attach = attachs[i].value;
         }
       }
     }

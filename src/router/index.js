@@ -1,16 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from "@/views/Layout/Layout.vue";
-import HomePage from "@/views/HomePage/HomePage.vue";
-import JournalCollection from "@/views/JournalCollection/JournalCollection.vue";
-import JournalRecommend from "@/views/JournalRecommend/JournalRecommend.vue";
-import DocumentBase from "@/views/DocumentBase/DocumentBase.vue";
-import PaperCheck from "@/views/PaperCheck/PaperCheck.vue";
-import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit.vue";
-import DocDetails from "@/views/DocDetails/DocDetails.vue";
-import JournalDetails from "@/views/JournalDetails/JournalDetails.vue";
-import Errors from "@/views/Error/Error"
+// import Layout from "@/views/Layout/Layout.vue";
+// import HomePage from "@/views/HomePage/HomePage.vue";
+// import JournalCollection from "@/views/JournalCollection/JournalCollection.vue";
+// import JournalRecommend from "@/views/JournalRecommend/JournalRecommend.vue";
+// import DocumentBase from "@/views/DocumentBase/DocumentBase.vue";
+// import PaperCheck from "@/views/PaperCheck/PaperCheck.vue";
+// import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit.vue";
+// import DocDetails from "@/views/DocDetails/DocDetails.vue";
+// import JournalDetails from "@/views/JournalDetails/JournalDetails.vue";
+// import Errors from "@/views/Error/Error"
+
+// 懒加载路由,提高页面渲染速度
+const Layout = ()=>import("@/views/Layout/Layout.vue")
+const HomePage = ()=>import("@/views/HomePage/HomePage.vue")
+const JournalCollection = ()=>import("@/views/JournalCollection/JournalCollection.vue")
+const JournalRecommend = ()=>import("@/views/JournalRecommend/JournalRecommend.vue")
+const DocumentBase = ()=>import("@/views/DocumentBase/DocumentBase.vue")
+const PaperCheck = ()=>import("@/views/PaperCheck/PaperCheck.vue")
+const OnlineSubmit = ()=>import("@/views/OnlineSubmit/OnlineSubmit.vue")
+const DocDetails = ()=>import("@/views/DocDetails/DocDetails.vue")
+const JournalDetails = ()=>import("@/views/JournalDetails/JournalDetails.vue")
+const Errors = ()=>import("@/views/Error/Error")
+
 Vue.use(Router)
+
+
 
 export default new Router({
   mode: "history",
