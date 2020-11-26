@@ -9,7 +9,7 @@
       v-model="display"
     >
       <p slot="header" style="color: #fff; text-align: center">
-        <span>期刊发表网欢迎您</span>
+        <span>集爱网欢迎您</span>
       </p>
       <p slot="close">
         <Icon type="md-close" size="20px" color="#fff" />

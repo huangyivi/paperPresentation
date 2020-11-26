@@ -2,21 +2,21 @@
   <div class="HomePage">
     <!-- 轮播图 -->
     <div class="round-chart">
-      <!-- <transition-group name="runbo"> -->
-      <div class="banner doc-banner" v-show="show == 0">
+      <transition-group name="runbo">
+      <div class="banner doc-banner" v-show="show == 0" key="0">
         <img src="../../assets/images/index_banner1.png" />
       </div>
-      <div class="banner doc-banner" v-show="show == 1">
+      <div class="banner doc-banner" v-show="show == 1" key="1">
         <img src="../../assets/images/index_banner2.png" />
       </div>
-      <div class="banner doc-banner" v-show="show == 2">
+      <div class="banner doc-banner" v-show="show == 2" key="2">
         <img src="../../assets/images/index_banner3.png" />
       </div>
-      <div class="banner doc-banner" v-show="show == 3">
+      <div class="banner doc-banner" v-show="show == 3" key="3">
         <img src="../../assets/images/index_banner4.png" />
       </div>
 
-      <!-- </transition-group> -->
+      </transition-group>
 
       <ul>
         <li
