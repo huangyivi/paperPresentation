@@ -1,7 +1,6 @@
 <template>
   <div class="check-duplicate">
     <div>
-      <img :src="img" alt />
       <h3>{{ title }}</h3>
       <p>{{ detail }}</p>
       <a :href="href" target="_blank">立即检测</a>
