@@ -9,7 +9,7 @@
       v-model="display"
     >
       <p slot="header" style="color: #fff; text-align: center">
-        <span>集爱网欢迎您</span>
+        <span>集爱科技欢迎您</span>
       </p>
       <p slot="close">
         <Icon type="md-close" size="20px" color="#fff" />
@@ -315,9 +315,9 @@ export default {
       data.append("chat", localStorage.getItem("customer_chat"));
 
       this.$http
-        .post(this.domain + "chat/chatId", data,{},{
+        .post(this.domain + "chat/chatId", data,{
           headers : {
-            'token' : "welcome"
+            token : "welcome"
           }
         })
         .then((res) => {
