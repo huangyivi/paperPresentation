@@ -2,7 +2,7 @@
   <div id="header-container">
     <div>
       <div id="left-session">
-        <p>您好，欢迎来到集爱科技</p>
+        <p>您好，欢迎来到集文网</p>
         <p>咨询电话:17666665234</p>
       </div>
       <div id="right-session">

@@ -3,7 +3,7 @@
     <div>
       <div id="nav-logo">
         <img src="../../../assets/images/logo.png" alt="">
-        集爱科技
+        集文网
         </div>
       <div id="nav-content">
         <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
