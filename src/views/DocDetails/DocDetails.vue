@@ -110,8 +110,12 @@ export default {
     },
     getRecoms() {
       // 获取推荐文献
+      let data = new FormData();
+      data.append('perId',this.journalId);
+      data.append('pageNum',1);
+      data.append('pageSize',10);
       this.$http
-        .get(this.domain + `doc/${this.journalId}/1/10`)
+        .post(this.domain + 'doc/list',data)
         .then(res => {
           if(res.data.code === 1){
             this.docs = res.data.data.list

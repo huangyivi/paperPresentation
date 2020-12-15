@@ -131,7 +131,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "/paperhub/client/JournalDetails/" + params.row.id,
+                  href: "/paperhub/client/JournalDetails/" + params.row.periodicalId,
                   target: "_blank",
                   title: params.row.title
                 }

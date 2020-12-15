@@ -12,29 +12,27 @@
             v-model="wxCondition"
             @keyup.enter="getSearchWX"
           />
-          <Icon type="ios-search" size="21" id="search"/>
+          <Icon type="ios-search" size="21" id="search" />
         </div>
       </div>
     </div>
     <div class="jd-search-ans">
       <div v-for="item in WXData" :key="item.title" class="list-out">
         <div class="wx-ans-title">
-          <a :href='"/paperhub/client/DocDetails/" + item.id' >{{ item.title }}</a>
+          <a :href="'/paperhub/client/DocDetails/' + item.id">{{
+            item.title
+          }}</a>
         </div>
         <p>{{ item.abstractText }}</p>
         <div class="list-bottom">
           <span>{{ item.author }}</span>
         </div>
       </div>
-      <Page :total="total * 2" class="jd-list-page" @on-change="changePage"/>
+      <Page :total="total * 2" class="jd-list-page" @on-change="changePage" />
     </div>
 
     <div class="jd-title">发表流程<span>/你需要知道的论文发表流程</span></div>
-    <img
-      class="progress-img"
-      src="../../../assets/images/process.png"
-      alt
-    />
+    <img class="progress-img" src="../../../assets/images/process.png" alt />
   </div>
 </template>
 
@@ -66,8 +64,13 @@ export default {
         content: "Loading...",
         duration: 0,
       });
+      var formdata = new FormData();
+      formdata.append("perId", this.$route.params.jid);
+      formdata.append("pageNum", this.nowPage);
+      formdata.append("pageSize", 5);
+      formdata.append("condition", this.wxCondition);
       this.$http
-        .get(this.domain + `doc/${this.$route.params.jid}/${this.nowPage}/5/${this.wxCondition}`)
+        .post(this.domain + 'doc/listCondition', formdata)
         .then((res) => {
           setTimeout(loadingMsg, 0);
           if (res.data.code === 1) {

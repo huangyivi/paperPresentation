@@ -3,7 +3,7 @@
     <div>
       <div id="nav-logo">
         <img src="../../../assets/images/logo.png" alt="">
-        集文网
+        <img id="nav-font" src="../../../assets/images/jiwenwang.png" alt="">
         </div>
       <div id="nav-content">
         <Menu mode="horizontal" :theme="theme1" active-key="0" width="100">
@@ -83,7 +83,10 @@ export default {
         height: 30px;
         margin-right: 10px;
       }
-      font-size: 24px;
+      #nav-font{
+        width: 120px;
+        height: 60px;
+      }
     }
 
     #nav-content {
