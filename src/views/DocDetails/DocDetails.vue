@@ -126,7 +126,7 @@ export default {
         });
     },
     toJournal() {
-        window.open(`/paperhub/client/JournalDetails/${this.journalId}`);
+        window.open(`/JournalDetails/${this.journalId}`);
     }
   },
   created() {

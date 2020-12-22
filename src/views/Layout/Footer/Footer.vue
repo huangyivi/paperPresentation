@@ -2,12 +2,12 @@
   <div id="foot-container">
     <div id="foot-nav">
       <div>
-        <a href="/paperhub/client/JournalCollection">期刊大全</a>
-        <a href="/paperhub/client/OnlineSubmit">在线投稿</a>
-        <a href="/paperhub/client/JournalRecommend">期刊推荐</a>
-        <a href="/paperhub/client/DocumentBase">文献查询</a>
+        <a href="/JournalCollection">期刊大全</a>
+        <a href="/OnlineSubmit">在线投稿</a>
+        <a href="/JournalRecommend">期刊推荐</a>
+        <a href="/DocumentBase">文献查询</a>
         <a>联系我们</a>
-        <a href="/paperhub/client/PaperCheck">文章检查</a>
+        <a href="/PaperCheck">文章检查</a>
       </div>
     </div>
     <div id="foot-info">

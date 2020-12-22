@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="j-detail-us">
-        <a href="/paperhub/client/JournalCollection">返回期刊大全</a>
+        <a href="/JournalCollection">返回期刊大全</a>
         <div class="j-us-phone">
           <p><label>咨询热线</label>17666665234</p>
           <p><label>咨询邮箱</label>429075156@qq.com</p>

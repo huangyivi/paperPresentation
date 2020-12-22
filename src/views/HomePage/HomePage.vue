@@ -59,7 +59,7 @@
       >
         {{ item }}
       </li>
-      <!-- <a href="/paperhub/client/JournalRecommend">查看全部</a> -->
+      <!-- <a href="/JournalRecommend">查看全部</a> -->
       <router-link to="/JournalRecommend">查看全部</router-link>
     </ul>
 
@@ -88,7 +88,7 @@
         >
           {{ item }}
         </li>
-        <!-- <a href="/paperhub/client/DocumentBase">查看全部</a> -->
+        <!-- <a href="/DocumentBase">查看全部</a> -->
         <router-link to="/DocumentBase">查看全部</router-link>
       </ul>
       <div class="article-show">
@@ -102,7 +102,7 @@
       <BookIntro class="book-intro" :bookSum="books[3]" />
       <ul>
         <li v-for="item in articleCheck" :key="item.index">
-          <!-- <a href="/paperhub/client/PaperCheck"><img :src="item" alt /></a> -->
+          <!-- <a href="/PaperCheck"><img :src="item" alt /></a> -->
           <router-link to="/PaperCheck"><img :src="item" alt /></router-link>
         </li>
       </ul>
@@ -118,14 +118,14 @@
       >
         {{ item }}
       </li>
-      <!-- <a href="/paperhub/client/DocumentBase">查看全部</a> -->
+      <!-- <a href="/DocumentBase">查看全部</a> -->
       <router-link to="/DocumentBase">查看全部</router-link>
     </ul>
     <div class="new-article">
       <BookIntro class="book-intro" :bookSum="books[4]" />
       <div class="article-table">
         <Table :columns="columns1" :data="newDocu.slice(0, 6)"></Table>
-        <!-- <a class="article-look" href="/paperhub/client/DocumentBase"
+        <!-- <a class="article-look" href="/DocumentBase"
           >查看总文献库（{{ allNum }}篇）</a
         > -->
         <router-link class="article-look" to="/DocumentBase"
@@ -284,7 +284,7 @@ export default {
               "a",
               {
                 attrs: {
-                  href: "/paperhub/client/DocDetails/" + params.row.id,
+                  href: "/DocDetails/" + params.row.id,
                   target: "_blank",
                   title: params.row.title,
                 },

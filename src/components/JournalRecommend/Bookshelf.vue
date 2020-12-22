@@ -38,7 +38,7 @@
               :title="item.name"
               :level="item.journalLevel"
               :cycle="item.releaseCycle"
-              :id="'/paperhub/client/journalDetails/' + item.id"
+              :id="'/journalDetails/' + item.id"
             />
           </div>
           <h1 v-if="!isSize" class="ivu-page">暂无查询到数据</h1>
