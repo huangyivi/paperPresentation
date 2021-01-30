@@ -3,7 +3,7 @@
     <transition-group name="panel">
       <!-- 注册面板 -->
       <div v-show="!isLogin" class="register-wrap" key="0">
-        <h2>游客注册</h2>
+        <h1>集文网游客注册</h1>
         <div class="register-name">
           <span>姓名</span>
           <Input
@@ -79,7 +79,7 @@
       </div>
       <!-- 登陆面板 -->
       <div v-show="isLogin" class="login-wrap" key="1">
-        <h2>游客登录</h2>
+        <h1>集文网游客登录</h1>
         <div class="login-name">
           <span>姓名</span>
           <Input
@@ -148,11 +148,11 @@ export default {
           num 1 ----  显示注册面板 
           */
       if (num == 0) {
-        this.isLogin = true;
         this.registerQuery = this.handleClearInput(this.registerQuery);
+        this.isLogin = true;
       } else {
-        this.isLogin = false;
         this.loginQuery = this.handleClearInput(this.loginQuery);
+        this.isLogin = false;
       }
     },
     //游客登录

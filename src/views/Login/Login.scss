@@ -4,7 +4,8 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: url("../../assets/images/black.jpg") fixed no-repeat;
+  // background: url("../../assets/images/black.jpg") fixed no-repeat;
+  background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
   background-size: 100% 100%;
   overflow: hidden;
 
@@ -20,14 +21,13 @@
     border-radius: 5px;
     color: #fff;
 
-    h2 {
+    h1 {
       margin-bottom: 25px;
-      font-size: 22 px;
       letter-spacing: 1px;
     }
 
     >div {
-      width: 400px;
+      width: 380px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -129,19 +129,24 @@
     }
   }
 
-  .panel-enter-active {
-    transition: all .7s;
-  }
-
-  .panel-leave-active {
-    transition: all .7s;
-  }
-
+  
+  
   .panel-enter {
-    opacity: 0;
+    display: none;
   }
-
+  
+  .panel-enter-active {
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  .panel-enter-to{
+    display: none;
+  }
+  
+  .panel-leave-active {
+    transition: all 0.3s;
+  }
   .panel-leave-to {
-    transform: scale(0.1);
+    opacity: 0;
   }
 }
