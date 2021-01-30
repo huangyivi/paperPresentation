@@ -1,0 +1,147 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: url("../../assets/images/black.jpg") fixed no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+
+  .register-wrap,
+  .login-wrap {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    color: #fff;
+
+    h2 {
+      margin-bottom: 25px;
+      font-size: 22 px;
+      letter-spacing: 1px;
+    }
+
+    >div {
+      width: 400px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 7px 0;
+
+      &:nth-last-child(2),
+      &:last-child {
+        margin: 10px 0;
+        justify-content: center;
+      }
+
+      span {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+
+    .turn {
+
+      i {
+        font-style: normal;
+        cursor: pointer;
+        text-decoration: underline;
+
+        &:hover {
+          color: #009FFD;
+        }
+      }
+
+    }
+
+    .btn {
+      background: #1e1a3e;
+      height: 35px;
+      cursor: pointer;
+      text-align: center;
+
+      .text {
+        transform: translate(50%, 25px);
+        letter-spacing: 5px;
+        transition: all 1s;
+      }
+    }
+  }
+
+  .login-wrap {
+
+    .login-btn {
+
+      .rectangle {
+        fill: transparent;
+        stroke-width: 6px;
+        stroke: #fff;
+        stroke-dasharray: 150 720;
+        stroke-dashoffset: 307;
+        transition: 1s all ease;
+      }
+
+      &:hover .rectangle {
+        stroke-dasharray: 100 0;
+        stroke-dashoffset: 0;
+        stroke: #009FFD;
+        stroke-width: 4px;
+      }
+
+      &:hover .text {
+        fill: #009FFD;
+      }
+    }
+  }
+
+  .register-wrap {
+
+    .register-btn {
+
+      .rectangle {
+        fill: transparent;
+        stroke-width: 6px;
+        stroke: #fff;
+        stroke-dasharray: 150 720;
+        stroke-dashoffset: -560;
+        transition: 1s all;
+      }
+
+
+
+      &:hover .rectangle {
+        stroke-dasharray: 870;
+        stroke-dashoffset: 0;
+        stroke: #009FFD;
+        stroke-width: 4px;
+      }
+
+      &:hover .text {
+        fill: #009FFD;
+      }
+    }
+  }
+
+  .panel-enter-active {
+    transition: all .7s;
+  }
+
+  .panel-leave-active {
+    transition: all .7s;
+  }
+
+  .panel-enter {
+    opacity: 0;
+  }
+
+  .panel-leave-to {
+    transform: scale(0.1);
+  }
+}

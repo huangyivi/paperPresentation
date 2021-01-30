@@ -3,19 +3,18 @@
     <!-- 轮播图 -->
     <div class="round-chart">
       <transition-group name="runbo">
-      <div class="banner doc-banner" v-show="show == 0" key="0">
-        <img src="../../assets/images/index_banner1.png" />
-      </div>
-      <div class="banner doc-banner" v-show="show == 1" key="1">
-        <img src="../../assets/images/index_banner2.png" />
-      </div>
-      <div class="banner doc-banner" v-show="show == 2" key="2">
-        <img src="../../assets/images/index_banner3.png" />
-      </div>
-      <div class="banner doc-banner" v-show="show == 3" key="3">
-        <img src="../../assets/images/index_banner4.png" />
-      </div>
-
+        <div class="banner doc-banner" v-show="show == 0" key="0">
+          <img src="../../assets/images/index_banner1.png" />
+        </div>
+        <div class="banner doc-banner" v-show="show == 1" key="1">
+          <img src="../../assets/images/index_banner2.png" />
+        </div>
+        <div class="banner doc-banner" v-show="show == 2" key="2">
+          <img src="../../assets/images/index_banner3.png" />
+        </div>
+        <div class="banner doc-banner" v-show="show == 3" key="3">
+          <img src="../../assets/images/index_banner4.png" />
+        </div>
       </transition-group>
 
       <ul>
@@ -392,7 +391,6 @@ export default {
       this.$http
         .post(this.domain + "journal/searchJournal", formdata)
         .then((res) => {
-          setTimeout(docsmsg, 0);
           console.log(res.data.data);
           let data = res.data.data;
           this.books[0].bookNum = data.total;
@@ -427,8 +425,10 @@ export default {
         })
         .catch((err) => {
           console.log(err, "期刊");
-          setTimeout(docsmsg, 0);
           this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(docsmsg, 0);
         });
     },
     //获取文献
@@ -445,7 +445,6 @@ export default {
           },
         })
         .then((res) => {
-          setTimeout(docsmsg, 0);
           let data = res.data.data;
           this.allNum = data.total;
           this.qianyan.num = data.total;
@@ -471,8 +470,10 @@ export default {
         })
         .catch((err) => {
           console.log(err, "文献");
-          setTimeout(docsmsg, 0);
           this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(docsmsg, 0);
         });
     },
     //切换国内征稿
@@ -491,7 +492,6 @@ export default {
         .post(this.domain + "journal/searchRecommendJournal", data)
         .then((res) => {
           let data = res.data.data;
-          setTimeout(docsmsg, 0);
           if (data.list.length) {
             data.list.forEach((item, index) => {
               this.domestic.push({
@@ -508,8 +508,10 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg, 0);
           this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(docsmsg, 0);
         });
     },
     //切换行业
@@ -530,7 +532,6 @@ export default {
           },
         })
         .then((res) => {
-          setTimeout(docsmsg, 0);
           let data = res.data.data;
           data.list.forEach((item, index) => {
             //行业前沿
@@ -545,8 +546,10 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg, 0);
           this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(docsmsg, 0);
         });
     },
     //切换最新文献
@@ -567,7 +570,6 @@ export default {
         })
         .then((res) => {
           let data = res.data.data;
-          setTimeout(docsmsg, 0);
           data.list.forEach((item, index) => {
             //最新文献
             this.newDocu.push({
@@ -581,8 +583,10 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          setTimeout(docsmsg, 0);
           this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(docsmsg, 0);
         });
     },
   },

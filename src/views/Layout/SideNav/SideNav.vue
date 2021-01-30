@@ -4,7 +4,7 @@
       <div class="side-box">
         <div
           class="box-icon"
-          @mouseover="toFonts($event,'客服')"
+          @mouseover="toFonts($event, '客服')"
           @mouseleave="toSvg($event)"
           @click="displayService = true"
         >
@@ -37,7 +37,11 @@
         </div>
       </div>
       <div class="side-box">
-        <div class="box-icon" @mouseover="toFonts($event,'微信')" @mouseleave="toSvg($event)">
+        <div
+          class="box-icon"
+          @mouseover="toFonts($event, '微信')"
+          @mouseleave="toSvg($event)"
+        >
           <svg
             t="1602598843971"
             class="icon"
@@ -59,8 +63,21 @@
       <div class="side-box">
         <div
           class="box-icon"
+          @mouseover="toFonts($event, '推荐码')"
+          @mouseleave="toSvg($event)"
+          @click="recommendModal = true"
+        >
+          <img
+            class="recommend-icon"
+            src="../../../assets/images/recommend.png"
+          />
+        </div>
+      </div>
+      <div class="side-box">
+        <div
+          class="box-icon"
           @click="toTop"
-          @mouseover="toFonts($event,'置顶')"
+          @mouseover="toFonts($event, '置顶')"
           @mouseleave="toSvg($event)"
         >
           <svg
@@ -93,10 +110,29 @@
       </div>
       <div class="side-wechat">
         <div class="side-QRCode">
-          <img src="../../../assets/images/wechat.jpg" class="wechat">
+          <img src="../../../assets/images/wechat.jpg" class="wechat" />
         </div>
       </div>
     </div>
+    <!-- 推荐面板 -->
+    <Modal
+      class="recommend-wrap"
+      mask
+      :closable="false"
+      title="获取推荐码"
+      v-model="recommendModal"
+    >
+      <div class="recommend-content">
+        <div class="tip">推荐码可以分享给别人，供他人注册时使用</div>
+        <div class="code-row">
+          <Button @click="getCode()" :disabled="isBan" type="primary" ghost>
+            <span v-show="!isBan">获取推荐码</span>
+            <span v-show="isBan">({{ time }}s)</span>
+          </Button>
+          <div class="code">推荐码：{{ recommendCode }}</div>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
@@ -109,7 +145,12 @@ export default {
       svg2:
         '<svg data-v-d2fa3dc4="" t="1602598843971" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4227" width="20" height="20" class="icon"><path data-v-d2fa3dc4="" d="M693.12 347.264c11.776 0 23.36 0.896 35.008 2.176-31.36-146.048-187.456-254.528-365.696-254.528C163.2 94.912 0 230.656 0 403.136c0 99.52 54.272 181.248 145.024 244.736L108.8 756.864l126.72-63.488c45.312 8.896 81.664 18.112 126.912 18.112 11.392 0 22.656-0.512 33.792-1.344-7.04-24.256-11.2-49.6-11.2-76.032C385.088 475.776 521.024 347.264 693.12 347.264zM498.304 249.024c27.392 0 45.376 17.984 45.376 45.248 0 27.136-17.984 45.312-45.376 45.312-27.072 0-54.336-18.176-54.336-45.312C443.968 266.944 471.168 249.024 498.304 249.024zM244.672 339.584c-27.2 0-54.592-18.176-54.592-45.312 0-27.264 27.392-45.248 54.592-45.248S289.92 266.944 289.92 294.272C289.92 321.408 271.872 339.584 244.672 339.584zM1024 629.76c0-144.896-145.024-262.976-307.904-262.976-172.48 0-308.224 118.144-308.224 262.976 0 145.28 135.808 262.976 308.224 262.976 36.096 0 72.512-9.024 108.736-18.112l99.392 54.528-27.264-90.624C969.728 783.872 1024 711.488 1024 629.76zM616.128 584.384c-17.984 0-36.224-17.92-36.224-36.224 0-18.048 18.24-36.224 36.224-36.224 27.52 0 45.376 18.176 45.376 36.224C661.504 566.464 643.648 584.384 616.128 584.384zM815.488 584.384c-17.856 0-36.032-17.92-36.032-36.224 0-18.048 18.112-36.224 36.032-36.224 27.264 0 45.376 18.176 45.376 36.224C860.864 566.464 842.752 584.384 815.488 584.384z" p-id="4228" fill="#ffffff"></path></svg>',
       svg3:
-        '<svg data-v-d2fa3dc4="" t="1602598897107" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5963" width="20" height="20" class="icon"><path data-v-d2fa3dc4="" d="M1024 0v102.4H0V0h1024zM512 153.6l512 496.7936h-297.984L727.1936 1024h-429.056v-373.6064H0L512 153.6z" p-id="5964" fill="#ffffff"></path></svg>'
+        '<svg data-v-d2fa3dc4="" t="1602598897107" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5963" width="20" height="20" class="icon"><path data-v-d2fa3dc4="" d="M1024 0v102.4H0V0h1024zM512 153.6l512 496.7936h-297.984L727.1936 1024h-429.056v-373.6064H0L512 153.6z" p-id="5964" fill="#ffffff"></path></svg>',
+      img1: `<img data-v-d2fa3dc4="" src="${require("../../../assets/images/recommend.png")}" class="recommend-icon">`,
+      recommendModal: false, //控制推荐面板的显示
+      recommendCode: "", //推荐码
+      isBan: false, //是否禁止发送
+      time: 0, //计时器
     };
   },
   methods: {
@@ -120,6 +161,8 @@ export default {
         this.showPanel("side-service");
       } else if (content == "微信") {
         this.showPanel("side-wechat");
+      } else if (content == "推荐码") {
+        // alert('tuijianma');
       }
     },
     // 改变为svg样式
@@ -139,6 +182,10 @@ export default {
         }
         case "置顶": {
           icon = this.svg3;
+          break;
+        }
+        case "推荐码": {
+          icon = this.img1;
           break;
         }
       }
@@ -170,18 +217,61 @@ export default {
     },
     // 显示客服聊天框
     displayService(){
-    }
+    },
+    //获取推荐码
+    getCode() {
+      //获取缓存中的用户信息
+      const userInfo = JSON.parse(window.sessionStorage.getItem("userInfo"));
+      if (!userInfo) {
+        return this.$Message.info("请先登录");
+      }
+      let data = new FormData();
+      data.append("telephone", userInfo.phone);
+      const loadingmsg = this.$Message.loading({
+        content: "Loading...",
+        duration: 0,
+      });
+      this.$http
+        .post(this.domain + "visitor/getCode", data)
+        .then((res) => {
+          console.log(res);
+          const { code, msg, data } = res.data;
+          if (code == 1) {
+            this.$Message.success("获取推荐码成功");
+            this.recommendCode = data;
+            //禁用按钮，防止用户恶意发送
+            this.isBan = true;
+            this.time = 60;  //倒计时60s
+            const timer = setInterval(() => {
+              //计时结束，允许再次获取推荐码
+              if (this.time-- <= 0) {
+                clearInterval(timer); //清除计时器
+                this.isBan = false;  //解除禁用
+              }
+            }, 1000);
+          } else {
+            this.$Message.error("获取推荐码失败");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$Message.error("服务器连接失败");
+        })
+        .finally(() => {
+          setTimeout(loadingmsg, 0); //隐藏loading
+        });
+    },
   },
-  computed : {
-    displayService:{
-      get(){
+  computed: {
+    displayService: {
+      get() {
         return this.$store.state.displayService;
       },
-      set(val){
-        this.$store.commit('setService',val);
-      }
-    }
-  }
+      set(val) {
+        this.$store.commit("setService", val);
+      },
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
