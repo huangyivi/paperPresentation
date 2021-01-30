@@ -7,12 +7,20 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         // 键值对即为管理的状态
-        displayService : false
+        displayService : false,
+        // showLogin : true,
+        // user : null
     },
     mutations:{
         setService(state,val){
             state.displayService = val;
-        }
+        },
+        // setUser(state,val){
+        //     state.user = val;
+        // },
+        // setLogin(state,val){
+        //     state.showLogin = val;
+        // }
     }
 });
 

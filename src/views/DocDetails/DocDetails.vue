@@ -26,6 +26,10 @@
             <label>刊期：</label>
             <b class="date">{{date}}</b>
           </span>
+          <span>
+            <label>浏览量：</label>
+            <b class="view">{{view}}</b>
+          </span>
         </div>
       </div>
 
@@ -58,6 +62,7 @@ export default {
       date: "",
       imgSrc: "",
       journalId: "",
+      view : "",
       docs : []
     };
   },
@@ -84,6 +89,7 @@ export default {
             this.date = res.data.data.publishTime;
             this.journal = res.data.data.fromJournal;
             this.journalId = res.data.data.periodicalId;
+            this.view = res.data.data.view
           }
         }).then(()=>{
           this.getJournalImg();

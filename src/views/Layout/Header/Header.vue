@@ -6,17 +6,13 @@
         <p>咨询电话:17666665234</p>
       </div>
       <div id="right-session">
-        <!-- <a href="http://47.105.50.27//manager">管理员登录</a> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "Header",
-  data() {
-    return {};
-  },
+  name: "Header"
 };
 </script>
 <style lang="scss" scoped>

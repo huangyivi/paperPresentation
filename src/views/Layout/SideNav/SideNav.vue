@@ -170,8 +170,6 @@ export default {
     },
     // 显示客服聊天框
     displayService(){
-      console.log(this.Global.service)
-      this.Global.service = true;
     }
   },
   computed : {

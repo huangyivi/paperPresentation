@@ -27,20 +27,8 @@
           </router-link>
         </Menu>
       </div>
-      <div id="nav-search">
-        <!-- <i-input>
-          <i-select :model.sync="select" slot="prepend" style="width: 80px">
-            <i-option value="magazine">期刊</i-option>
-            <i-option value="paper">文献</i-option>
-            <i-option value="title">标题</i-option>
-            <i-option value="author">作者</i-option>
-            <i-option value="keyword">关键词</i-option>
-            <i-option value="passage">全文</i-option>
-            <i-option value="unit">单位</i-option>
-            <i-option value="abstract">摘要</i-option>
-          </i-select>
-          <i-button slot="append" icon="ios-search"></i-button>
-        </i-input> -->
+      <div id="nav-view">
+        网站浏览量：{{views}}
       </div>
     </div>
   </div>
@@ -52,8 +40,15 @@ export default {
     return {
       theme1: "light",
       select: "magazine",
+      views : ""
     };
   },
+  beforeCreate(){
+    this.$http.get(this.domain + "view")
+    .then(res=>{
+      this.views = res.data;
+    })
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -95,7 +90,7 @@ export default {
       justify-content: center;
     }
 
-    #nav-search {
+    #nav-view {
       float: left;
       width: 100px;
     }
