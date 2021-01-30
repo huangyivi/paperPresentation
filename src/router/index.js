@@ -22,6 +22,7 @@ const OnlineSubmit = ()=>import("@/views/OnlineSubmit/OnlineSubmit.vue")
 const DocDetails = ()=>import("@/views/DocDetails/DocDetails.vue")
 const JournalDetails = ()=>import("@/views/JournalDetails/JournalDetails.vue")
 const Errors = ()=>import("@/views/Error/Error")
+const Login = ()=>import("@/views/Login/Login")
 
 Vue.use(Router)
 
@@ -83,6 +84,11 @@ export default new Router({
       path: '*',
       name : 'Error',
       component : Errors
+    },
+    {
+      path:'/Login',
+      name: '',
+      component: Login
     }
   ],
   scrollBehavior (to, from, savedPosition) {

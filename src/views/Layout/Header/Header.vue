@@ -7,6 +7,18 @@
       </div>
       <div id="right-session">
         <!-- <a href="http://47.105.50.27//manager">管理员登录</a> -->
+        <div class="login-wrap">
+          <img class="icon" src="../../../assets/images/my.png" />
+          <router-link v-if="!userInfo.name" class="login" to="/Login"
+            >游客登录</router-link
+          >
+          <div v-else class="user">
+            <div class="user-name" :title="userInfo.name">
+              {{ userInfo.name }}
+            </div>
+            <div class="exit" @click="handleExit()">退出</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -15,7 +27,31 @@
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      userInfo: {}, //用户信息
+    };
+  },
+  methods: {
+    //退出登录
+    handleExit() {
+      this.$Modal.confirm({
+        title: "退出登录？",
+        onOk: () => {
+          //清楚缓存中数据
+          window.sessionStorage.removeItem("userInfo");
+          this.userInfo = {};
+          this.$Message.success("已退出登录");
+        },
+      });
+    },
+  },
+  created() {},
+  mounted() {
+    //从缓存中获取用户数据，在渲染
+    const userInfo = window.sessionStorage.getItem("userInfo");
+    if (userInfo) {
+      this.userInfo = JSON.parse(userInfo);
+    }
   },
 };
 </script>
