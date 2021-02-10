@@ -1,18 +1,18 @@
 <template>
   <div class="HomePage">
     <!-- 轮播图 -->
-    <div class="round-chart">
+    <!-- <div class="round-chart">
       <transition-group name="runbo">
-        <!-- <div class="banner doc-banner" v-show="show == 0" key="0">
+        <div class="banner doc-banner" v-show="show == 0" key="0">
           <img src="../../assets/images/index_banner1.png" />
         </div>
         <div class="banner doc-banner" v-show="show == 1" key="1">
           <img src="../../assets/images/index_banner2.png" />
-        </div> -->
-        <div class="banner doc-banner" v-show="show == 0" key="0">
+        </div>
+        <div class="banner doc-banner" v-show="show == 2" key="2">
           <img src="../../assets/images/index_banner3.png" />
         </div>
-        <div class="banner doc-banner" v-show="show == 1" key="1">
+        <div class="banner doc-banner" v-show="show == 3" key="3">
           <img src="../../assets/images/index_banner4.png" />
         </div>
       </transition-group>
@@ -20,12 +20,12 @@
       <ul>
         <li
           :class="{ active: index === show }"
-          v-for="index in [0, 1]"
+          v-for="index in [0, 3]"
           :key="index"
           @click="changePics(index)"
         ></li>
       </ul>
-    </div>
+    </div> -->
     <!-- 精品期刊 -->
     <div class="book-show">
       <BookIntro :bookSum="books[0]" />
@@ -365,7 +365,7 @@ export default {
     roundChange() {
       this.recordTime = setInterval(() => {
         this.show++;
-        if (this.show > 1) this.show = 0;
+        if (this.show > 3) this.show = 0;
       }, 5000);
     },
     //点击选项显示图片
