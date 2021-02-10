@@ -31,7 +31,7 @@
       <Page :total="total * 2" class="jd-list-page" @on-change="changePage" />
     </div>
 
-    <div class="jd-title">发表流程<span>/你需要知道的论文发表流程</span></div>
+    <div class="jd-title">分享流程<span>/你需要知道的论文分享流程</span></div>
     <img class="progress-img" src="../../../assets/images/process.png" alt />
   </div>
 </template>

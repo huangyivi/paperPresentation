@@ -15,7 +15,7 @@
           <span><label>总发文量</label>{{ journalDetailData.totalVolume }}</span>
           <span><label>级别(单位)</label>{{ journalDetailData.journalLevel }}</span>
           <span><label>被引频次</label>{{ journalDetailData.totalUsed }}</span>
-          <span><label>出版周期</label>{{ journalDetailData.releaseCycle }}</span>
+          <span><label>分享周期</label>{{ journalDetailData.releaseCycle }}</span>
         </div>
         <div class="j-message-lanmu">
           <span><label>主办单位</label>{{ journalDetailData.sponsor }}</span>

@@ -47,7 +47,7 @@ export default {
           align: "center"
         },
         {
-          title: "发表时间",
+          title: "分享时间",
           key: "publishTime",
           align: "center"
         },

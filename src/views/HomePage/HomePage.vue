@@ -3,16 +3,16 @@
     <!-- 轮播图 -->
     <div class="round-chart">
       <transition-group name="runbo">
-        <div class="banner doc-banner" v-show="show == 0" key="0">
+        <!-- <div class="banner doc-banner" v-show="show == 0" key="0">
           <img src="../../assets/images/index_banner1.png" />
         </div>
         <div class="banner doc-banner" v-show="show == 1" key="1">
           <img src="../../assets/images/index_banner2.png" />
-        </div>
-        <div class="banner doc-banner" v-show="show == 2" key="2">
+        </div> -->
+        <div class="banner doc-banner" v-show="show == 0" key="0">
           <img src="../../assets/images/index_banner3.png" />
         </div>
-        <div class="banner doc-banner" v-show="show == 3" key="3">
+        <div class="banner doc-banner" v-show="show == 1" key="1">
           <img src="../../assets/images/index_banner4.png" />
         </div>
       </transition-group>
@@ -20,7 +20,7 @@
       <ul>
         <li
           :class="{ active: index === show }"
-          v-for="index in [0, 1, 2, 3]"
+          v-for="index in [0, 1]"
           :key="index"
           @click="changePics(index)"
         ></li>
@@ -134,14 +134,14 @@
     </div>
 
     <!-- 网站研发 -->
-    <div class="web-container">
+    <!-- <div class="web-container">
       <div class="web-rd">
         <BookIntro class="book-intro" :bookSum="books[5]" />
         <div class="web-detail">
           <WebIntro v-for="item in webs" :key="item.index" :web="item" />
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -260,7 +260,7 @@ export default {
       qianyan: {
         title: "行业前沿",
         num: 292049,
-        intro: "最新发表的优质文献",
+        intro: "最新分享的优质文献",
         articles: [],
       },
       articleCheck: [
@@ -312,7 +312,7 @@ export default {
         {
           id: "01",
           intro: "智能主编",
-          text: `总投入500万，历时2年，服务于期刊社的自动编排印系统，已有多家期刊社应用此系统，是出版行业向人工智能技术的应用系统，口碑反馈良好。`,
+          text: `总投入500万，历时2年，服务于期刊社的自动编排印系统，已有多家期刊社应用此系统，是分享行业向人工智能技术的应用系统，口碑反馈良好。`,
         },
         {
           id: "02",
@@ -332,8 +332,8 @@ export default {
         },
         {
           id: "05",
-          intro: "推荐发表",
-          text: `对您的文章进行诊断，从写作方向、篇幅、查重结果、格式、文字表达错误等所有方面进行诊断，根据全网期刊大数据进行准确匹配适合发表的期刊。`,
+          intro: "推荐分享",
+          text: `对您的文章进行诊断，从写作方向、篇幅、查重结果、格式、文字表达错误等所有方面进行诊断，根据全网期刊大数据进行准确匹配适合分享的期刊。`,
         },
         {
           id: "06",
@@ -365,7 +365,7 @@ export default {
     roundChange() {
       this.recordTime = setInterval(() => {
         this.show++;
-        if (this.show > 3) this.show = 0;
+        if (this.show > 1) this.show = 0;
       }, 5000);
     },
     //点击选项显示图片
