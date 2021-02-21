@@ -1,7 +1,7 @@
 <template>
   <div class="HomePage">
     <!-- 轮播图 -->
-    <!-- <div class="round-chart">
+    <div class="round-chart">
       <transition-group name="runbo">
         <div class="banner doc-banner" v-show="show == 0" key="0">
           <img src="../../assets/images/index_banner1.png" />
@@ -20,12 +20,12 @@
       <ul>
         <li
           :class="{ active: index === show }"
-          v-for="index in [0, 3]"
+          v-for="index in [0,1,2,3]"
           :key="index"
           @click="changePics(index)"
         ></li>
       </ul>
-    </div> -->
+    </div>
     <!-- 精品期刊 -->
     <div class="book-show">
       <BookIntro :bookSum="books[0]" />
