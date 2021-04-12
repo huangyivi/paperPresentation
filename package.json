@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.5.2",
+    "vue-qr": "^2.3.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
