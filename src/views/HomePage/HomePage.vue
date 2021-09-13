@@ -28,9 +28,9 @@
     </div>
     <!-- 精品期刊 -->
     <div class="book-show">
-      <BookIntro :bookSum="books[0]" />
+      <!-- <BookIntro :bookSum="books[0]" /> -->
       <Book
-        v-for="item in preciseBook.slice(0, 9)"
+        v-for="item in preciseBook.slice(0, 10)"
         :key="item.index"
         :book="item"
       />
@@ -38,10 +38,10 @@
     <Ad :imgSrc="jounralsImg" />
     <!-- 国际期刊 -->
     <div class="book-show guoji-show">
-      <BookIntro class="book-intro" :bookSum="books[1]" />
+      <!-- <BookIntro class="book-intro" :bookSum="books[1]" /> -->
       <Book
         class="book"
-        v-for="item in international.slice(2, 11)"
+        v-for="item in international.slice(10, 20)"
         :key="item.index"
         :book="item"
       />
@@ -63,7 +63,7 @@
     </ul>
 
     <div class="book-show guonei-show">
-      <BookIntro class="book-intro" :bookSum="books[2]" />
+      <!-- <BookIntro class="book-intro" :bookSum="books[2]" /> -->
       <Book
         class="book"
         v-for="item in domestic"
@@ -421,7 +421,7 @@ export default {
               bookurl: item.journalPhoto, //图片地址
             });
           });
-          this.domestic = this.domestic.slice(-9);
+          this.domestic = this.domestic.slice(-10);
         })
         .catch((err) => {
           console.log(err, "期刊");
@@ -482,7 +482,7 @@ export default {
       this.domestic.length = 0; //清空一波数组
       var data = new FormData();
       data.append("pageNum", 1);
-      data.append("pageSize", 9);
+      data.append("pageSize", 10);
       data.append("name", this.interList[index]); //名称
       const docsmsg = this.$Message.loading({
         content: "Loading...",
