@@ -90,7 +90,7 @@
       </div>
 
       <!-- 二维码分享 -->
-      <Poptip placement="right" v-model="shareModal" trigger="hover">
+      <Poptip placement="right" v-model="shareModal" trigger="hover" >
         <!--分享二维码 -->
         <div class="side-box">
           <div
