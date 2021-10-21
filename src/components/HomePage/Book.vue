@@ -80,8 +80,7 @@ export default {
             overflow: hidden;
             background: #fff;
 
-            .book-container {
-                
+            .book-container {                
 
                 .book-to {
                     margin: 0 auto;
