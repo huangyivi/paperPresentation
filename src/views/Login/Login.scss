@@ -17,9 +17,11 @@
     justify-content: space-around;
     align-items: center;
     padding: 40px 20px;
-    background: rgba(255, 255, 255, 0.15);
+    // background: #6f86d6;
+    background: rgba($color: #6f86d6, $alpha: 1);
     border-radius: 5px;
     color: #fff;
+    border: 1px solid rgba($color: #fff, $alpha: 0.5);
 
     h1 {
       margin-bottom: 25px;
@@ -48,21 +50,20 @@
     }
 
     .turn {
-
       i {
         font-style: normal;
         cursor: pointer;
         text-decoration: underline;
 
         &:hover {
-          color: #009FFD;
+          color: #000;
         }
       }
 
     }
 
     .btn {
-      background: #1e1a3e;
+      background: #fff;
       height: 35px;
       cursor: pointer;
       text-align: center;
@@ -71,6 +72,8 @@
         transform: translate(50%, 25px);
         letter-spacing: 5px;
         transition: all 1s;
+        fill: #6f6f6f;
+        font-weight: bold;
       }
     }
   }
@@ -82,14 +85,14 @@
       .rectangle {
         fill: transparent;
         stroke-width: 6px;
-        stroke: #fff;
+        stroke: #009FFD;
         stroke-dasharray: 150 720;
-        stroke-dashoffset: 307;
+        stroke-dashoffset: -110;
         transition: 1s all ease;
       }
 
       &:hover .rectangle {
-        stroke-dasharray: 100 0;
+        stroke-dasharray: 870;
         stroke-dashoffset: 0;
         stroke: #009FFD;
         stroke-width: 4px;
@@ -108,9 +111,9 @@
       .rectangle {
         fill: transparent;
         stroke-width: 6px;
-        stroke: #fff;
+        stroke: #009FFD;
         stroke-dasharray: 150 720;
-        stroke-dashoffset: -560;
+        stroke-dashoffset: -530;
         transition: 1s all;
       }
 

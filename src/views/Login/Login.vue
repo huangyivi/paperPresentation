@@ -71,7 +71,7 @@
         <div class="register-btn btn" @click="handleRegister()">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <rect class="rectangle" width="100%" height="100%"></rect>
-            <text class="text" text-anchor="middle" font-size="18" fill="white">
+            <text class="text" text-anchor="middle" font-size="18">
               注册
             </text>
           </svg>
@@ -107,7 +107,7 @@
         <div class="login-btn btn" @click="handleLogin()">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <rect class="rectangle" width="100%" height="100%"></rect>
-            <text class="text" text-anchor="middle" font-size="18" fill="white">
+            <text class="text" text-anchor="middle" font-size="18">
               登录
             </text>
           </svg>
@@ -284,9 +284,10 @@ export default {
     },
     //检测电话号码
     checkPhone(phone) {
-      let exp = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
+      let exp = /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])[0-9]{8}$/;
       return exp.test(phone);
     },
+
     //检查身份证
     checkID(ID) {
       //空的话不校验

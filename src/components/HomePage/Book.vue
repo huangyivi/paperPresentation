@@ -68,7 +68,7 @@ export default {
 
     .Book {
 
-        margin: 10px 0;
+        margin: 10px 7px;
         height: 366px;
 
         .book-show {
