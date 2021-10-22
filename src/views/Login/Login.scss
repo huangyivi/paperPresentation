@@ -5,7 +5,8 @@
   width: 100vw;
   height: 100vh;
   // background: url("../../assets/images/black.jpg") fixed no-repeat;
-  background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+  // background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+  background-color: #014955;
   background-size: 100% 100%;
   overflow: hidden;
 
@@ -18,11 +19,11 @@
     align-items: center;
     padding: 40px 20px;
     // background: #6f86d6;
-    background: rgba($color: #6f86d6, $alpha: 1);
+    background: rgba($color: #1687a7, $alpha: 1);
     border-radius: 5px;
     color: #fff;
-    border: 1px solid rgba($color: #fff, $alpha: 0.5);
-
+    border: 1px solid transparent;
+    box-shadow: 2px 2px 2px #ddd;
     h1 {
       margin-bottom: 25px;
       letter-spacing: 1px;
